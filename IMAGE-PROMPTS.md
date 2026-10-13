@@ -1,5 +1,22 @@
 # Wizualizacje koncepcyjne
 
+
+## Koncepcja 3 — dom w Sokolnikach
+
+Wbudowany ImageGen. Referencja: prawdziwa wizualizacja z archisfera.net, zapisana jako `assets/project-bf8f4858e0ba.webp`. Wszystkie wygenerowane warstwy mają 1672 × 941 px. Przezroczystość pierwszego planu zachowano w WebP.
+
+### Scene / assets/hero-scene-v3.webp
+
+Use case: sketch-to-render. Edit target: attached architectural rendering of the real Sokolniki house from ArchiSfera's portfolio. Preserve its architectural identity: single long simple pitched gable volume, steep triangular fully glazed double-height front facade in black slim metal frames, dark charred timber siding, thin pale concrete roof rim wrapping gable, low attached dark rectangular side volume. Re-render it as an exquisitely realistic architectural editorial photograph. Reposition the camera to a straight centered FRONT view of the SAME building with only a little of the right side wing visible. Landscape 16:9 full canvas 2400x1350. Whole house centered in lower-middle image: roof apex at 30 percent of image height, facade base at 76 percent, building extends from 18 to 82 percent of width. Calm late-blue-hour mountain landscape replaces the suburban forest: distant dark rugged mountains on both sides, dramatic soft cloudy blue-grey sky across the top half, subtle wisps of low mist, dry meadow grasses and a stone terrace in foreground, warm understated interior light. No snow, no palm trees. Remove all people and foreground tree trunks obscuring the house. Refined moody cool slate exterior with amber interior. Wide generous open sky above and to sides of the building is essential: native website wordmark will later be placed behind roof. Do not add text, logos, website UI, watermarks, other buildings. Maintain exact original distinctive house geometry, do not substitute an unrelated chalet.
+
+### Foreground / assets/hero-foreground-v3.webp
+
+Use case: background-extraction. Edit target: the provided final mountain house image. Produce a PIXEL-ALIGNED foreground layer for a website composition. Keep the canvas exactly the same 1672x941 aspect ratio and framing as the supplied image. Preserve the EXACT house location, size, roof shape, every material, window, lighting and foreground ground. Keep ONLY the whole building, its entire visible terrace, retaining wall, and ALL foreground vegetation/ground below the terrace all the way to the bottom and both side edges. Make the entire sky and all distant mountains/forest behind the house fully transparent, with a precise clean alpha edge on the roof and walls. The front house apex must stay at the EXACT original coordinate. Do not center, enlarge, crop, re-render or shift the house, do not add or modify anything. This is an exact background removal, not a new image. Around the building's left and right edges, keep foreground plants where they belong, remove only distant mountains and sky. Output actual transparency.
+
+### Background / assets/hero-background-v3.webp
+
+Use case: precise-object-edit. Edit target: provided mountain house scene. Create the BACKGROUND PLATE of this EXACT scene for a layered website hero. Remove the entire house, its terrace and retaining wall, filling their former area plausibly with distant forest, natural meadow slopes and mountains consistent with surroundings. Keep the exact same full canvas size and 16:9 framing. All existing sky, clouds, mountains on both edges, horizon placement, lighting and color grading MUST remain unchanged and in exactly the same pixel coordinates. Do not recompose. The top 50 percent and outer mountains must be identical to the original; only remove the foreground building. No text, no watermarks. This plate will be behind an exact cutout of the original house. Seamless realistic landscape restoration, no remaining house fragments.
+
 ## Hero — koncepcja 2
 
 Plik `assets/hero-v2.webp`, wygenerowany wbudowanym ImageGen.

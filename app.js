@@ -40,8 +40,9 @@ if (content && projects.length) {
   const house=projects.find(p => /Sokolnikach/.test(p.title));
   const interior=projects.find(p => /biurowego w Zgierzu/.test(p.title));
   const duplex=projects.find(p => /Ksawerowie/.test(p.title));
-  const selections=[{p:house,t:'Dom jednorodzinny · Sokolniki',image:house?.images[2]},{p:interior,t:'Pokój biurowy · Zgierz'},{p:duplex,t:'Zabudowa bliźniacza · Ksawerów'}];
-  selections.forEach(({p,t,image}) => {if(p)$('#featured-projects').append(makeCard(p,t,image));});
+  const living=projects.find(p => /pokoju dziennego/.test(p.title));
+  const selections=[{p:house,t:'Dom w Sokolnikach',sub:'Sokolniki · Dom jednorodzinny',image:house?.images[2]},{p:interior,t:'Pokój biurowy',sub:'Zgierz · Wnętrza'},{p:duplex,t:'Zabudowa bliźniacza',sub:'Ksawerów · Od podstaw'},{p:living,t:'Wnętrze mieszkalne',sub:'Koncepcja · Aranżacja wnętrz',image:living?.images[2]}];
+  selections.forEach(({p,t,image,sub},index) => {if(p){const card=makeCard(p,t,image);card.querySelector('.project-caption p').textContent=sub;const number=document.createElement('span');number.className='project-number';number.textContent=String(index+1).padStart(2,'0');const type=document.createElement('span');type.className='project-type';type.textContent=categories[p.key].toLocaleUpperCase('pl');const arrow=document.createElement('span');arrow.className='project-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');card.append(number,type,arrow);$('#featured-projects').append(card);}});
   for (const [key,label] of Object.entries(categories)) {
     const button=document.createElement('button');button.textContent=label;button.dataset.filter=key;button.setAttribute('aria-pressed',String(key==='all'));button.addEventListener('click',()=>filterProjects(key));$('.filters').append(button);
   }
@@ -64,7 +65,7 @@ function filterProjects(key) {
   $('#portfolio-count').textContent=`${filtered.length} ${filtered.length===1?'projekt':'projektów'} · materiały pracowni ArchiSfera`;
 }
 $('#show-projects').addEventListener('click',()=>{
-  const open=$('#portfolio').hidden;$('#portfolio').hidden=!open;$('#show-projects').setAttribute('aria-expanded',String(open));$('#show-projects').innerHTML=open?'Zwiń archiwum <span>−</span>':'Zobacz wszystkie projekty <span>↗</span>';
+  const open=$('#portfolio').hidden;$('#portfolio').hidden=!open;$('#show-projects').setAttribute('aria-expanded',String(open));$('#show-projects').innerHTML=open?'Zwiń archiwum <span>−</span>':'Wszystkie projekty <span>↗</span>';
   if(open){filterProjects('all');$('#portfolio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}
 });
 function openDialog(dialog){dialog.showModal();dialog.scrollTop=0;document.body.classList.add('modal-open');}
@@ -96,4 +97,15 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();
 if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}},{threshold:.08});
   document.querySelectorAll('.section-space').forEach(section=>{section.classList.add('reveal');observer.observe(section);});
+}
+const hero=$('#hero'),motionButton=$('#motion-toggle'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+let motionPaused=false,heroVisible=true,scrollFrame=0;
+if(hero && motionButton){
+  const resetMotion=()=>{hero.style.setProperty('--pointer-x','0px');hero.style.setProperty('--pointer-y','0px');hero.style.setProperty('--scroll-y','0px');};
+  motionButton.addEventListener('click',()=>{motionPaused=!motionPaused;hero.classList.toggle('motion-paused',motionPaused);motionButton.setAttribute('aria-pressed',String(motionPaused));motionButton.setAttribute('aria-label',motionPaused?'Włącz ruch tła':'Wstrzymaj ruch tła');motionButton.querySelector('span').textContent=motionPaused?'▷':'Ⅱ';if(motionPaused)resetMotion();});
+  hero.addEventListener('pointermove',event=>{if(motionPaused || reducedMotion.matches || event.pointerType==='touch')return;const rect=hero.getBoundingClientRect();hero.style.setProperty('--pointer-x',`${((event.clientX-rect.left)/rect.width-.5)*-14}px`);hero.style.setProperty('--pointer-y',`${((event.clientY-rect.top)/rect.height-.5)*-8}px`);});
+  hero.addEventListener('pointerleave',()=>{hero.style.setProperty('--pointer-x','0px');hero.style.setProperty('--pointer-y','0px');});
+  window.addEventListener('scroll',()=>{if(scrollFrame || motionPaused || reducedMotion.matches || !heroVisible)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;const top=hero.getBoundingClientRect().top;hero.style.setProperty('--scroll-y',`${Math.min(24,Math.max(-24,-top*.035))}px`);});},{passive:true});
+  reducedMotion.addEventListener('change',()=>resetMotion());
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroVisible=entries[0].isIntersecting;hero.classList.toggle('motion-offscreen',!heroVisible);}).observe(hero);
 }
