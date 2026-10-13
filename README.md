@@ -1,6 +1,6 @@
 # ArchiSfera — projekt wstępny
 
-Nowa strona pracowni mgr inż. arch. Kamili Chęcielewskiej. Kierunek wizualny: ciepły papier, mocna typografia, spokojne fotografie architektury, asymetryczne kompozycje, ciemne sekcje usług.
+Druga koncepcja strony pracowni mgr inż. arch. Kamili Chęcielewskiej. Kierunek wizualny: spokojne atelier, elegancka typografia szeryfowa, naturalna architektura, grafit, ciepła biel i akcent terakoty. Pełnoekranowe hero, większe prezentacje projektów, prawdziwy portret architekt i rozwijana oferta.
 
 ## Uruchomienie
 
@@ -24,7 +24,7 @@ Build tworzy `dist/`, który można wdrożyć na dowolnym hostingu statycznym. P
 - `content.json` przechowuje teksty wszystkich stron, oryginalne adresy materiałów i ich lokalne odpowiedniki. `content.js` udostępnia te dane stronie, także przy otwarciu z pliku.
 - Pełna biografia znajduje się w oknie „Poznaj moją historię”. Oferta i cennik zachowują zakres obecnej strony, z korektą interpunkcji i oczywistych literówek.
 - Portfolio używa oryginalnych zdjęć i wizualizacji pracowni. Archiwum zawiera filtry, galerie, wykaz opracowań i linki do źródeł.
-- `assets/hero.webp` i `assets/pracownia.webp` są wizualizacjami koncepcyjnymi AI, oznaczonymi na stronie. Nie są prezentowane jako realizacje pracowni.
+- `assets/hero-v2.webp` i `assets/pracownia.webp` są wizualizacjami koncepcyjnymi AI, oznaczonymi na stronie. Nie są prezentowane jako realizacje pracowni. `assets/hero.webp` zachowuje obraz z pierwszej koncepcji.
 - Prawdziwy portret architekt pochodzi z obecnej strony. Nie generowano jej wizerunku.
 - Ceny odtworzono z istniejącej oferty. Kontakt używa telefonu i e-maila z zakładki Kontakt. Archiwalne dane, w tym drugi e-mail ze strony głównej, pozostają w danych źródłowych.
 - Kontakt otwiera pocztę lub połączenie telefoniczne; nie udaje działającego formularza serwerowego.

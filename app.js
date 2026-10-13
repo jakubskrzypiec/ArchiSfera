@@ -40,8 +40,8 @@ if (content && projects.length) {
   const house=projects.find(p => /Sokolnikach/.test(p.title));
   const interior=projects.find(p => /biurowego w Zgierzu/.test(p.title));
   const duplex=projects.find(p => /Ksawerowie/.test(p.title));
-  const selections=[{p:house,t:'Dom jednorodzinny · Sokolniki'},{p:interior,t:'Pokój biurowy · Zgierz'},{p:duplex,t:'Zabudowa bliźniacza · Ksawerów'}];
-  selections.forEach(({p,t}) => {if(p)$('#featured-projects').append(makeCard(p,t));});
+  const selections=[{p:house,t:'Dom jednorodzinny · Sokolniki',image:house?.images[2]},{p:interior,t:'Pokój biurowy · Zgierz'},{p:duplex,t:'Zabudowa bliźniacza · Ksawerów'}];
+  selections.forEach(({p,t,image}) => {if(p)$('#featured-projects').append(makeCard(p,t,image));});
   for (const [key,label] of Object.entries(categories)) {
     const button=document.createElement('button');button.textContent=label;button.dataset.filter=key;button.setAttribute('aria-pressed',String(key==='all'));button.addEventListener('click',()=>filterProjects(key));$('.filters').append(button);
   }
@@ -64,7 +64,7 @@ function filterProjects(key) {
   $('#portfolio-count').textContent=`${filtered.length} ${filtered.length===1?'projekt':'projektów'} · materiały pracowni ArchiSfera`;
 }
 $('#show-projects').addEventListener('click',()=>{
-  const open=$('#portfolio').hidden;$('#portfolio').hidden=!open;$('#show-projects').setAttribute('aria-expanded',String(open));$('#show-projects').innerHTML=open?'ZWIŃ ARCHIWUM <span>−</span>':'WSZYSTKIE PROJEKTY <span>↗</span>';
+  const open=$('#portfolio').hidden;$('#portfolio').hidden=!open;$('#show-projects').setAttribute('aria-expanded',String(open));$('#show-projects').innerHTML=open?'Zwiń archiwum <span>−</span>':'Zobacz wszystkie projekty <span>↗</span>';
   if(open){filterProjects('all');$('#portfolio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}
 });
 function openDialog(dialog){dialog.showModal();dialog.scrollTop=0;document.body.classList.add('modal-open');}
