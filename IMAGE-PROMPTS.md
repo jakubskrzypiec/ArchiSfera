@@ -1,6 +1,19 @@
 # Wizualizacje koncepcyjne
 
 
+## Dopracowanie zatwierdzonej wersji 4
+
+Wbudowany ImageGen. Bardziej naturalna fotografia i przezroczysty pierwszy plan, oba 1672 × 941 px.
+
+### Realism refinement / assets/hero-scene-v4b.webp
+
+Use case: lighting-weather / photorealism refinement. Edit the supplied house image into a convincing real architectural photograph, not a polished CGI render. Preserve the exact house design, perfectly front-facing camera, composition, framing and all geometry. Keep the SAME 1672x941 full canvas, house pixel location, roof apex location, facade width, terrace location and tree placement so the existing website layout will match. Refine only realism: naturally irregular concrete grain and subtle joint imperfections; realistic dark timber with fine grain and tonal variations; believable restrained glass reflections and transparency (less smeared golden reflection, visible detailed interior); soft photographic dynamic range; coherent natural daylight, accurate soft shadows; realistic individual grass blades and varied foliage, slightly less oversaturated yellow-green highlights; fine detail without crunchy oversharpening or synthetic glow. Premium editorial architecture photograph on a sunny Polish garden afternoon, 35mm architectural lens with straight verticals. Keep rich real green garden and clear blue sky; no clouds, mountains, mist, people, text, logos or watermark. Do not add or remove architectural elements, do not change perspective, do not invent a different house. The goal is a tasteful more realistic version of THIS same hero.
+
+### Foreground / assets/hero-foreground-v4b.webp
+
+Use case: background-extraction. Remove background from this EXACT refined house photograph. Keep canvas 1672x941, exact framing, scale and house pixel coordinates. Keep entire house, roof rim, facade, windows, side extension, terrace, ALL foreground garden and ground across full width to the bottom. Remove only sky and distant trees/garden behind the house, making those truly transparent. Precise clean alpha edge, no colored halo at roof, no re-rendering or alteration of house pixels. Do not change lighting or texture or sharpen. The result will overlay this exact photograph to place website lettering behind the house, so exact alignment and unchanged house pixels are essential. No crop, shift, text or added objects.
+
+
 ## Koncepcja 4 — front domu i jasne wnętrze
 
 Wbudowany ImageGen. Hero na podstawie referencji klienta przedstawiającej dom w Sokolnikach. Trzy warstwy hero i wnętrze mają 1672 × 941 px. Pierwszy plan zachowuje przezroczystość RGBA.

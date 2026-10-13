@@ -98,17 +98,6 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}},{threshold:.08});
   document.querySelectorAll('.section-space').forEach(section=>{section.classList.add('reveal');observer.observe(section);});
 }
-const hero=$('#hero'),motionButton=$('#motion-toggle'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
-let motionPaused=false,heroVisible=true,scrollFrame=0;
-if(hero && motionButton){
-  const resetMotion=()=>{hero.style.setProperty('--pointer-x','0px');hero.style.setProperty('--pointer-y','0px');hero.style.setProperty('--scroll-y','0px');};
-  motionButton.addEventListener('click',()=>{motionPaused=!motionPaused;hero.classList.toggle('motion-paused',motionPaused);motionButton.setAttribute('aria-pressed',String(motionPaused));motionButton.setAttribute('aria-label',motionPaused?'Włącz ruch tła':'Wstrzymaj ruch tła');motionButton.querySelector('span').textContent=motionPaused?'▷':'Ⅱ';if(motionPaused)resetMotion();});
-  hero.addEventListener('pointermove',event=>{if(motionPaused || reducedMotion.matches || event.pointerType==='touch')return;const rect=hero.getBoundingClientRect();hero.style.setProperty('--pointer-x',`${((event.clientX-rect.left)/rect.width-.5)*-14}px`);hero.style.setProperty('--pointer-y',`${((event.clientY-rect.top)/rect.height-.5)*-8}px`);});
-  hero.addEventListener('pointerleave',()=>{hero.style.setProperty('--pointer-x','0px');hero.style.setProperty('--pointer-y','0px');});
-  window.addEventListener('scroll',()=>{if(scrollFrame || motionPaused || reducedMotion.matches || !heroVisible)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;const top=hero.getBoundingClientRect().top;hero.style.setProperty('--scroll-y',`${Math.min(24,Math.max(-24,-top*.035))}px`);});},{passive:true});
-  reducedMotion.addEventListener('change',()=>resetMotion());
-  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroVisible=entries[0].isIntersecting;hero.classList.toggle('motion-offscreen',!heroVisible);}).observe(hero);
-}
 const contactForm=$('#contact-form');
 if(contactForm){
   const status=$('#form-status'),copyButton=$('#copy-message');

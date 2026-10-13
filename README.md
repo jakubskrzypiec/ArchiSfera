@@ -27,7 +27,8 @@ Build tworzy `dist/`, który można wdrożyć na dowolnym hostingu statycznym. P
 - Hero bazuje na rzeczywistym projekcie domu w Sokolnikach z portfolio pracowni. Za pomocą ImageGen przerobiono go na fotorealistyczną wizualizację z widokiem na wprost, w zielonym ogrodzie. Nie ma gór ani chmur.
 - `assets/hero-scene-v4.webp` to pełna przerobiona scena. `assets/hero-background-v4.webp` zawiera ogród bez budynku, a `assets/hero-foreground-v4.webp` zachowuje przezroczystość wokół budynku i pierwszego planu. Napis archisfera jest prawdziwym tekstem HTML pomiędzy tymi warstwami.
 - `assets/interior-v4.webp` to generowana ilustracja wnętrza: przerywnik i tło za białymi kartami z efektem frosted glass. Nie jest dodana do rzeczywistego portfolio.
-- Tło ma subtelną animację i reaguje na ruch kursora oraz przewijanie. Można je zatrzymać przyciskiem w hero. Preferencja ograniczenia animacji wyłącza ruch, a animacja zatrzymuje się poza ekranem.
+- Po dopracowaniu zatwierdzonej wersji hero jest całkowicie statyczne: bez animacji, reakcji na kursor i przewijanie oraz bez przełącznika ruchu. Hero i przerywnik dochodzą do krawędzi ekranu, bez białych marginesów i zaokrągleń.
+- Obraz w `assets/hero-scene-v4b.webp` ma dopracowane naturalne faktury, szkło, odbicia i światło. `assets/hero-foreground-v4b.webp` zachowuje alpha do ułożenia napisu za domem. Statyczne tło używa tej samej pełnej sceny, co pierwszy plan.
 - Materiały z poprzednich koncepcji zachowano w assets; nie są używane w nowym hero.
 - Prawdziwy portret architekt pochodzi z obecnej strony. Nie generowano jej wizerunku.
 - Cztery usługi i ich pełne opisy pochodzą z https://www.archisfera.net/uslugi. Proces współpracy opracowano jako opis koncepcji z indywidualnym ustalaniem szczegółów.
