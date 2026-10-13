@@ -1,6 +1,27 @@
 # Wizualizacje koncepcyjne
 
 
+## Koncepcja 4 — front domu i jasne wnętrze
+
+Wbudowany ImageGen. Hero na podstawie referencji klienta przedstawiającej dom w Sokolnikach. Trzy warstwy hero i wnętrze mają 1672 × 941 px. Pierwszy plan zachowuje przezroczystość RGBA.
+
+### Hero / assets/hero-scene-v4.webp
+
+Use case: sketch-to-render. Re-render the attached real ArchiSfera project as a very high quality photoreal architectural image. Preserve the house design: steep pitched gable volume with pale narrow concrete roof rim, completely glazed double-height triangular front facade with black metal mullions, dark timber sides, wood soffit and low right side extension. Camera MUST be perfectly FRONT ON, lens perpendicular to the triangular facade, centered on the middle vertical mullion, architectural elevation perspective, symmetrical roof pitches, no receding side wall, NO three-quarter angle. Whole front facade centered, entire building visible including side extension. Large landscape 16:9 composition, 1672x941 framing; apex at 30 percent of canvas height, building base at 78 percent, main house spans 25-75 percent of canvas width. Setting: real Polish pine garden like source, vivid fresh green lawn, lush rich green trees on both edges, flowers and natural grasses, warm sunshine and believable material colors, subtle warm oak interior, clear pale blue sky behind and above roof. More color and life than a grey minimalist render, clean natural editorial photography. No mountains, NO clouds, no mist, no dramatic blue hour, no people or vehicles. Keep foreground trees from obstructing facade. The central upper sky must be open so website wordmark can be placed there later. No text, no logo, no UI or watermark.
+
+### Foreground / assets/hero-foreground-v4.webp
+
+Use case: background-extraction. Exact background removal of supplied final house image, for a layered website hero. Keep the image canvas EXACTLY 1672x941 and preserve every foreground pixel's position, scale, lighting, framing and materials. Keep the whole house, concrete triangular roof rim, all facade and windows, side extension, terrace and ALL grass/plants/ground below the building across entire width to bottom. Make the sky, ALL background pine trees above and to either side of the house, and distant garden behind it fully TRANSPARENT. Exact clean alpha roof and wall boundaries, accurate transparency, no re-rendering, no changed architecture, no crop or shift. Tree trunks and foliage in background must be removed so a white website wordmark can sit between background and this house layer. Keep foreground shrubs close to house and terrace. Actual transparent alpha output, no text.
+
+### Background / assets/hero-background-v4.webp
+
+Use case: precise-object-edit. Produce an exact BACKGROUND PLATE of this house photograph. Remove the entire foreground house and its terrace, and restore their area seamlessly with green lawn, shrubs and pine garden. Keep canvas exactly 1672x941. Preserve the clear blue sky, pine trees and garden at left and right edges EXACTLY unchanged in position, scale, lighting and color. Fill former house area naturally with more trees and a softly sunlit garden in same setting. Do NOT recompose, change lighting or add clouds, mountains, mist or text. This plate goes behind a precise alpha cutout of the original house.
+
+### Interior / assets/interior-v4.webp
+
+Use case: photorealistic-natural. Asset type: wide architectural interior image used as a website section background behind white frosted glass cards. Create an editorial photoreal photograph of a bright carefully designed contemporary home interior: large floor-to-ceiling windows showing a lush green Polish garden, light grey plaster walls, natural oak floor and built-in storage, light linen sofa, sculptural cream armchairs, a simple stone coffee table, a single leafy indoor plant, thin black window frames. Warm natural daylight, neutral light-grey/white/graphite dominant palette with rich real green garden and honey oak accents. Spacious architectural perspective with seating on the right and clean wall/window negative space on left, high-quality believable details and materials, serene premium studio presentation, no people, text, logos or watermark. Landscape 16:9. Do not add mountains or cloudy drama.
+
+
 ## Koncepcja 3 — dom w Sokolnikach
 
 Wbudowany ImageGen. Referencja: prawdziwa wizualizacja z archisfera.net, zapisana jako `assets/project-bf8f4858e0ba.webp`. Wszystkie wygenerowane warstwy mają 1672 × 941 px. Przezroczystość pierwszego planu zachowano w WebP.

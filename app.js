@@ -109,3 +109,12 @@ if(hero && motionButton){
   reducedMotion.addEventListener('change',()=>resetMotion());
   if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroVisible=entries[0].isIntersecting;hero.classList.toggle('motion-offscreen',!heroVisible);}).observe(hero);
 }
+const contactForm=$('#contact-form');
+if(contactForm){
+  const status=$('#form-status'),copyButton=$('#copy-message');
+  const mailLink=document.createElement('a');mailLink.className='prepared-mail';mailLink.hidden=true;mailLink.textContent='Otwórz wiadomość w poczcie ↗';status.before(mailLink);
+  const prepareMessage=()=>{const values=Object.fromEntries(new FormData(contactForm));return {subject:`Zapytanie o projekt — ${values.type}`,body:`Dzień dobry,\n\n${values.message.trim()}\n\nRodzaj projektu: ${values.type}\nLokalizacja: ${values.location.trim() || 'Do ustalenia'}\n\nKontakt:\n${values.name.trim()}\nE-mail: ${values.email.trim()}\nTelefon: ${values.phone.trim() || 'Nie podano'}`};};
+  contactForm.addEventListener('submit',event=>{event.preventDefault();if(!contactForm.reportValidity())return;const message=prepareMessage();mailLink.href=`mailto:biuro@archisfera.net?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;mailLink.hidden=false;status.textContent='Wiadomość jest przygotowana. Otwórz ją w poczcie, aby wysłać, lub skopiuj treść.';mailLink.focus();});
+  contactForm.addEventListener('input',()=>{mailLink.hidden=true;status.textContent='';});
+  copyButton.addEventListener('click',async()=>{if(!contactForm.reportValidity())return;const message=prepareMessage();const text=`Do: biuro@archisfera.net\nTemat: ${message.subject}\n\n${message.body}`;try{await navigator.clipboard.writeText(text);status.textContent='Treść została skopiowana. Wklej ją do wiadomości i wyślij na biuro@archisfera.net.';}catch{status.textContent='Nie udało się skopiować automatycznie. Użyj przycisku „Przygotuj wiadomość”, aby otworzyć ją w swojej poczcie.';}});
+}
