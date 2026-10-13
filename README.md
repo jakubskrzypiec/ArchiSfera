@@ -1,6 +1,6 @@
 # ArchiSfera — projekt wstępny
 
-Trzecia koncepcja strony pracowni mgr inż. arch. Kamili Chęcielewskiej, według przesłanych inspiracji. Prosta typografia bezszeryfowa bez kursywy, warstwowe hero z napisem ARCHISFERA za budynkiem, jeden rząd czterech projektów, minimalistyczne O mnie z tekstem pod zdjęciem, cztery kolumny oferty, fotograficzny przerywnik i kontakt.
+Czwarta koncepcja strony pracowni mgr inż. arch. Kamili Chęcielewskiej, według nowych referencji. Paleta jasnoszara / biała / grafitowa, lokalny Manrope jako krój zbliżony do screenshotu, bardziej kolorowe hero z widokiem na wprost i napisem archisfera za budynkiem. Kolejność: hero, o mnie, projekty, oferta, proces współpracy, wnętrze jako przerywnik, przykładowe opinie, formularz kontaktowy i stopka.
 
 ## Uruchomienie
 
@@ -24,13 +24,18 @@ Build tworzy `dist/`, który można wdrożyć na dowolnym hostingu statycznym. P
 - `content.json` przechowuje teksty wszystkich stron, oryginalne adresy materiałów i ich lokalne odpowiedniki. `content.js` udostępnia te dane stronie, także przy otwarciu z pliku.
 - Pełna biografia znajduje się w oknie „Poznaj moją historię”. Oferta i cennik zachowują zakres obecnej strony, z korektą interpunkcji i oczywistych literówek.
 - Portfolio używa oryginalnych zdjęć i wizualizacji pracowni. Archiwum zawiera filtry, galerie, wykaz opracowań i linki do źródeł.
-- Hero bazuje na rzeczywistym projekcie domu w Sokolnikach z portfolio pracowni: `assets/project-bf8f4858e0ba.webp`. Za pomocą ImageGen przerobiono go na fotorealistyczną wizualizację i zmieniono otoczenie na górski krajobraz. Ten obraz nie dokumentuje realizacji w górach.
-- `assets/hero-scene-v3.webp` to pełna przerobiona scena. `assets/hero-background-v3.webp` zawiera krajobraz bez budynku, a `assets/hero-foreground-v3.webp` zachowuje przezroczystość wokół budynku i pierwszego planu. Napis ARCHISFERA jest prawdziwym tekstem HTML pomiędzy tymi warstwami.
-- Tło ma subtelną animację i reaguje na ruch kursora oraz przewijanie. Można je zatrzymać przyciskiem w hero. Preferencja ograniczenia animacji wyłącza ruch, a animacja zatrzymuje się poza ekranem.
+- Hero bazuje na rzeczywistym projekcie domu w Sokolnikach z portfolio pracowni. Za pomocą ImageGen przerobiono go na fotorealistyczną wizualizację z widokiem na wprost, w zielonym ogrodzie. Nie ma gór ani chmur.
+- `assets/hero-scene-v4.webp` to pełna przerobiona scena. `assets/hero-background-v4.webp` zawiera ogród bez budynku, a `assets/hero-foreground-v4.webp` zachowuje przezroczystość wokół budynku i pierwszego planu. Napis archisfera jest prawdziwym tekstem HTML pomiędzy tymi warstwami.
+- `assets/interior-v4.webp` to generowana ilustracja wnętrza: przerywnik i tło za białymi kartami z efektem frosted glass. Nie jest dodana do rzeczywistego portfolio.
+- Po dopracowaniu zatwierdzonej wersji hero jest całkowicie statyczne: bez animacji, reakcji na kursor i przewijanie oraz bez przełącznika ruchu. Hero i przerywnik dochodzą do krawędzi ekranu, bez białych marginesów i zaokrągleń.
+- Obraz w `assets/hero-scene-v4b.webp` ma dopracowane naturalne faktury, szkło, odbicia i światło. `assets/hero-foreground-v4b.webp` zachowuje alpha do ułożenia napisu za domem. Statyczne tło używa tej samej pełnej sceny, co pierwszy plan.
 - Materiały z poprzednich koncepcji zachowano w assets; nie są używane w nowym hero.
 - Prawdziwy portret architekt pochodzi z obecnej strony. Nie generowano jej wizerunku.
-- Ceny odtworzono z istniejącej oferty. Kontakt używa telefonu i e-maila z zakładki Kontakt. Archiwalne dane, w tym drugi e-mail ze strony głównej, pozostają w danych źródłowych.
-- Kontakt otwiera pocztę lub połączenie telefoniczne; nie udaje działającego formularza serwerowego.
+- Cztery usługi i ich pełne opisy pochodzą z https://www.archisfera.net/uslugi. Proces współpracy opracowano jako opis koncepcji z indywidualnym ustalaniem szczegółów.
+- Trzy opinie są fikcyjnymi tekstami do makiety, zgodnie z prośbą użytkownika. Każda karta i cała sekcja mają widoczne oznaczenie przykładowej treści. Przed użyciem jako rzeczywistych rekomendacji trzeba je zastąpić autentycznymi opiniami.
+- Kontakt używa telefonu i e-maila z zakładki Kontakt. Archiwalne dane, w tym ceny i drugi e-mail ze strony głównej, pozostają w danych źródłowych.
+- Formularz ma walidację wymaganych pól, przygotowuje link mailto z kompletną wiadomością i umożliwia kopiowanie treści. Nie wysyła maili z serwera i nie zapisuje danych osobowych. Użytkownik otwiera wiadomość w swojej poczcie i sam ją wysyła. Interfejs jasno komunikuje ten sposób działania.
+- Manrope jest przechowywany lokalnie w assets/fonts razem z licencją OFL. Z samego zrzutu nie potwierdzono dokładnej nazwy fontu referencyjnego.
 
 ## Interakcje i dostępność
 
@@ -38,6 +43,6 @@ Menu mobilne, klawiaturowa obsługa dialogów i galerii, zamykanie Escape, seman
 
 ## Weryfikacja
 
-Sprawdzono widoki 320, 390, 560, 768, 1024, 1440 i 1920 px oraz menu, biografię, filtry portfolio, przełączanie zdjęć i rozwijanie cennika. Sprawdzono ruch tła, zatrzymanie i wznowienie, reakcję na kursor, reduced motion oraz jeden rząd projektów na desktopie i telefonie. Potwierdzono brak kursywy i poziomego przewijania całej strony. Źródłowe zdjęcia zoptymalizowano do WebP.
+Sprawdzono widoki 320, 390, 560, 768, 1024, 1440 i 1920 px oraz menu, biografię, filtry portfolio i przełączanie zdjęć. Sprawdzono kolejność sekcji, ładowanie lokalnego fontu, brak kursywy, jeden rząd projektów, trzy oznaczenia przykładowych opinii, walidację formularza, link mailto i kopiowanie treści. Potwierdzono brak błędów JavaScript, brak brakujących zdjęć i brak poziomego przewijania całej strony. Źródłowe zdjęcia zoptymalizowano do WebP.
 
 Prompty wykorzystane w wbudowanym ImageGen znajdują się w `IMAGE-PROMPTS.md`.

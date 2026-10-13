@@ -98,14 +98,12 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}},{threshold:.08});
   document.querySelectorAll('.section-space').forEach(section=>{section.classList.add('reveal');observer.observe(section);});
 }
-const hero=$('#hero'),motionButton=$('#motion-toggle'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
-let motionPaused=false,heroVisible=true,scrollFrame=0;
-if(hero && motionButton){
-  const resetMotion=()=>{hero.style.setProperty('--pointer-x','0px');hero.style.setProperty('--pointer-y','0px');hero.style.setProperty('--scroll-y','0px');};
-  motionButton.addEventListener('click',()=>{motionPaused=!motionPaused;hero.classList.toggle('motion-paused',motionPaused);motionButton.setAttribute('aria-pressed',String(motionPaused));motionButton.setAttribute('aria-label',motionPaused?'Włącz ruch tła':'Wstrzymaj ruch tła');motionButton.querySelector('span').textContent=motionPaused?'▷':'Ⅱ';if(motionPaused)resetMotion();});
-  hero.addEventListener('pointermove',event=>{if(motionPaused || reducedMotion.matches || event.pointerType==='touch')return;const rect=hero.getBoundingClientRect();hero.style.setProperty('--pointer-x',`${((event.clientX-rect.left)/rect.width-.5)*-14}px`);hero.style.setProperty('--pointer-y',`${((event.clientY-rect.top)/rect.height-.5)*-8}px`);});
-  hero.addEventListener('pointerleave',()=>{hero.style.setProperty('--pointer-x','0px');hero.style.setProperty('--pointer-y','0px');});
-  window.addEventListener('scroll',()=>{if(scrollFrame || motionPaused || reducedMotion.matches || !heroVisible)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;const top=hero.getBoundingClientRect().top;hero.style.setProperty('--scroll-y',`${Math.min(24,Math.max(-24,-top*.035))}px`);});},{passive:true});
-  reducedMotion.addEventListener('change',()=>resetMotion());
-  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroVisible=entries[0].isIntersecting;hero.classList.toggle('motion-offscreen',!heroVisible);}).observe(hero);
+const contactForm=$('#contact-form');
+if(contactForm){
+  const status=$('#form-status'),copyButton=$('#copy-message');
+  const mailLink=document.createElement('a');mailLink.className='prepared-mail';mailLink.hidden=true;mailLink.textContent='Otwórz wiadomość w poczcie ↗';status.before(mailLink);
+  const prepareMessage=()=>{const values=Object.fromEntries(new FormData(contactForm));return {subject:`Zapytanie o projekt — ${values.type}`,body:`Dzień dobry,\n\n${values.message.trim()}\n\nRodzaj projektu: ${values.type}\nLokalizacja: ${values.location.trim() || 'Do ustalenia'}\n\nKontakt:\n${values.name.trim()}\nE-mail: ${values.email.trim()}\nTelefon: ${values.phone.trim() || 'Nie podano'}`};};
+  contactForm.addEventListener('submit',event=>{event.preventDefault();if(!contactForm.reportValidity())return;const message=prepareMessage();mailLink.href=`mailto:biuro@archisfera.net?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;mailLink.hidden=false;status.textContent='Wiadomość jest przygotowana. Otwórz ją w poczcie, aby wysłać, lub skopiuj treść.';mailLink.focus();});
+  contactForm.addEventListener('input',()=>{mailLink.hidden=true;status.textContent='';});
+  copyButton.addEventListener('click',async()=>{if(!contactForm.reportValidity())return;const message=prepareMessage();const text=`Do: biuro@archisfera.net\nTemat: ${message.subject}\n\n${message.body}`;try{await navigator.clipboard.writeText(text);status.textContent='Treść została skopiowana. Wklej ją do wiadomości i wyślij na biuro@archisfera.net.';}catch{status.textContent='Nie udało się skopiować automatycznie. Użyj przycisku „Przygotuj wiadomość”, aby otworzyć ją w swojej poczcie.';}});
 }
