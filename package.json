@@ -1,0 +1,1 @@
+{"name":"archisfera","version":"1.0.0","private":true,"description":"ArchiSfera — projekt wstępny strony pracowni architektonicznej","scripts":{"build":"node build.mjs","dev":"node server.mjs"}}
