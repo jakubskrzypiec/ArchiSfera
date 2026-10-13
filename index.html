@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archisfera | Kamila Chęcielewska – architekt Łódź</title>
+<meta name="description" content="Pracownia architektoniczna Archisfera – projekty domów, obiektów medycznych, przedszkoli i żłobków, rozbudowy, inwentaryzacje i wnętrza. Od koncepcji do realizacji.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#161616;--paper:#fff;--soft:#f4f4f2;--line:#e4e4e0;--mute:#6d6d68;--warm:#e9a653;--dark:#2b2b2b}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;font-weight:400}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,100% - 48px);margin-inline:auto}
+.btn{display:inline-block;padding:14px 28px;font:500 14px 'Jost';letter-spacing:.04em;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;transition:.25s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.light{background:#fff;color:var(--ink);border-color:#fff}
+.btn.light:hover{background:transparent;color:#fff}
+
+/* header */
+header{position:absolute;inset:0 0 auto 0;z-index:10;color:#fff}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.28)}
+.logo{font-weight:600;letter-spacing:.28em;font-size:15px}
+nav{display:flex;gap:34px;font-size:14px}
+nav a{opacity:.85;transition:.2s}nav a:hover{opacity:1}
+.hdr-contact{font-size:13px;text-align:right;line-height:1.4;opacity:.9}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;background:#0d1519;overflow:hidden}
+.hero>svg{position:absolute;inset:0;width:100%;height:100%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 35%,rgba(0,0,0,.55) 100%)}
+.hero .wrap{position:relative;z-index:2;padding:0 0 70px;width:min(1180px,100% - 48px)}
+.hero h1{font-size:clamp(54px,10vw,128px);font-weight:500;letter-spacing:.02em;line-height:1}
+.hero p{max-width:440px;margin:18px 0 34px;font-size:18px;font-weight:300;opacity:.92}
+.hero-row{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.hero-line{flex:1;min-width:200px;max-width:520px;display:flex;align-items:center;gap:14px;font-size:13px;opacity:.9}
+.hero-line i{flex:1;height:1px;background:rgba(255,255,255,.5);position:relative}
+.hero-line i::after{content:"";position:absolute;left:0;top:-1px;height:3px;width:42%;background:#fff}
+
+/* facts */
+.facts{border-bottom:1px solid var(--line)}
+.facts .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.facts div{padding:34px 20px;border-left:1px solid var(--line)}
+.facts div:first-child{border-left:0;padding-left:0}
+.facts b{display:block;font-size:40px;font-weight:500;line-height:1.1}
+.facts span{font-size:14px;color:var(--mute)}
+
+section{padding:100px 0}
+h2{font-size:clamp(34px,5vw,54px);font-weight:500;line-height:1.1;letter-spacing:-.01em}
+.kicker{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+
+/* offer */
+.offer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border-top:1px solid var(--ink)}
+.offer-grid article{padding:34px 26px 38px 0;border-right:1px solid var(--line);margin-right:26px}
+.offer-grid article:last-child{border:0;margin:0}
+.offer-grid .n{font-size:14px;color:var(--mute);margin-bottom:46px}
+.offer-grid h3{font-size:22px;font-weight:500;line-height:1.25;margin-bottom:14px}
+.offer-grid p{font-size:15px;color:var(--mute)}
+
+/* catalog */
+.catalog-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:36px 0 34px}
+.chip{padding:9px 18px;border:1px solid var(--line);background:#fff;font:400 14px 'Jost';cursor:pointer;transition:.2s}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{position:relative;aspect-ratio:3/4;overflow:hidden;background:#222;transition:opacity .3s}
+.card.hide{display:none}
+.card svg{width:100%;height:100%;transition:transform .6s}
+.card:hover svg{transform:scale(1.05)}
+.card .cap{position:absolute;inset:auto 0 0 0;padding:60px 16px 16px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff}
+.card small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.card h3{font-size:19px;font-weight:500}
+.card .go{position:absolute;right:14px;top:14px;background:#fff;color:var(--ink);font-size:12px;padding:7px 12px;opacity:0;transition:.25s}
+.card:hover .go{opacity:1}
+.note{margin-top:22px;font-size:13px;color:var(--mute)}
+
+/* about */
+.about{background:var(--ink);color:#fff;padding:0}
+.about .grid{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+.about .vis{position:relative;min-height:380px}
+.about .vis svg{position:absolute;inset:0;width:100%;height:100%}
+.about .txt{padding:90px 70px;display:flex;flex-direction:column;justify-content:center}
+.about .kicker{color:#a6a6a0}
+.about p{color:#cfcfca;font-size:17px;font-weight:300;margin-top:20px}
+.about .btn{margin-top:36px;align-self:flex-start}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;counter-reset:s}
+.step{background:var(--soft);padding:32px 26px 36px;counter-increment:s;min-height:240px}
+.step::before{content:"0" counter(s);display:block;font-size:14px;color:var(--mute);margin-bottom:60px}
+.step h3{font-size:21px;font-weight:500;margin-bottom:10px}
+.step p{font-size:15px;color:var(--mute)}
+
+/* cta */
+.cta{text-align:center;border-top:1px solid var(--line);padding:90px 0}
+.cta h2{max-width:720px;margin:0 auto 30px}
+
+/* footer / contact */
+footer{display:grid;grid-template-columns:1fr 1fr}
+.f-l{background:var(--soft);padding:80px max(24px,calc((100vw - 1180px)/2)) 60px}
+.f-r{background:var(--dark);color:#fff;padding:80px 60px 60px}
+.f-l .big{font-size:56px;font-weight:500;letter-spacing:.04em;margin-bottom:46px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;font-size:15px}
+.cols b{display:block;font-weight:500;margin-bottom:8px}
+.cols a:hover{text-decoration:underline}
+.f-r h2{font-size:clamp(28px,3.2vw,40px);margin-bottom:34px;max-width:420px}
+form{display:grid;gap:18px;max-width:460px}
+input,textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.4);color:#fff;font:400 16px 'Jost';padding:12px 0;outline:none}
+input:focus,textarea:focus{border-color:#fff}
+input::placeholder,textarea::placeholder{color:#a8a8a8}
+textarea{resize:vertical;min-height:90px}
+.chk{display:flex;gap:10px;font-size:12px;color:#b5b5b5;align-items:flex-start}
+.chk input{width:auto;margin-top:3px}
+.legal{grid-column:1/-1;background:var(--dark);color:#8d8d88;font-size:12px;text-align:center;padding:18px;border-top:1px solid rgba(255,255,255,.1)}
+
+@media(max-width:960px){
+ nav,.hdr-contact{display:none}
+ .facts .wrap,.offer-grid,.steps{grid-template-columns:1fr 1fr}
+ .facts div:nth-child(3){border-left:0;padding-left:0}
+ .offer-grid article{border:0;margin:0;border-bottom:1px solid var(--line)}
+ .cards{grid-template-columns:1fr 1fr}
+ .about .grid,footer{grid-template-columns:1fr}
+ .about .txt{padding:60px 24px}
+ .f-r{padding:60px 24px}
+ section{padding:70px 0}
+}
+@media(max-width:560px){.facts .wrap,.offer-grid,.steps,.cards{grid-template-columns:1fr}.facts div{border-left:0;padding-left:0!important;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="wrap">
+  <a class="logo" href="#top">ARCHISFERA</a>
+  <nav>
+   <a href="#oferta">Oferta</a><a href="#projekty">Projekty</a><a href="#o-mnie">O mnie</a><a href="#proces">Jak pracuję</a><a href="#kontakt">Kontakt</a>
+  </nav>
+  <div class="hdr-contact">Łódź · ul. Drewnowska 45<br>+48 506 088 108</div>
+ </div>
+</header>
+
+<!-- HERO: generowana grafika SVG (do podmiany na render / zdjęcie realizacji) -->
+<div class="hero" id="top">
+ <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+   <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0b1318"/><stop offset=".55" stop-color="#27363c"/><stop offset="1" stop-color="#6b5a49"/>
+   </linearGradient>
+   <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd48a"/><stop offset="1" stop-color="#e08f3c"/></linearGradient>
+   <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5b3d28"/><stop offset="1" stop-color="#7a5236"/></linearGradient>
+   <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26343a"/><stop offset="1" stop-color="#0b1013"/></linearGradient>
+   <pattern id="slats" width="9" height="10" patternUnits="userSpaceOnUse"><rect width="9" height="10" fill="url(#wood)"/><rect width="1.5" height="10" fill="#00000055"/></pattern>
+   <filter id="bl"><feGaussianBlur stdDeviation="14"/></filter>
+   <filter id="bl2"><feGaussianBlur stdDeviation="2.2"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <!-- distant trees -->
+  <g fill="#0a1114">
+   <path d="M0 640 L40 420 L80 640Z M60 640 L110 380 L160 640Z M140 640 L190 440 L240 640Z M1370 640 L1420 400 L1470 640Z M1440 640 L1500 360 L1560 640Z M1530 640 L1580 430 L1630 640Z M260 640 L300 470 L340 640Z M1290 640 L1330 470 L1370 640Z"/>
+  </g>
+  <!-- glow -->
+  <ellipse cx="800" cy="560" rx="470" ry="120" fill="#e9a653" opacity=".28" filter="url(#bl)"/>
+  <!-- ground -->
+  <rect y="640" width="1600" height="260" fill="url(#water)"/>
+  <!-- reflection -->
+  <g opacity=".35" filter="url(#bl2)" transform="translate(0,1280) scale(1,-1)">
+   <rect x="520" y="660" width="560" height="150" fill="url(#glow)"/>
+   <rect x="1090" y="660" width="170" height="150" fill="#d8d3c8"/>
+  </g>
+  <!-- house : lower volume -->
+  <rect x="500" y="500" width="780" height="140" fill="#1a1c1d"/>
+  <rect x="520" y="515" width="560" height="125" fill="url(#glow)"/>
+  <g stroke="#1a1c1d" stroke-width="5"><path d="M660 515V640M800 515V640M940 515V640"/></g>
+  <!-- wood volume -->
+  <rect x="1090" y="500" width="190" height="140" fill="url(#slats)"/>
+  <!-- upper volume (white) -->
+  <rect x="600" y="360" width="520" height="140" fill="#dcd9d1"/>
+  <rect x="560" y="344" width="610" height="16" fill="#f1efe9"/>
+  <rect x="620" y="385" width="300" height="95" fill="url(#glow)" opacity=".95"/>
+  <rect x="940" y="385" width="160" height="95" fill="#3a3d3f"/>
+  <path d="M770 385V480" stroke="#dcd9d1" stroke-width="6"/>
+  <!-- slab + terrace -->
+  <rect x="470" y="496" width="840" height="10" fill="#efece4"/>
+  <rect x="400" y="640" width="900" height="10" fill="#0c0e0f"/>
+  <!-- stairs -->
+  <g fill="#161819"><rect x="760" y="650" width="260" height="8"/><rect x="740" y="658" width="300" height="8"/><rect x="720" y="666" width="340" height="8"/></g>
+  <!-- foreground trees -->
+  <g fill="#05090b"><path d="M-40 900 L70 300 L180 900Z M1420 900 L1530 260 L1650 900Z M120 900 L210 420 L300 900Z"/></g>
+ </svg>
+ <div class="wrap">
+  <h1>ARCHISFERA</h1>
+  <p>Pracownia architektoniczna Kamili Chęcielewskiej. Od koncepcji do realizacji – domy, obiekty medyczne, przedszkola i wnętrza.</p>
+  <div class="hero-row">
+   <a class="btn light" href="#kontakt">Umów konsultację</a>
+   <div class="hero-line"><span>Łódź</span><i></i><span>od 2013</span></div>
+  </div>
+ </div>
+</div>
+
+<div class="facts">
+ <div class="wrap">
+  <div><b>2013</b><span>założenie pracowni</span></div>
+  <div><b>2001</b><span>dyplom, Politechnika Łódzka</span></div>
+  <div><b>2012</b><span>pełne uprawnienia projektowe</span></div>
+  <div><b>6</b><span>obszarów specjalizacji</span></div>
+ </div>
+</div>
+
+<section id="oferta">
+ <div class="wrap">
+  <p class="kicker">Oferta</p>
+  <h2>Pełna obsługa inwestycji,<br>od pomysłu po nadzór</h2>
+  <div class="offer-grid">
+   <article><div class="n">01</div><h3>Projekty koncepcyjne</h3><p>Analizy i koncepcje oparte na założeniach inwestora, wymogach prawnych, uwagach rzeczoznawców sanitarnych i ppoż. oraz dokładnym rozpoznaniu otoczenia inwestycji.</p></article>
+   <article><div class="n">02</div><h3>Projekty budowlane wielobranżowe</h3><p>Koordynacja branż – geologia, geodezja, dendrologia, rzeczoznawcy sanitarni i ppoż. Reprezentowanie inwestora w urzędach aż do uzyskania decyzji i pozwoleń.</p></article>
+   <article><div class="n">03</div><h3>Projekty technologiczne</h3><p>Opracowania technologiczne dla żłobków, przedszkoli, obiektów gastronomicznych i budynków służby zdrowia.</p></article>
+   <article><div class="n">04</div><h3>Wizualizacje</h3><p>Standardowe wizualizacje szkicowe budynków i wnętrz. Na życzenie – fotorealistyczne renderingi.</p></article>
+  </div>
+ </div>
+</section>
+
+<section id="projekty" style="padding-top:0">
+ <div class="wrap">
+  <div class="catalog-head">
+   <div><p class="kicker">Projekty</p><h2>Od koncepcji do realizacji</h2></div>
+  </div>
+  <div class="chips" id="chips">
+   <button class="chip on" data-f="all">Wszystkie</button>
+   <button class="chip" data-f="zdrowie">Służba zdrowia</button>
+   <button class="chip" data-f="przedszkola">Przedszkola i żłobki</button>
+   <button class="chip" data-f="rozbudowy">Rozbudowy i przebudowy</button>
+   <button class="chip" data-f="podstaw">Od podstaw</button>
+   <button class="chip" data-f="inwent">Inwentaryzacje</button>
+   <button class="chip" data-f="wnetrza">Wnętrza</button>
+  </div>
+  <div class="cards" id="cards"></div>
+  <p class="note">Grafiki w kafelkach to ilustracje poglądowe – do podmiany na zdjęcia i wizualizacje realizacji z archisfera.net.</p>
+ </div>
+</section>
+
+<div class="about" id="o-mnie">
+ <div class="grid">
+  <div class="vis">
+   <svg viewBox="0 0 800 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+     <linearGradient id="ab" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f2a2f"/><stop offset="1" stop-color="#0c1114"/></linearGradient>
+     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff14"/></pattern>
+    </defs>
+    <rect width="800" height="700" fill="url(#ab)"/><rect width="800" height="700" fill="url(#grid)"/>
+    <g fill="none" stroke="#e9a653" stroke-width="2">
+     <path d="M140 520H640V300H500V210H300V300H140Z"/>
+     <path d="M300 300H500M220 520V400H300V520M400 520V420H480V520"/>
+     <path d="M140 560H640M140 550V570M640 550V570" stroke="#ffffff55"/>
+     <path d="M200 160L300 210M600 160L500 210" stroke="#ffffff30" stroke-dasharray="6 6"/>
+    </g>
+    <circle cx="400" cy="130" r="60" fill="none" stroke="#ffffff33"/>
+    <text x="140" y="600" fill="#ffffff88" font-family="Jost" font-size="15" letter-spacing="3">ELEWACJA FRONTOWA  1:100</text>
+   </svg>
+  </div>
+  <div class="txt">
+   <p class="kicker">O mnie</p>
+   <h2>Kamila Chęcielewska<br>mgr inż. architekt</h2>
+   <p>Absolwentka Wydziału Architektury i Budownictwa Politechniki Łódzkiej (2001). Pełne uprawnienia budowlane w specjalności architektonicznej posiada od 2012 roku. Przed założeniem własnej pracowni w listopadzie 2013 pracowała w łódzkich biurach projektowych – od asystenta po kierownika pracowni – przy wnętrzach, kompleksowej obsłudze inwestycji i obiektach zabytkowych.</p>
+   <p>Zaczynałam od domów jednorodzinnych, dziś projektuję także obiekty usługowe, medyczne i opieki nad dziećmi, a z deweloperami – budynki wielorodzinne, przebudowy kamienic i uzupełnienia zabudowy. Współpracuję z siecią sprawdzonych specjalistów branżowych.</p>
+   <a class="btn light" href="#kontakt">Zapraszam do współpracy</a>
+  </div>
+ </div>
+</div>
+
+<section id="proces">
+ <div class="wrap">
+  <p class="kicker">Jak pracuję</p>
+  <h2>Cztery kroki do gotowego projektu</h2>
+  <div class="steps">
+   <div class="step"><h3>Koncepcja</h3><p>Poznanie potrzeb, analiza działki i przepisów, pierwsze warianty rozwiązań.</p></div>
+   <div class="step"><h3>Projekt budowlany</h3><p>Kompletna dokumentacja wielobranżowa, koordynacja specjalistów i rzeczoznawców.</p></div>
+   <div class="step"><h3>Formalności</h3><p>Uzgodnienia, wnioski i reprezentowanie inwestora w urzędach do uzyskania pozwolenia.</p></div>
+   <div class="step"><h3>Realizacja</h3><p>Wsparcie na budowie i nadzór, aby efekt końcowy odpowiadał projektowi.</p></div>
+  </div>
+ </div>
+</section>
+
+<div class="cta">
+ <div class="wrap">
+  <h2>Masz działkę, dom do rozbudowy lub pomysł na obiekt?</h2>
+  <a class="btn" href="#kontakt">Porozmawiajmy o projekcie</a>
+ </div>
+</div>
+
+<footer id="kontakt">
+ <div class="f-l">
+  <div class="big">ARCHISFERA</div>
+  <div class="cols">
+   <div><b>Pracownia</b>Łódź, ul. Drewnowska 45</div>
+   <div><b>Adres korespondencyjny</b>Janów 3T<br>95-002 Janów</div>
+   <div><b>Kontakt</b><a href="tel:+48506088108">506 088 108</a><br><a href="mailto:biuro@archisfera.net">biuro@archisfera.net</a></div>
+   <div><b>Projektant</b>mgr inż. arch.<br>Kamila Chęcielewska</div>
+  </div>
+ </div>
+ <div class="f-r">
+  <h2>Zacznijmy od rozmowy o Twojej inwestycji</h2>
+  <form id="cf">
+   <input name="name" placeholder="Imię i nazwisko" required>
+   <input name="mail" type="email" placeholder="E-mail" required>
+   <textarea name="msg" placeholder="Opisz krótko, czego dotyczy projekt"></textarea>
+   <label class="chk"><input type="checkbox" required> Wyrażam zgodę na przetwarzanie danych osobowych w celu odpowiedzi na zapytanie.</label>
+   <button class="btn light" type="submit">Wyślij</button>
+  </form>
+ </div>
+ <div class="legal">© 2019–2026 Archisfera mgr inż. arch. Kamila Chęcielewska</div>
+</footer>
+
+<script>
+/* kafelki projektów – ilustracje generowane z konfiguracji */
+const P=[
+ {t:'Przedszkole',c:'Przedszkola i żłobki',f:'przedszkola',sky:['#6fa3c2','#d9e6ea'],g:'#4d7a47',v:[[30,250,250,90,'#e8e2d4'],[100,200,110,50,'#c9d96a'],[240,265,80,75,'#f0b34a'],[310,295,40,45,'#d9534f']],w:[[48,270,50,40],[120,270,50,40],[190,270,40,40]]},
+ {t:'Dom jednorodzinny',c:'Rozbudowa · Warszawa',f:'rozbudowy',sky:['#3a4a58','#c9a27b'],g:'#2c3a2c',v:[[40,260,170,80,'#d6cfc2'],[210,230,140,110,'#2b2d2f'],[60,225,130,35,'#8a5a3a']],w:[[225,255,100,70,'glow'],[60,282,60,40]]},
+ {t:'Dom jednorodzinny',c:'Projekt od podstaw',f:'podstaw',sky:['#14202a','#7a5e48'],g:'#0f1a14',v:[[60,270,260,70,'#1c1d1e'],[110,200,200,70,'#e1ded6'],[300,250,60,90,'#6a452c']],w:[[75,285,170,45,'glow'],[130,215,100,40,'glow']]},
+ {t:'Bliźniaki',c:'Projekt od podstaw',f:'podstaw',sky:['#7d98ad','#e3d8c6'],g:'#58733f',v:[[30,250,160,90,'#ece7dc'],[210,250,160,90,'#cfc6b6'],[20,225,180,26,'#6b4a3a'],[200,225,180,26,'#3b3f42']],w:[[50,272,40,40],[130,272,40,40],[230,272,40,40],[310,272,40,40]]},
+ {t:'Pokój biurowy',c:'Wnętrza · Zgierz',f:'wnetrza',sky:['#c9c2b4','#e9e4da'],g:'#8d7456',v:[[0,0,400,250,'#e4dfd4'],[60,170,160,40,'#3b3f42'],[250,60,110,150,'#b9b19f']],w:[[260,70,90,130,'glow'],[70,150,140,20,'#7a5236']]},
+ {t:'Obiekt służby zdrowia',c:'Służba zdrowia',f:'zdrowie',sky:['#8fb3c4','#e9f0f2'],g:'#6c8a6a',v:[[30,210,340,130,'#f2f2ee'],[170,170,60,40,'#4aa3a0'],[30,200,340,12,'#4aa3a0']],w:[[50,235,50,40],[120,235,50,40],[230,235,50,40],[300,235,50,40]]},
+ {t:'Inwentaryzacja',c:'Inwentaryzacje',f:'inwent',blue:1}
+];
+const wrap=document.getElementById('cards');
+function art(p){
+ if(p.blue)return `<svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice"><rect width="400" height="520" fill="#12304a"/><g stroke="#ffffff22"><path d="M0 100H400M0 200H400M0 300H400M0 400H400M100 0V520M200 0V520M300 0V520"/></g><g fill="none" stroke="#fff" stroke-width="2.2"><path d="M70 150H330V380H70Z M70 250H190V380 M190 150V250 M250 380V300H330"/></g><g stroke="#e9a653" stroke-width="1.5"><path d="M70 130H330M70 122V138M330 122V138M350 150V380M342 150H358M342 380H358"/></g></svg>`;
+ const id='s'+Math.random().toString(36).slice(2,7);
+ let s=`<svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p.sky[0]}"/><stop offset="1" stop-color="${p.sky[1]}"/></linearGradient><linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd48a"/><stop offset="1" stop-color="#e08f3c"/></linearGradient></defs><rect width="400" height="520" fill="url(#${id})"/><rect y="340" width="400" height="180" fill="${p.g}"/>`;
+ if(!p.f.includes('wnetrza'))s+=`<path d="M-20 340L30 230 80 340Z M330 340L380 200 430 340Z" fill="#00000030"/>`;
+ p.v.forEach(r=>s+=`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" fill="${r[4]}"/>`);
+ p.w.forEach(r=>s+=`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" fill="${r[4]==='glow'?`url(#${id}g)`:'#25343b'}"/>`);
+ return s+'</svg>';
+}
+P.forEach(p=>{
+ const d=document.createElement('div');d.className='card';d.dataset.f=p.f;
+ d.innerHTML=art(p)+`<span class="go">Zobacz</span><div class="cap"><small>${p.c}</small><h3>${p.t}</h3></div>`;
+ wrap.appendChild(d);
+});
+document.getElementById('chips').addEventListener('click',e=>{
+ const b=e.target.closest('.chip');if(!b)return;
+ document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));
+ document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hide',b.dataset.f!=='all'&&c.dataset.f!==b.dataset.f));
+});
+document.getElementById('cf').addEventListener('submit',e=>{
+ e.preventDefault();const f=e.target;
+ location.href='mailto:biuro@archisfera.net?subject='+encodeURIComponent('Zapytanie ze strony – '+f.name.value)+'&body='+encodeURIComponent(f.msg.value+'\n\n'+f.name.value+' / '+f.mail.value);
+});
+</script>
+</body>
+</html>
