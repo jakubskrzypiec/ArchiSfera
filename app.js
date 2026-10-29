@@ -30,11 +30,11 @@ if (content) {
   const biography = content['o-mnie'].texts[1].replace(/\u200b/g,'').split('\n').filter(line => line.trim());
   for (const text of biography) {const p=document.createElement('p');p.textContent=text;$('#bio-text')?.append(p);}
 }
-function makeCard(project, title, image) {
-  const button=document.createElement('button');button.className='project-card';button.setAttribute('aria-label',`Zobacz projekt: ${title || project.title}`);
+function makeCard(project, title, image,asPageLink=false) {
+  const button=document.createElement(asPageLink?'a':'button');button.className='project-card';button.setAttribute('aria-label',`Zobacz projekt: ${title || project.title}`);
   const frame=document.createElement('div');frame.className='project-image';
   const img=document.createElement('img');img.src=image || project.images[0];img.alt=title || project.title;img.loading='lazy';img.width=800;img.height=600;frame.append(img);
-  const caption=document.createElement('div');caption.className='project-caption';const heading=document.createElement('h3');heading.textContent=title || project.title;const category=document.createElement('p');category.textContent=categories[project.key];caption.append(heading,category);button.append(frame,caption);button.addEventListener('click',()=>openProject(project));return button;
+  const caption=document.createElement('div');caption.className='project-caption';const heading=document.createElement('h3');heading.textContent=title || project.title;const category=document.createElement('p');category.textContent=categories[project.key];caption.append(heading,category);button.append(frame,caption);if(asPageLink)button.href=`projekty/?projekt=${project.id+1}`;else button.addEventListener('click',()=>openProject(project));return button;
 }
 if (content && projects.length) {
   const house=projects.find(p => /Sokolnikach/.test(p.title));
@@ -42,7 +42,7 @@ if (content && projects.length) {
   const duplex=projects.find(p => /Ksawerowie/.test(p.title));
   const living=projects.find(p => /pokoju dziennego/.test(p.title));
   const selections=[{p:house,t:'Dom w Sokolnikach',sub:'Sokolniki · Dom jednorodzinny',image:house?.images[2]},{p:interior,t:'Pokój biurowy',sub:'Zgierz · Wnętrza'},{p:duplex,t:'Zabudowa bliźniacza',sub:'Ksawerów · Od podstaw'},{p:living,t:'Wnętrze mieszkalne',sub:'Koncepcja · Aranżacja wnętrz',image:living?.images[2]}];
-  selections.forEach(({p,t,image,sub},index) => {if(p && $('#featured-projects')){const card=makeCard(p,t,image);card.querySelector('.project-caption p').textContent=sub;const number=document.createElement('span');number.className='project-number';number.textContent=String(index+1).padStart(2,'0');const type=document.createElement('span');type.className='project-type';type.textContent=categories[p.key].toLocaleUpperCase('pl');const arrow=document.createElement('span');arrow.className='project-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');card.append(number,type,arrow);$('#featured-projects').append(card);}});
+  selections.forEach(({p,t,image,sub},index) => {if(p && $('#featured-projects')){const card=makeCard(p,t,image,true);card.querySelector('.project-caption p').textContent=sub;const number=document.createElement('span');number.className='project-number';number.textContent=String(index+1).padStart(2,'0');const type=document.createElement('span');type.className='project-type';type.textContent=categories[p.key].toLocaleUpperCase('pl');const arrow=document.createElement('span');arrow.className='project-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');card.append(number,type,arrow);$('#featured-projects').append(card);}});
   for (const [key,label] of Object.entries(categories)) {
     const button=document.createElement('button');button.textContent=label;button.dataset.filter=key;button.setAttribute('aria-pressed',String(key==='all'));button.addEventListener('click',()=>filterProjects(key));$('.filters')?.append(button);
   }
@@ -116,8 +116,24 @@ if(contactForm){
   contactForm.addEventListener('input',()=>{mailLink.hidden=true;status.textContent='';});
   copyButton.addEventListener('click',async()=>{if(!contactForm.reportValidity())return;const message=prepareMessage();const text=`Do: biuro@archisfera.net\nTemat: ${message.subject}\n\n${message.body}`;try{await navigator.clipboard.writeText(text);status.textContent='Treść została skopiowana. Wklej ją do wiadomości i wyślij na biuro@archisfera.net.';}catch{status.textContent='Nie udało się skopiować automatycznie. Użyj przycisku „Przygotuj wiadomość”, aby otworzyć ją w swojej poczcie.';}});
 }
-if(document.body.dataset.page==='projects'){
+if(document.body.dataset.page==='projects' && $('#portfolio-grid')){
   filterProjects('all');
   $('#project-search').addEventListener('input',()=>filterProjects(activeCategory));
   $('#clear-project-search').addEventListener('click',()=>{$('#project-search').value='';filterProjects('all');$('#project-search').focus();});
+}
+if($('#spotlight-image') && projects.length){
+  const requested=Number(new URLSearchParams(location.search).get('projekt') || 1);
+  const index=Number.isInteger(requested)&&requested>=1&&requested<=projects.length?requested-1:0;
+  const project=projects[index];
+  $('#spotlight-image').src=index===0&&project.images[2]?project.images[2]:project.images[0];
+  $('#spotlight-image').alt=project.title;
+  $('#spotlight-title').textContent=index===0?'Dom jednorodzinny w Sokolnikach':project.title;
+  $('#spotlight-category').textContent=categories[project.key].toLocaleUpperCase('pl');
+  $('#spotlight-hero-label').textContent=`ARCHISFERA / PROJEKT ${String(index+1).padStart(2,'0')}`;
+  const introductions={'od-podstaw':'Projekt architektoniczny od podstaw — opracowanie pracowni ArchiSfera.',rozbudowy:'Projekt przebudowy lub rozbudowy istniejącego budynku.',wnetrza:'Koncepcja aranżacji wnętrza opracowana przez pracownię ArchiSfera.',zdrowie:'Opracowania dla placówek związanych ze służbą zdrowia.',przedszkola:'Projekt placówki edukacyjnej.',inwentaryzacje:'Inwentaryzacja istniejących obiektów.'};
+  $('#spotlight-description').textContent=project.description || introductions[project.key];
+  $('#spotlight-counter').textContent=`${String(index+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')}`;
+  $('#spotlight-prev').href=`projekty/?projekt=${(index-1+projects.length)%projects.length+1}`;
+  $('#spotlight-next').href=`projekty/?projekt=${(index+1)%projects.length+1}`;
+  document.title=`${$('#spotlight-title').textContent} — ArchiSfera`;
 }
