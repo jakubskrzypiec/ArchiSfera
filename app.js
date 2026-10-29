@@ -129,7 +129,6 @@ if($('#spotlight-image') && projects.length){
   $('#spotlight-image').alt=project.title;
   $('#spotlight-title').textContent=index===0?'Dom jednorodzinny w Sokolnikach':project.title;
   $('#spotlight-category').textContent=categories[project.key].toLocaleUpperCase('pl');
-  $('#spotlight-hero-label').textContent=`ARCHISFERA / PROJEKT ${String(index+1).padStart(2,'0')}`;
   const introductions={'od-podstaw':'Projekt architektoniczny od podstaw — opracowanie pracowni ArchiSfera.',rozbudowy:'Projekt przebudowy lub rozbudowy istniejącego budynku.',wnetrza:'Koncepcja aranżacji wnętrza opracowana przez pracownię ArchiSfera.',zdrowie:'Opracowania dla placówek związanych ze służbą zdrowia.',przedszkola:'Projekt placówki edukacyjnej.',inwentaryzacje:'Inwentaryzacja istniejących obiektów.'};
   $('#spotlight-description').textContent=project.description || introductions[project.key];
   $('#spotlight-counter').textContent=`${String(index+1).padStart(2,'0')} / ${String(projects.length).padStart(2,'0')}`;
@@ -137,3 +136,10 @@ if($('#spotlight-image') && projects.length){
   $('#spotlight-next').href=`projekty/?projekt=${(index+1)%projects.length+1}`;
   document.title=`${$('#spotlight-title').textContent} — ArchiSfera`;
 }
+
+// Keep a single navigation bar consistent across every page.
+const topbar = $('.topbar');
+function updateTopbar(){topbar.classList.toggle('is-scrolled', window.scrollY > 48);}
+window.addEventListener('scroll', updateTopbar, {passive:true});
+window.addEventListener('pageshow', updateTopbar);
+updateTopbar();

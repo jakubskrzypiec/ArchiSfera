@@ -66,3 +66,7 @@ Use case: photorealistic-natural. Asset type: wide architectural website hero, 2
 ## Sekcja o pracowni
 
 Use case: photorealistic-natural. Asset type: vertical photograph for about section of premium Polish architecture studio website, portrait 2:3. Architectural detail of the same serene contemporary courtyard residence aesthetic: warm limestone wall on left, beautifully weathered oak soffit overhead, slim bronze-framed glazing right, quiet stone terrace and one sculptural multi-stem tree in a small planted garden. View through a shaded passage into sunlit garden, strong clean geometries, generous negative space in upper stone wall, pale travertine ivory and muted olive palette. True high-end architecture magazine photography, soft morning sun, tactile material grain, realistic shadows, no people, no text or logos, no cactus or tropical plants.
+
+## Compact subpage banner — 2026-10-30
+Asset: assets/subpage-house-banner.webp. AI interpretation of hero-scene-v4b.webp, not a photograph of a completed building.
+Prompt: Photorealistic panoramic 3:1 architectural photograph of the same concrete gabled house, slim dark window frames, timber soffits and pine garden. Close view toward the right; green foliage negative space on the left for page titles. Natural afternoon light, no people, text, logos, mountains or clouds.

@@ -35,3 +35,16 @@ body{font-weight:400}.section-space{margin-top:110px}.wrap{max-width:1440px}.mic
 
 /* Approved refinement: static hero and edge-to-edge photographs */
 .hero{margin:0!important;border-radius:0!important;height:100svh}.interlude{margin-left:0!important;margin-right:0!important;border-radius:0!important}.hero-landscape,.hero-landscape>img{transform:none!important;animation:none!important;will-change:auto}.hero img{user-select:none;-webkit-user-drag:none}
+
+/* Shared navigation: transparent over the hero, white after a short scroll. */
+.topbar{position:fixed;inset:0 0 auto;z-index:50;height:92px;padding:0 4%;gap:30px;color:#fff;background:transparent;transition:background-color .25s,color .25s,box-shadow .25s}
+.topbar .brand{color:inherit;flex-shrink:0}
+.topbar nav{margin-left:auto;gap:42px;font-size:17px;font-weight:500;letter-spacing:-.035em}
+.topbar nav a{color:inherit;padding:10px 0}
+.topbar.is-scrolled{background:#fff;color:#262926;box-shadow:0 1px 0 #20292012}
+.topbar.is-scrolled nav a:hover,.topbar.is-scrolled nav a[aria-current=page]{border-color:#262926}
+.topbar .menu-toggle{color:inherit}
+html{scroll-padding-top:110px}
+@media(max-width:800px){.topbar{height:78px;padding-inline:24px}.topbar nav{font-size:16px;gap:28px}}
+@media(max-width:560px){.topbar{height:72px;padding-inline:20px;gap:20px}.topbar nav{top:72px;left:0;right:0;margin:0;padding:18px 20px 24px;background:#fff;color:#262926;border-bottom:1px solid #20292015;font-size:19px;max-height:calc(100svh - 72px);overflow:auto}.topbar nav.open{gap:4px}.topbar nav a{padding:15px 0}.topbar .menu-toggle{font-size:11px;margin-left:auto}html{scroll-padding-top:90px}}
+@media(prefers-reduced-motion:reduce){.topbar{transition:none}}

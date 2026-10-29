@@ -66,3 +66,5 @@ Menu mobilne, klawiaturowa obsługa dialogów i galerii, zamykanie Escape, seman
 Sprawdzono widoki 320, 390, 560, 768, 1024, 1440 i 1920 px oraz menu, biografię, filtry portfolio i przełączanie zdjęć. Sprawdzono kolejność sekcji, ładowanie lokalnego fontu, brak kursywy, jeden rząd projektów, trzy oznaczenia przykładowych opinii, walidację formularza, link mailto i kopiowanie treści. Potwierdzono brak błędów JavaScript, brak brakujących zdjęć i brak poziomego przewijania całej strony. Źródłowe zdjęcia zoptymalizowano do WebP.
 
 Prompty wykorzystane w wbudowanym ImageGen znajdują się w `IMAGE-PROMPTS.md`.
+
+Navigation update: a single fixed header on all pages, transparent initially and solid white after 48px of scrolling. Three larger right-aligned links: Projekty, Oferta, Kontakt. Removed the header phone. Shared AI architectural banner on subpages is 39svh (capped at 420px), with the page title at left. The selected project retains one separate original visualization. Verified at 320, 390, 768 and 1440px: scroll behavior, menu, banner size, overflow and project navigation.
