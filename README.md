@@ -1,5 +1,25 @@
 # ArchiSfera — projekt wstępny
 
+## Podstrony — 29.10.2026
+
+Po korekcie: wszystkie podstrony mają ten sam nagłówek co strona główna, nałożony na pełnoekranowe hero. Usunięto osobny jasny pasek i link „Strona główna” z nagłówka, żeby menu nie zmieniało układu między stronami. Do strony głównej prowadzi logo.
+
+Portfolio uproszczono do jednego projektu na widok: hero od górnej krawędzi, pod nim nazwa po lewej oraz krótki opis. Linki Poprzedni/Następny prowadzą do adresów `/projekty/?projekt=1`–`38`. Kafelki projektów na stronie głównej prowadzą do odpowiednich widoków. Siatkę trzech kolumn, wyszukiwarkę i filtry usunięto z widocznej strony projektów. Oferta i Kontakt zachowują treści i formularz, z nowym spójnym hero.
+
+Sprawdzono identyczne położenie, wysokość, rozmiar tekstu i zestaw linków nagłówka na wszystkich czterech stronach, jeden obraz projektu, nazwę poniżej hero, szerokości 320–1440 px, menu mobilne, poprzedni/następny projekt, adres bezpośredni, błędny parametr i przejścia z kafelków strony głównej. Brak błędów przeglądarki i poziomego przewijania.
+
+Dodano trzy osobne podstrony, spójne z zaakceptowaną stroną główną:
+
+- `/projekty/` — pełne portfolio: 38 galerii, kategorie, wyszukiwanie po nazwie i miejscowości (także bez polskich znaków), pusty wynik i reset wyszukiwania, pełny wykaz opracowań, przerywnik z wnętrzem.
+- `/oferta/` — cztery rozwinięte obszary usług na podstawie archisfera.net/uslugi, proces współpracy, odpowiedzi na pytania, przerywnik z wnętrzem i przejście do formularza z uzupełnionym rodzajem zapytania.
+- `/kontakt/` — telefon i e-mail, formularz, wskazówki do zapytania, oba adresy pracowni z linkami do map oraz przerywnik z wnętrzem.
+
+Nawigacja główna, stopka, przyciski usług i link „Wszystkie projekty” prowadzą do nowych adresów. Wspólny skrypt inicjalizuje tylko elementy dostępne na danej stronie. Nowe układy są w `subpages.css`; wygląd strony głównej, statyczne hero i jeden rząd wyróżnionych projektów zachowano.
+
+Podstrony mają fizyczne pliki `projekty/index.html`, `oferta/index.html` i `kontakt/index.html`. Build kopiuje je do `dist/` razem z istniejącymi materiałami. Do nawigowania między podstronami użyj `npm run dev` lub hostingu statycznego. Nie dodawano osobnego zakresu SEO.
+
+Weryfikacja w prawdziwej przeglądarce przez lokalny HTTP: cztery trasy i wszystkie linki wewnętrzne, szerokości 320–1440 px, menu, logo i powrót do strony głównej, galerie i obsługa klawiatury, wszystkie kategorie, wyszukiwanie, brak wyników i reset, FAQ, przejście oferta → kontakt z uzupełnionym zapytaniem, walidacja formularza, mailto i kopiowanie. Brak błędów JavaScript, brakujących zdjęć i poziomego przewijania całej strony.
+
 Czwarta koncepcja strony pracowni mgr inż. arch. Kamili Chęcielewskiej, według nowych referencji. Paleta jasnoszara / biała / grafitowa, lokalny Manrope jako krój zbliżony do screenshotu, bardziej kolorowe hero z widokiem na wprost i napisem archisfera za budynkiem. Kolejność: hero, o mnie, projekty, oferta, proces współpracy, wnętrze jako przerywnik, przykładowe opinie, formularz kontaktowy i stopka.
 
 ## Uruchomienie
