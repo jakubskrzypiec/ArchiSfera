@@ -70,3 +70,8 @@ Use case: photorealistic-natural. Asset type: vertical photograph for about sect
 ## Compact subpage banner — 2026-10-30
 Asset: assets/subpage-house-banner.webp. AI interpretation of hero-scene-v4b.webp, not a photograph of a completed building.
 Prompt: Photorealistic panoramic 3:1 architectural photograph of the same concrete gabled house, slim dark window frames, timber soffits and pine garden. Close view toward the right; green foliage negative space on the left for page titles. Natural afternoon light, no people, text, logos, mountains or clouds.
+
+## Subpage interior dividers — 2026-10-30
+- assets/offer-dining-divider.webp: AI-generated panoramic photorealistic dining room, travertine, oak table, linen chairs and pine garden; neutral plaster on the left for text. No text, people or logos.
+- assets/contact-foyer-divider.webp: AI-generated panoramic entry foyer with oak bench, warm plaster, limestone, ceramic vase and sunlit pine garden doorway. No text, people or logos.
+Both are illustrative concepts, not photographs of completed ArchiSfera projects.

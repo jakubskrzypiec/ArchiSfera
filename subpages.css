@@ -34,3 +34,29 @@
 @media(max-width:800px){.subpage .page-hero-caption{left:24px;right:24px;bottom:25px}.spotlight-heading>#spotlight-title{font-size:38px}.spotlight-visual{margin-top:34px}}
 @media(max-width:560px){.subpage .page-hero-caption{left:20px;right:20px;bottom:24px}.subpage .page-hero-caption>.micro:first-child{font-size:6px;letter-spacing:.06em}.subpage .page-hero-caption>h1{font-size:46px;margin-top:12px}.spotlight-heading>#spotlight-title{font-size:34px}.spotlight-visual{margin-top:30px}}
 @media(max-height:500px){.subpage .page-hero-caption{bottom:15px}.subpage .page-hero-caption>.micro{display:none}.subpage .page-hero-caption>h1{font-size:38px}}
+
+/* Five quiet, single-column places for the client's project photography. */
+.project-placeholder-list{display:grid;gap:32px;padding-top:54px}
+.project-placeholder{position:relative;min-height:420px;height:min(58vw,650px);background:#dedfdd;color:#424741;overflow:hidden;outline-offset:5px}
+.placeholder-location{position:absolute;top:30px;left:32px;font-size:12px;letter-spacing:-.015em}
+.placeholder-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#8b9089;pointer-events:none}
+.placeholder-center>span{font-size:10px;letter-spacing:.12em}.placeholder-center>p{font-size:16px;letter-spacing:-.03em}
+.placeholder-bottom{position:absolute;left:32px;right:32px;bottom:30px;display:flex;align-items:end;justify-content:space-between;gap:25px}
+.placeholder-bottom>h2{font-size:clamp(24px,2.5vw,38px);line-height:1.2;font-weight:500;letter-spacing:-.05em}
+.placeholder-area{font-size:13px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;text-align:right}
+.placeholder-area>span{display:block;font-size:20px;margin-top:8px;letter-spacing:-.04em}
+.project-placeholder:hover .placeholder-area,.project-placeholder:focus .placeholder-area{opacity:1;transform:none}
+.offer-faq{display:block;max-width:880px;margin-inline:auto}
+.offer-faq>.subsection-heading{text-align:center;margin-bottom:48px}
+.offer-faq>.subsection-heading>h2{font-size:clamp(36px,4.6vw,64px)}
+.full-width-cta{width:100%;max-width:none;padding:0;background:#e5e8e0}
+.full-width-cta>.glass{width:100%;border:0;border-radius:0;box-shadow:none;background:none;padding:65px 4%;gap:40px}
+.full-width-cta h2{font-size:clamp(28px,3.2vw,46px);max-width:700px}
+.full-width-cta .dark-button{white-space:nowrap;justify-content:center}
+.subpage[data-page=offer] .footer,.subpage[data-page=contact] .footer{margin-top:0}
+.contact-final-divider{height:470px}
+@media(hover:none){.placeholder-area{opacity:1;transform:none}}
+@media(max-width:800px){.project-placeholder-list{padding-top:35px;gap:24px}.project-placeholder{height:520px;min-height:0}.placeholder-location{left:24px;top:24px}.placeholder-bottom{left:24px;right:24px;bottom:24px}.full-width-cta>.glass{padding:45px 24px;flex-direction:column;align-items:flex-start;gap:28px}}
+@media(max-width:560px){.project-placeholder-list{padding-top:24px;gap:20px}.project-placeholder{height:420px}.placeholder-location{left:20px;top:22px;font-size:10px}.placeholder-bottom{left:20px;right:20px;bottom:22px;align-items:flex-start;flex-direction:column;gap:16px}.placeholder-bottom>h2{font-size:27px}.placeholder-area{text-align:left;font-size:10px;display:flex;gap:10px;align-items:baseline}.placeholder-area>span{font-size:13px;margin:0}.placeholder-center>p{font-size:14px}.offer-faq>.subsection-heading{margin-bottom:30px}.offer-faq .section-label{font-size:7px;letter-spacing:.08em}.full-width-cta>.glass{padding:38px 20px}.full-width-cta .dark-button{font-size:12px}.contact-final-divider{height:440px}}
+@media(prefers-reduced-motion:reduce){.placeholder-area{transition:none;transform:none}}
+@media(max-width:560px){.placeholder-area{opacity:1;transform:none;align-self:flex-end}}
