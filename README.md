@@ -1,5 +1,19 @@
 # ArchiSfera — projekt wstępny
 
+## Podstrony — 29.10.2026
+
+Dodano trzy osobne podstrony, spójne z zaakceptowaną stroną główną:
+
+- `/projekty/` — pełne portfolio: 38 galerii, kategorie, wyszukiwanie po nazwie i miejscowości (także bez polskich znaków), pusty wynik i reset wyszukiwania, pełny wykaz opracowań, przerywnik z wnętrzem.
+- `/oferta/` — cztery rozwinięte obszary usług na podstawie archisfera.net/uslugi, proces współpracy, odpowiedzi na pytania, przerywnik z wnętrzem i przejście do formularza z uzupełnionym rodzajem zapytania.
+- `/kontakt/` — telefon i e-mail, formularz, wskazówki do zapytania, oba adresy pracowni z linkami do map oraz przerywnik z wnętrzem.
+
+Nawigacja główna, stopka, przyciski usług i link „Wszystkie projekty” prowadzą do nowych adresów. Wspólny skrypt inicjalizuje tylko elementy dostępne na danej stronie. Nowe układy są w `subpages.css`; wygląd strony głównej, statyczne hero i jeden rząd wyróżnionych projektów zachowano.
+
+Podstrony mają fizyczne pliki `projekty/index.html`, `oferta/index.html` i `kontakt/index.html`. Build kopiuje je do `dist/` razem z istniejącymi materiałami. Do nawigowania między podstronami użyj `npm run dev` lub hostingu statycznego. Nie dodawano osobnego zakresu SEO.
+
+Weryfikacja w prawdziwej przeglądarce przez lokalny HTTP: cztery trasy i wszystkie linki wewnętrzne, szerokości 320–1440 px, menu, logo i powrót do strony głównej, galerie i obsługa klawiatury, wszystkie kategorie, wyszukiwanie, brak wyników i reset, FAQ, przejście oferta → kontakt z uzupełnionym zapytaniem, walidacja formularza, mailto i kopiowanie. Brak błędów JavaScript, brakujących zdjęć i poziomego przewijania całej strony.
+
 Czwarta koncepcja strony pracowni mgr inż. arch. Kamili Chęcielewskiej, według nowych referencji. Paleta jasnoszara / biała / grafitowa, lokalny Manrope jako krój zbliżony do screenshotu, bardziej kolorowe hero z widokiem na wprost i napisem archisfera za budynkiem. Kolejność: hero, o mnie, projekty, oferta, proces współpracy, wnętrze jako przerywnik, przykładowe opinie, formularz kontaktowy i stopka.
 
 ## Uruchomienie
