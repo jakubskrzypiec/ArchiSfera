@@ -78,3 +78,27 @@
 .subpage[data-page=contact] .footer{margin-top:95px}
 @media(max-width:1199px){.sub-services-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.service-detail{padding:30px}}
 @media(max-width:560px){.sub-services-grid{grid-template-columns:1fr;gap:18px}.service-detail{padding:25px}.service-detail h3{font-size:26px}.subpage[data-page=contact] .footer{margin-top:65px}}
+
+/* Readable offer copy and FAQ. */
+.service-detail-copy p{font-size:15px;line-height:1.8;color:#242824}
+.service-detail li{font-size:13px;line-height:1.75;color:#242824}
+.service-detail>.text-link{font-size:14px;color:#171b16;font-weight:600}
+.offer-faq .section-label{font-size:12px;letter-spacing:.09em;color:#40483c}
+.faq-list summary{font-size:18px;line-height:1.6;color:#20251e;padding-block:25px}
+.faq-list details p{font-size:16px;line-height:1.85;color:#343d2e}
+/* The contact page centers a larger form, followed by the studio details. */
+.subpage[data-page=contact] #formularz{display:block;max-width:1080px;margin-top:65px}
+.subpage[data-page=contact] .contact-intro{text-align:center;margin-bottom:38px}
+.subpage[data-page=contact] .contact-intro h2{font-size:clamp(32px,3.5vw,50px);line-height:1.15;max-width:850px;margin:auto}
+.subpage[data-page=contact] .contact-form{padding:50px;border:1px solid #bec9b5;border-radius:24px;box-shadow:0 18px 65px #243b2412}
+.subpage[data-page=contact] .contact-form label{font-size:15px;margin-bottom:25px;color:#242a22}
+.subpage[data-page=contact] .contact-form input:not([type=checkbox]),.subpage[data-page=contact] .contact-form select,.subpage[data-page=contact] .contact-form textarea{font-size:16px;padding:17px 18px;margin-top:10px;line-height:1.6;border-color:#cdd5c6}
+.subpage[data-page=contact] .contact-form textarea{min-height:200px}
+.subpage[data-page=contact] .contact-form .form-consent{font-size:13px}
+.subpage[data-page=contact] .form-actions .dark-button{font-size:15px;padding:19px 28px}
+.subpage[data-page=contact] .copy-button{font-size:13px}
+.subpage[data-page=contact] .form-note,.subpage[data-page=contact] .contact-form #form-status{font-size:12px;line-height:1.8}
+.subpage[data-page=contact] .contact-methods{margin-top:55px}
+@media(max-width:800px){.subpage[data-page=contact] .contact-form{padding:35px}}
+@media(max-width:560px){.service-detail-copy p{font-size:15px}.service-detail li{font-size:13px}.service-detail>.text-link{font-size:14px}.offer-faq .section-label{font-size:10px}.faq-list summary{font-size:16px}.faq-list details p{font-size:15px}.subpage[data-page=contact] #formularz{margin-top:40px}.subpage[data-page=contact] .contact-intro{margin-bottom:27px}.subpage[data-page=contact] .contact-form{padding:25px 20px;border-radius:18px}.subpage[data-page=contact] .contact-form label{font-size:14px}.subpage[data-page=contact] .contact-form input:not([type=checkbox]),.subpage[data-page=contact] .contact-form select,.subpage[data-page=contact] .contact-form textarea{font-size:16px;padding:14px}.subpage[data-page=contact] .form-actions .dark-button{font-size:13px;padding:17px 20px}.subpage[data-page=contact] .contact-methods{margin-top:35px}}
+.service-detail-top>.service-index{font-size:11px}

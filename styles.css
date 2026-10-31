@@ -72,3 +72,16 @@ html{scroll-padding-top:110px}
 .footer-top{grid-template-columns:1fr 1fr auto}
 @media(max-width:800px){.footer-top{grid-template-columns:1fr 1fr}.footer-top>nav{grid-column:1/-1}}
 @media(max-width:560px){.footer-top{grid-template-columns:1fr}.footer-top>nav{grid-column:1}}
+
+/* A clear project CTA and a text-only, full-screen biography. */
+.projects-heading .all-projects-link{font-size:14px;padding:17px 26px;border:1px solid var(--ink);border-radius:50px;min-height:52px;text-align:center;justify-content:center}
+.bio-dialog{position:fixed;inset:0;width:100%;height:100svh;max-width:none;max-height:100svh;margin:0;padding:28px 4% 65px;background:var(--paper);overflow-y:auto}
+.bio-dialog .dialog-top{position:sticky;top:-28px;background:var(--paper);z-index:2;padding-block:20px;align-items:center}
+.bio-dialog .dialog-top>span{visibility:hidden}
+.bio-dialog .close-dialog{font-size:13px;padding:10px}
+.bio-dialog .bio-layout{display:block;width:min(900px,100%);margin:55px auto 0}
+.bio-dialog .bio-layout>div{display:block;margin:0}
+.bio-dialog .bio-layout h2{text-align:center;font-size:clamp(38px,5vw,68px);max-width:none;font-weight:500;margin:0 0 45px}
+.bio-dialog #bio-text p{font-size:17px;line-height:1.9;text-align:justify;hyphens:auto;margin-bottom:24px;letter-spacing:-.015em;color:#30352e}
+.footer-bottom>.micro:first-child{font-size:13px;line-height:1.7;letter-spacing:.015em;max-width:none;text-align:left;color:#c7cec3}
+@media(max-width:560px){.projects-heading .all-projects-link{font-size:11px;padding:13px 16px;min-height:45px}.bio-dialog{padding:15px 20px 45px}.bio-dialog .dialog-top{top:-15px;padding-block:12px}.bio-dialog .bio-layout{margin-top:35px}.bio-dialog .bio-layout h2{margin-bottom:30px;font-size:38px}.bio-dialog #bio-text p{font-size:15px;line-height:1.85}.footer-bottom>.micro:first-child{font-size:11px;max-width:none}}
