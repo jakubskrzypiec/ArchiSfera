@@ -67,3 +67,8 @@ html{scroll-padding-top:110px}
 .subpage-interlude::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#172017a8,transparent 72%);pointer-events:none}
 @media(max-width:800px){.subpage-interlude>.interlude-content{padding:30px 24px}.subpage-interlude h2{font-size:37px;max-width:600px}.featured-projects .project-image{height:560px}}
 @media(max-width:560px){.hero-footer.hero-actions{flex-direction:column;align-items:flex-start;gap:12px;bottom:36px}.hero-actions .pill-button{font-size:13px;min-width:195px;padding:17px 23px}.projects-heading{gap:16px;align-items:end}.projects-heading h2{max-width:180px}.projects-heading .all-projects-link{font-size:10px;padding-bottom:6px}.subpage-interlude>.interlude-content{padding:28px 20px}.subpage-interlude h2{font-size:30px;line-height:1.14;max-width:350px}}
+
+/* Footer without the back-to-top control. */
+.footer-top{grid-template-columns:1fr 1fr auto}
+@media(max-width:800px){.footer-top{grid-template-columns:1fr 1fr}.footer-top>nav{grid-column:1/-1}}
+@media(max-width:560px){.footer-top{grid-template-columns:1fr}.footer-top>nav{grid-column:1}}

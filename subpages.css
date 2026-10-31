@@ -69,3 +69,12 @@
 .subpage-interlude::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#172017a8,transparent 72%);pointer-events:none}
 @media(max-width:800px){.subpage-interlude>.interlude-content{padding:30px 24px}.subpage-interlude h2{font-size:37px;max-width:600px}}
 @media(max-width:560px){.subpage-interlude>.interlude-content{padding:28px 20px}.subpage-interlude h2{font-size:30px;line-height:1.14;max-width:350px}.subpage-interlude .interlude-note{margin-top:16px;font-size:5px}}
+
+/* Four offer cards in one desktop row, with comfortable smaller layouts. */
+.sub-services-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.service-detail{padding:27px 24px;min-width:0}
+.service-detail h3{font-size:24px;overflow-wrap:break-word}
+.service-detail>.text-link{gap:14px;font-size:11px;line-height:1.7}
+.subpage[data-page=contact] .footer{margin-top:95px}
+@media(max-width:1199px){.sub-services-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.service-detail{padding:30px}}
+@media(max-width:560px){.sub-services-grid{grid-template-columns:1fr;gap:18px}.service-detail{padding:25px}.service-detail h3{font-size:26px}.subpage[data-page=contact] .footer{margin-top:65px}}
