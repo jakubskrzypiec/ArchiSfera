@@ -85,3 +85,56 @@ html{scroll-padding-top:110px}
 .bio-dialog #bio-text p{font-size:17px;line-height:1.9;text-align:justify;hyphens:auto;margin-bottom:24px;letter-spacing:-.015em;color:#30352e}
 .footer-bottom>.micro:first-child{font-size:13px;line-height:1.7;letter-spacing:.015em;max-width:none;text-align:left;color:#c7cec3}
 @media(max-width:560px){.projects-heading .all-projects-link{font-size:11px;padding:13px 16px;min-height:45px}.bio-dialog{padding:15px 20px 45px}.bio-dialog .dialog-top{top:-15px;padding-block:12px}.bio-dialog .bio-layout{margin-top:35px}.bio-dialog .bio-layout h2{margin-bottom:30px;font-size:38px}.bio-dialog #bio-text p{font-size:15px;line-height:1.85}.footer-bottom>.micro:first-child{font-size:11px;max-width:none}}
+
+.hero-title-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.topbar .brand img {
+  display: block;
+  width: clamp(145px, 17vw, 222px);
+  height: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 3px #0008);
+}
+
+.topbar.is-scrolled .brand img {
+  filter: brightness(0);
+}
+
+.footer-wordmark img {
+  display: block;
+  width: 105px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.services {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.reviews-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#bio-text h3 {
+  margin: 1.75em 0 .75em;
+}
+
+#bio-text li {
+  margin-block: .6em;
+  line-height: 1.65;
+}
+
+@media (max-width: 800px) {
+  .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .reviews-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .services { grid-template-columns: 1fr; }
+}

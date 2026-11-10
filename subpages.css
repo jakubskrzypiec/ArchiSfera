@@ -102,3 +102,20 @@
 @media(max-width:800px){.subpage[data-page=contact] .contact-form{padding:35px}}
 @media(max-width:560px){.service-detail-copy p{font-size:15px}.service-detail li{font-size:13px}.service-detail>.text-link{font-size:14px}.offer-faq .section-label{font-size:10px}.faq-list summary{font-size:16px}.faq-list details p{font-size:15px}.subpage[data-page=contact] #formularz{margin-top:40px}.subpage[data-page=contact] .contact-intro{margin-bottom:27px}.subpage[data-page=contact] .contact-form{padding:25px 20px;border-radius:18px}.subpage[data-page=contact] .contact-form label{font-size:14px}.subpage[data-page=contact] .contact-form input:not([type=checkbox]),.subpage[data-page=contact] .contact-form select,.subpage[data-page=contact] .contact-form textarea{font-size:16px;padding:14px}.subpage[data-page=contact] .form-actions .dark-button{font-size:13px;padding:17px 20px}.subpage[data-page=contact] .contact-methods{margin-top:35px}}
 .service-detail-top>.service-index{font-size:11px}
+
+@media (min-width: 1200px) {
+  .sub-services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.studio-address,
+.placeholder-description {
+  margin-top: .6em;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+.project-placeholder {
+  scroll-margin-top: 110px;
+}

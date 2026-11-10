@@ -27,8 +27,6 @@ if (content) {
   }
   const portrait = content['o-mnie'].images.find(i => i.alt === 'KCH');
   if (portrait) for (const selector of ['#portrait','#bio-portrait']) $(selector)?.setAttribute('src',portrait.local);
-  const biography = content['o-mnie'].texts[1].replace(/\u200b/g,'').split('\n').filter(line => line.trim());
-  for (const text of biography) {const p=document.createElement('p');p.textContent=text;$('#bio-text')?.append(p);}
 }
 function makeCard(project, title, image,asPageLink=false) {
   const button=document.createElement(asPageLink?'a':'button');button.className='project-card';button.setAttribute('aria-label',`Zobacz projekt: ${title || project.title}`);
@@ -37,12 +35,6 @@ function makeCard(project, title, image,asPageLink=false) {
   const caption=document.createElement('div');caption.className='project-caption';const heading=document.createElement('h3');heading.textContent=title || project.title;const category=document.createElement('p');category.textContent=categories[project.key];caption.append(heading,category);button.append(frame,caption);if(asPageLink)button.href='projekty/';else button.addEventListener('click',()=>openProject(project));return button;
 }
 if (content && projects.length) {
-  const house=projects.find(p => /Sokolnikach/.test(p.title));
-  const interior=projects.find(p => /biurowego w Zgierzu/.test(p.title));
-  const duplex=projects.find(p => /Ksawerowie/.test(p.title));
-  const living=projects.find(p => /pokoju dziennego/.test(p.title));
-  const selections=[house,interior,duplex,living].map((p,index)=>({p,t:`Nazwa projektu ${String(index+1).padStart(2,'0')}`,sub:'Opis projektu — do uzupełnienia'}));
-  selections.forEach(({p,t,image,sub},index) => {if(p && $('#featured-projects')){const card=makeCard(p,t,image,true);card.querySelector('.project-caption p').textContent=sub;card.querySelector('.project-image').replaceChildren();const number=document.createElement('span');number.className='project-number';number.textContent=String(index+1).padStart(2,'0');const type=document.createElement('span');type.className='project-type';type.textContent='SZKIC / DO UZUPEŁNIENIA';card.append(number,type);$('#featured-projects').append(card);}});
   for (const [key,label] of Object.entries(categories)) {
     const button=document.createElement('button');button.textContent=label;button.dataset.filter=key;button.setAttribute('aria-pressed',String(key==='all'));button.addEventListener('click',()=>filterProjects(key));$('.filters')?.append(button);
   }
@@ -51,8 +43,6 @@ if (content && projects.length) {
     for(const text of content[key].texts.filter(text=>!text.startsWith('©'))){const p=document.createElement('p');p.textContent=sentence(text);section.append(p);}
     const link=document.createElement('a');link.href=content[key].url;link.target='_blank';link.rel='noopener';link.textContent='ZOBACZ NA STRONIE PRACOWNI ↗';section.append(link);$('#register-content')?.append(section);
   }
-} else {
-  if($('#featured-projects'))$('#featured-projects').innerHTML='<p class="loading-note">Portfolio: <a href="https://www.archisfera.net/projekty">zobacz projekty pracowni ↗</a></p>';
 }
 let activeCategory='all';
 function filterProjects(key) {
@@ -111,7 +101,7 @@ if(contactForm){
   if(Object.hasOwn(serviceNames,service) && !contactForm.elements.message.value)contactForm.elements.message.value=`Interesuje mnie ${serviceNames[service]}.\n\n`;
   const status=$('#form-status'),copyButton=$('#copy-message');
   const mailLink=document.createElement('a');mailLink.className='prepared-mail';mailLink.hidden=true;mailLink.textContent='Otwórz wiadomość w poczcie ↗';status.before(mailLink);
-  const prepareMessage=()=>{const values=Object.fromEntries(new FormData(contactForm));return {subject:`Zapytanie o projekt — ${values.type}`,body:`Dzień dobry,\n\n${values.message.trim()}\n\nRodzaj projektu: ${values.type}\nLokalizacja: ${values.location.trim() || 'Do ustalenia'}\n\nKontakt:\n${values.name.trim()}\nE-mail: ${values.email.trim()}\nTelefon: ${values.phone.trim() || 'Nie podano'}`};};
+  const prepareMessage=()=>{const values=Object.fromEntries(new FormData(contactForm));values.type=values.type.trim() || 'Do ustalenia';return {subject:`Zapytanie o projekt — ${values.type}`,body:`Dzień dobry,\n\n${values.message.trim()}\n\nRodzaj projektu: ${values.type}\nLokalizacja: ${values.location.trim() || 'Do ustalenia'}\n\nKontakt:\n${values.name.trim()}\nE-mail: ${values.email.trim()}\nTelefon: ${values.phone.trim() || 'Nie podano'}`};};
   contactForm.addEventListener('submit',event=>{event.preventDefault();if(!contactForm.reportValidity())return;const message=prepareMessage();mailLink.href=`mailto:biuro@archisfera.net?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;mailLink.hidden=false;status.textContent='Wiadomość jest przygotowana. Otwórz ją w poczcie, aby wysłać, lub skopiuj treść.';mailLink.focus();});
   contactForm.addEventListener('input',()=>{mailLink.hidden=true;status.textContent='';});
   copyButton.addEventListener('click',async()=>{if(!contactForm.reportValidity())return;const message=prepareMessage();const text=`Do: biuro@archisfera.net\nTemat: ${message.subject}\n\n${message.body}`;try{await navigator.clipboard.writeText(text);status.textContent='Treść została skopiowana. Wklej ją do wiadomości i wyślij na biuro@archisfera.net.';}catch{status.textContent='Nie udało się skopiować automatycznie. Użyj przycisku „Przygotuj wiadomość”, aby otworzyć ją w swojej poczcie.';}});
