@@ -1595,7 +1595,7 @@ dialog::backdrop {
   --ink: #141414;
   --muted: #141414;
   --line: #ededed;
-  --soft: #ededed;
+  --soft: #ffffff;
   --accent: #f54329;
   --accent-hover: #f54329;
   --accent-dark: #141414;
@@ -1608,7 +1608,7 @@ dialog::backdrop {
 :root[data-palette="coral"] .dark-button,
 :root[data-palette="coral"] .hero-actions .pill-button:first-child,
 :root[data-palette="coral"] .step-number {
-  color: var(--ink);
+  color: #ffffff;
 }
 :root[data-palette="coral"] .hero-actions .outline-button,
 :root[data-palette="coral"] .text-link:hover,

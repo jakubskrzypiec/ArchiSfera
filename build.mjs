@@ -12,7 +12,6 @@ for (const name of [
   "kontakt",
   "styles.css",
   "subpages.css",
-  "studio.css",
   "app.js",
   "theme.js",
   "portfolio.js",

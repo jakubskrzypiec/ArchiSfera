@@ -44,7 +44,7 @@ window.archisferaProjects = [
       "assets/portfolio/project-05-02.webp",
       "assets/portfolio/project-05-03.webp",
     ],
-    cover: "assets/portfolio/project-05-03.webp",
+    cover: "assets/portfolio/project-05-02.webp",
   },
   {
     id: 1,
@@ -74,6 +74,6 @@ window.archisferaProjects = [
       "assets/portfolio/project-08-02.webp",
       "assets/portfolio/project-08-03.webp",
     ],
-    cover: "assets/portfolio/project-08-01.webp",
+    cover: "assets/portfolio/project-08-03.webp",
   },
 ];

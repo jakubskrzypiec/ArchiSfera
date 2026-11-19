@@ -511,5 +511,5 @@ a.contact-method:hover strong {
 }
 
 :root[data-palette="coral"] .full-width-cta .dark-button {
-  color: var(--ink);
+  color: #ffffff;
 }
