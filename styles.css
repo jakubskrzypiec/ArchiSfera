@@ -1501,3 +1501,90 @@ dialog::backdrop {
   --accent-border: #b9472e40;
   --accent-line: #b9472e80;
 }
+
+/* The supplied Cream / Beige / Deep Ocean palette. */
+:root[data-palette="ocean"] {
+  --paper: #ffffff;
+  --ink: #2c365a;
+  --muted: #2c365a;
+  --line: #c4bcb0;
+  --soft: #eee8df;
+  --accent: #2c365a;
+  --accent-hover: #2c365a;
+  --accent-dark: #2c365a;
+  --accent-light: #eee8df;
+  --accent-text: #2c365a;
+  --accent-surface: #eee8df;
+  --accent-border: #c4bcb0;
+  --accent-line: #c4bcb0;
+}
+:root[data-palette="ocean"] .projects-section {
+  padding-top: 65px;
+  background: var(--soft);
+}
+:root[data-palette="ocean"] .offer-section {
+  background: var(--soft);
+  color: var(--ink);
+}
+:root[data-palette="ocean"] .offer-section .eyebrow,
+:root[data-palette="ocean"] .offer-section .service-index,
+:root[data-palette="ocean"] .offer-section .service-text p,
+:root[data-palette="ocean"] .offer-section .text-link:hover,
+:root[data-palette="ocean"] .offer-section .service-link:hover {
+  color: var(--ink);
+}
+:root[data-palette="ocean"] .offer-section .service-card {
+  background: var(--paper);
+  border-color: var(--line);
+}
+:root[data-palette="ocean"] .hero-actions .outline-button {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--accent);
+}
+:root[data-palette="ocean"] .hero-actions .outline-button:hover {
+  background: var(--soft);
+  border-color: var(--soft);
+}
+:root[data-palette="ocean"] .service-text p,
+:root[data-palette="ocean"] .contact-form input::placeholder,
+:root[data-palette="ocean"] .contact-form textarea::placeholder {
+  color: var(--ink);
+}
+:root[data-palette="ocean"] .contact-form input:not([type="checkbox"]),
+:root[data-palette="ocean"] .contact-form textarea {
+  border-bottom-color: var(--line);
+}
+:root[data-palette="ocean"] .footer {
+  background: var(--soft);
+  color: var(--ink);
+}
+:root[data-palette="ocean"] .footer-top p,
+:root[data-palette="ocean"] .footer-bottom,
+:root[data-palette="ocean"] .footer-top a:hover {
+  color: var(--ink);
+}
+:root[data-palette="ocean"] .footer-bottom {
+  border-top-color: var(--line);
+}
+:root[data-palette="ocean"] .footer-wordmark {
+  display: block;
+  width: 120px;
+  background: var(--accent);
+  -webkit-mask: url("assets/archisfera-logo-simple.png") center / contain no-repeat;
+  mask: url("assets/archisfera-logo-simple.png") center / contain no-repeat;
+}
+:root[data-palette="ocean"] .footer-wordmark img {
+  opacity: 0;
+}
+:root[data-palette="ocean"] .gallery-stage {
+  background: var(--soft);
+}
+@media (max-width: 560px) {
+  :root[data-palette="ocean"] .projects-section {
+    padding-top: 45px;
+  }
+  :root[data-palette="ocean"] .footer-wordmark {
+    width: 100px;
+  }
+}
