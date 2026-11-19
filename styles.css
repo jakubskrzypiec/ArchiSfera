@@ -24,12 +24,12 @@
 }
 
 :root {
-  --paper: #f5f3ee;
+  --paper: #f2f4f0;
   --ink: #252723;
   --muted: #686b63;
   --line: #d5d4cb;
-  --soft: #eceae3;
-  --accent: #b9472e;
+  --soft: #e2eae3;
+  --accent: #245c59;
   --sans: Manrope, Arial, sans-serif;
   --gutter: clamp(24px, 4.45vw, 84px);
 }
@@ -306,7 +306,7 @@ h3 {
   background: var(--accent);
 }
 .hero-actions .pill-button:first-child:hover {
-  background: #953721;
+  background: #183f3d;
 }
 .outline-button {
   border: 1px solid #ffffff80;
@@ -758,7 +758,7 @@ h3 {
   font-size: 12px;
 }
 .footer-top a:hover {
-  color: #d9aa99;
+  color: #bddbd1;
 }
 .footer-bottom {
   border-top: 1px solid #ffffff22;
@@ -1400,5 +1400,93 @@ dialog::backdrop {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* Petrol gives the architecture a quiet, consistent frame. */
+.dark-button {
+  background: var(--accent);
+}
+.dark-button:hover {
+  background: #183f3d;
+}
+.offer-section {
+  background: var(--accent);
+  color: #f7f8f3;
+}
+.offer-section .eyebrow {
+  color: #c2d9d0;
+}
+.offer-section .service-card {
+  background: #ffffff08;
+  border-color: #ffffff4a;
+}
+.offer-section .service-index {
+  color: #c2d9d0;
+}
+.offer-section .service-text p {
+  color: #e2ebe4;
+}
+.offer-section .text-link:hover,
+.offer-section .service-link:hover {
+  color: #bcd8cb;
+}
+.process-steps article {
+  border-top-color: #245c5980;
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+}
+.contact-form {
+  border-color: #245c5940;
+}
+.footer {
+  background: #1c4140;
+}
+.about-section > .eyebrow {
+  margin-bottom: 35px;
+}
+.about-layout {
+  column-gap: 80px;
+  row-gap: 32px;
+}
+.about-main-heading {
+  grid-column: 2;
+  grid-row: 1;
+}
+.about-layout > .about-photo {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+.about-layout > .about-copy {
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: 0;
+}
+@media (max-width: 1100px) {
+  .about-layout {
+    column-gap: 45px;
+    row-gap: 28px;
+  }
+}
+@media (max-width: 800px) {
+  .about-main-heading {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .about-layout > .about-photo {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .about-layout > .about-copy {
+    grid-column: 1;
+    grid-row: 3;
   }
 }

@@ -452,3 +452,19 @@ a.contact-method:hover strong {
     margin-top: 40px;
   }
 }
+
+.full-width-cta {
+  background: var(--accent);
+  color: #f7f8f3;
+}
+.full-width-cta .dark-button {
+  background: #f2f4f0;
+  color: #245c59;
+}
+.full-width-cta .dark-button:hover {
+  background: #d5e5da;
+}
+.service-detail {
+  background: #e2eae338;
+  border-top: 3px solid var(--accent);
+}
