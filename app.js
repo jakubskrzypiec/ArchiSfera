@@ -5,6 +5,18 @@ const projects = window.archisferaProjects || [];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const formatNumber = (value) => String(value).padStart(2, "0");
 
+// Keep the selected comparison palette while moving between pages.
+function paletteLink(href) {
+  const url = new URL(href, document.baseURI);
+  if (url.origin === window.location.origin) {
+    url.searchParams.set("paleta", document.documentElement.dataset.palette);
+  }
+  return url.href;
+}
+document.querySelectorAll("a[href]").forEach((link) => {
+  link.href = paletteLink(link.getAttribute("href"));
+});
+
 // A single header is shared by the home page and all subpages.
 const header = find(".topbar");
 const menuButton = find(".menu-toggle");
@@ -78,7 +90,7 @@ if (hero) {
     const project = projects.find((item) => item.id === Number(nextSlide.dataset.project));
     find("#hero-project-location").textContent = project.location;
     find("#hero-project-name").textContent = project.title;
-    find("#hero-project-link").href = `projekty/#projekt-${formatNumber(project.id)}`;
+    find("#hero-project-link").href = paletteLink(`projekty/#projekt-${formatNumber(project.id)}`);
     find("#hero-counter").textContent = `${formatNumber(nextIndex + 1)} / ${formatNumber(slides.length)}`;
     scheduleSlide();
   }

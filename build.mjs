@@ -13,6 +13,7 @@ for (const name of [
   "styles.css",
   "subpages.css",
   "app.js",
+  "theme.js",
   "portfolio.js",
   "assets",
 ])

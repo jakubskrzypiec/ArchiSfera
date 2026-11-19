@@ -24,12 +24,19 @@
 }
 
 :root {
-  --paper: #f2f4f0;
+  --paper: #f5f3ee;
   --ink: #252723;
   --muted: #686b63;
   --line: #d5d4cb;
-  --soft: #e2eae3;
-  --accent: #245c59;
+  --soft: #e7e9f0;
+  --accent: #303e68;
+  --accent-hover: #253152;
+  --accent-dark: #202943;
+  --accent-light: #c8d0e5;
+  --accent-text: #e6e9f4;
+  --accent-surface: #303e6808;
+  --accent-border: #303e6840;
+  --accent-line: #303e6880;
   --sans: Manrope, Arial, sans-serif;
   --gutter: clamp(24px, 4.45vw, 84px);
 }
@@ -277,7 +284,7 @@ h3 {
 }
 .hero-shade {
   background:
-    linear-gradient(180deg, #0e191f65, transparent 35%), linear-gradient(0deg, #172018e8, #17201805 75%);
+    linear-gradient(180deg, #0e191f65, transparent 35%), linear-gradient(0deg, #18191ce8, #18191c05 75%);
   pointer-events: none;
 }
 .hero-content {
@@ -306,7 +313,7 @@ h3 {
   background: var(--accent);
 }
 .hero-actions .pill-button:first-child:hover {
-  background: #183f3d;
+  background: var(--accent-hover);
 }
 .outline-button {
   border: 1px solid #ffffff80;
@@ -597,7 +604,7 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, #121e15ba, transparent 85%);
+  background: linear-gradient(0deg, #18191cba, transparent 85%);
 }
 .interlude-content {
   position: absolute;
@@ -758,7 +765,7 @@ h3 {
   font-size: 12px;
 }
 .footer-top a:hover {
-  color: #bddbd1;
+  color: var(--accent-light);
 }
 .footer-bottom {
   border-top: 1px solid #ffffff22;
@@ -779,7 +786,7 @@ dialog {
   color: var(--ink);
 }
 dialog::backdrop {
-  background: #171b16cf;
+  background: #18191ccf;
   backdrop-filter: blur(8px);
 }
 .dialog-top {
@@ -1130,7 +1137,7 @@ dialog::backdrop {
   }
   .hero-shade {
     background:
-      linear-gradient(180deg, #131d1e69, transparent 27%), linear-gradient(0deg, #172018ee, transparent 90%);
+      linear-gradient(180deg, #131d1e69, transparent 27%), linear-gradient(0deg, #18191cee, transparent 90%);
   }
   .hero-content {
     bottom: 190px;
@@ -1403,36 +1410,36 @@ dialog::backdrop {
   }
 }
 
-/* Petrol gives the architecture a quiet, consistent frame. */
+/* Both comparison palettes share the same layout and neutral base. */
 .dark-button {
   background: var(--accent);
 }
 .dark-button:hover {
-  background: #183f3d;
+  background: var(--accent-hover);
 }
 .offer-section {
   background: var(--accent);
-  color: #f7f8f3;
+  color: #faf9f6;
 }
 .offer-section .eyebrow {
-  color: #c2d9d0;
+  color: var(--accent-light);
 }
 .offer-section .service-card {
   background: #ffffff08;
   border-color: #ffffff4a;
 }
 .offer-section .service-index {
-  color: #c2d9d0;
+  color: var(--accent-light);
 }
 .offer-section .service-text p {
-  color: #e2ebe4;
+  color: var(--accent-text);
 }
 .offer-section .text-link:hover,
 .offer-section .service-link:hover {
-  color: #bcd8cb;
+  color: var(--accent-light);
 }
 .process-steps article {
-  border-top-color: #245c5980;
+  border-top-color: var(--accent-line);
 }
 .step-number {
   display: inline-flex;
@@ -1445,10 +1452,10 @@ dialog::backdrop {
   border-radius: 50%;
 }
 .contact-form {
-  border-color: #245c5940;
+  border-color: var(--accent-border);
 }
 .footer {
-  background: #1c4140;
+  background: var(--accent-dark);
 }
 .about-section > .eyebrow {
   margin-bottom: 35px;
@@ -1481,4 +1488,16 @@ dialog::backdrop {
     grid-column: 1;
     grid-row: 2;
   }
+}
+
+:root[data-palette="cegla"] {
+  --soft: #efe3dc;
+  --accent: #b9472e;
+  --accent-hover: #913722;
+  --accent-dark: #552e27;
+  --accent-light: #edcbbd;
+  --accent-text: #f5e7df;
+  --accent-surface: #b9472e08;
+  --accent-border: #b9472e40;
+  --accent-line: #b9472e80;
 }

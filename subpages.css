@@ -17,7 +17,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #17201866, transparent 40%, #1720188c);
+  background: linear-gradient(180deg, #18191c66, transparent 40%, #18191c8c);
 }
 .page-hero-caption {
   position: absolute;
@@ -455,16 +455,16 @@ a.contact-method:hover strong {
 
 .full-width-cta {
   background: var(--accent);
-  color: #f7f8f3;
+  color: #faf9f6;
 }
 .full-width-cta .dark-button {
-  background: #f2f4f0;
-  color: #245c59;
+  background: var(--paper);
+  color: var(--accent);
 }
 .full-width-cta .dark-button:hover {
-  background: #d5e5da;
+  background: var(--accent-light);
 }
 .service-detail {
-  background: #e2eae338;
+  background: var(--accent-surface);
   border-top: 3px solid var(--accent);
 }
