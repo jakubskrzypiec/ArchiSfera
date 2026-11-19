@@ -469,43 +469,47 @@ a.contact-method:hover strong {
   border-top: 3px solid var(--accent);
 }
 
-:root[data-palette="ocean"] .portfolio-intro {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .portfolio-intro {
   width: 100%;
   max-width: none;
   padding-inline: var(--gutter);
   background: var(--soft);
   margin-bottom: 45px;
 }
-:root[data-palette="ocean"] .portfolio-project-info {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .portfolio-project-info {
   padding: 27px;
   background: var(--soft);
 }
-:root[data-palette="ocean"] .full-width-cta {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .full-width-cta {
   background: var(--soft);
   color: var(--ink);
 }
-:root[data-palette="ocean"] .full-width-cta .dark-button {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .full-width-cta .dark-button {
   background: var(--accent);
   color: var(--paper);
 }
-:root[data-palette="ocean"] .full-width-cta .dark-button:hover {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .full-width-cta .dark-button:hover {
   background: var(--accent);
   outline: 1px solid var(--accent);
   outline-offset: 3px;
 }
-:root[data-palette="ocean"] .service-detail {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .service-detail {
   background: var(--paper);
 }
-:root[data-palette="ocean"] .service-detail-copy p,
-:root[data-palette="ocean"] .service-detail li,
-:root[data-palette="ocean"] .faq-list details > p {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .service-detail-copy p,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .service-detail li,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .faq-list details > p {
   color: var(--ink);
 }
 @media (max-width: 560px) {
-  :root[data-palette="ocean"] .portfolio-intro {
+  :root:is([data-palette="ocean"], [data-palette="coral"]) .portfolio-intro {
     margin-bottom: 30px;
   }
-  :root[data-palette="ocean"] .portfolio-project-info {
+  :root:is([data-palette="ocean"], [data-palette="coral"]) .portfolio-project-info {
     padding: 22px 20px;
   }
+}
+
+:root[data-palette="coral"] .full-width-cta .dark-button {
+  color: var(--ink);
 }

@@ -1518,73 +1518,119 @@ dialog::backdrop {
   --accent-border: #c4bcb0;
   --accent-line: #c4bcb0;
 }
-:root[data-palette="ocean"] .projects-section {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .projects-section {
   padding-top: 65px;
   background: var(--soft);
 }
-:root[data-palette="ocean"] .offer-section {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .offer-section {
   background: var(--soft);
   color: var(--ink);
 }
-:root[data-palette="ocean"] .offer-section .eyebrow,
-:root[data-palette="ocean"] .offer-section .service-index,
-:root[data-palette="ocean"] .offer-section .service-text p,
-:root[data-palette="ocean"] .offer-section .text-link:hover,
-:root[data-palette="ocean"] .offer-section .service-link:hover {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .offer-section .eyebrow,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .offer-section .service-index,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .offer-section .service-text p,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .offer-section .text-link:hover,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .offer-section .service-link:hover {
   color: var(--ink);
 }
-:root[data-palette="ocean"] .offer-section .service-card {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .offer-section .service-card {
   background: var(--paper);
   border-color: var(--line);
 }
-:root[data-palette="ocean"] .hero-actions .outline-button {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .hero-actions .outline-button {
   background: var(--paper);
   border-color: var(--paper);
   color: var(--accent);
 }
-:root[data-palette="ocean"] .hero-actions .outline-button:hover {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .hero-actions .outline-button:hover {
   background: var(--soft);
   border-color: var(--soft);
 }
-:root[data-palette="ocean"] .service-text p,
-:root[data-palette="ocean"] .contact-form input::placeholder,
-:root[data-palette="ocean"] .contact-form textarea::placeholder {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .service-text p,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .contact-form input::placeholder,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .contact-form textarea::placeholder {
   color: var(--ink);
 }
-:root[data-palette="ocean"] .contact-form input:not([type="checkbox"]),
-:root[data-palette="ocean"] .contact-form textarea {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .contact-form input:not([type="checkbox"]),
+:root:is([data-palette="ocean"], [data-palette="coral"]) .contact-form textarea {
   border-bottom-color: var(--line);
 }
-:root[data-palette="ocean"] .footer {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .footer {
   background: var(--soft);
   color: var(--ink);
 }
-:root[data-palette="ocean"] .footer-top p,
-:root[data-palette="ocean"] .footer-bottom,
-:root[data-palette="ocean"] .footer-top a:hover {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .footer-top p,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .footer-bottom,
+:root:is([data-palette="ocean"], [data-palette="coral"]) .footer-top a:hover {
   color: var(--ink);
 }
-:root[data-palette="ocean"] .footer-bottom {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .footer-bottom {
   border-top-color: var(--line);
 }
-:root[data-palette="ocean"] .footer-wordmark {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .footer-wordmark {
   display: block;
   width: 120px;
   background: var(--accent);
   -webkit-mask: url("assets/archisfera-logo-simple.png") center / contain no-repeat;
   mask: url("assets/archisfera-logo-simple.png") center / contain no-repeat;
 }
-:root[data-palette="ocean"] .footer-wordmark img {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .footer-wordmark img {
   opacity: 0;
 }
-:root[data-palette="ocean"] .gallery-stage {
+:root:is([data-palette="ocean"], [data-palette="coral"]) .gallery-stage {
   background: var(--soft);
 }
 @media (max-width: 560px) {
-  :root[data-palette="ocean"] .projects-section {
+  :root:is([data-palette="ocean"], [data-palette="coral"]) .projects-section {
     padding-top: 45px;
   }
-  :root[data-palette="ocean"] .footer-wordmark {
+  :root:is([data-palette="ocean"], [data-palette="coral"]) .footer-wordmark {
     width: 100px;
   }
+}
+
+/* The supplied red, black and light-gray palette. */
+:root[data-palette="coral"] {
+  --paper: #ffffff;
+  --ink: #141414;
+  --muted: #141414;
+  --line: #ededed;
+  --soft: #ededed;
+  --accent: #f54329;
+  --accent-hover: #f54329;
+  --accent-dark: #141414;
+  --accent-light: #ededed;
+  --accent-text: #141414;
+  --accent-surface: #ededed;
+  --accent-border: #14141433;
+  --accent-line: #14141433;
+}
+:root[data-palette="coral"] .dark-button,
+:root[data-palette="coral"] .hero-actions .pill-button:first-child,
+:root[data-palette="coral"] .step-number {
+  color: var(--ink);
+}
+:root[data-palette="coral"] .hero-actions .outline-button,
+:root[data-palette="coral"] .text-link:hover,
+:root[data-palette="coral"] .service-link:hover {
+  color: var(--ink);
+}
+:root[data-palette="coral"] .text-link:hover,
+:root[data-palette="coral"] .service-link:hover {
+  border-bottom-color: var(--accent);
+}
+:root[data-palette="coral"] .footer {
+  background: var(--ink);
+  color: var(--soft);
+}
+:root[data-palette="coral"] .footer-top p,
+:root[data-palette="coral"] .footer-bottom,
+:root[data-palette="coral"] .footer-top a:hover {
+  color: var(--soft);
+}
+:root[data-palette="coral"] .footer-bottom {
+  border-top-color: #ededed33;
+}
+:root[data-palette="coral"] .footer-wordmark {
+  background: var(--soft);
 }
