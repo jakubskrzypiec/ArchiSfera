@@ -13,6 +13,8 @@ for (const name of [
   "styles.css",
   "subpages.css",
   "app.js",
+  "motion.css",
+  "motion.js",
   "theme.js",
   "portfolio.js",
   "assets",
