@@ -1,4 +1,405 @@
-<!doctype html>
-<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="../"><meta name="theme-color" content="#f3f3f3"><title>Projekty — ArchiSfera</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="assets/fonts/manrope-400.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="subpages.css"><script src="content.js" defer></script><script src="app.js" defer></script></head><body class="subpage" data-page="projects"><a class="skip-link" href="projekty/#main">Przejdź do treści</a><header class="topbar"><a class="brand" href="./" aria-label="ArchiSfera — strona główna"><img src="assets/archisfera-logo.png" alt="" decoding="async"></a><button class="menu-toggle micro" aria-expanded="false" aria-controls="navigation">MENU <span>+</span></button><nav id="navigation" aria-label="Nawigacja główna"><a href="projekty/" aria-current="page">Projekty</a><a href="oferta/">Oferta</a><a href="kontakt/">Kontakt</a></nav></header><main id="main"><section class="hero page-photo-hero project-spotlight" aria-label="Projekty pracowni"><img class="page-hero-photo" src="assets/subpage-house-banner.webp" alt="Detal domu wśród sosen — wizualizacja koncepcyjna AI" width="2400" height="800" fetchpriority="high" draggable="false"><div class="hero-shade" aria-hidden="true"></div><div class="page-hero-caption"><h1>Projekty.</h1></div></section><section class="project-placeholder-list wrap" aria-label="Projekty — miejsca na zdjęcia"><article class="project-placeholder" id="projekt-01" tabindex="0" aria-labelledby="project-name-1"><p class="placeholder-location">Miejscowość — do uzupełnienia</p><div class="placeholder-center" aria-hidden="true"><span>01 / 05</span><p>Miejsce na zdjęcie</p></div><div class="placeholder-bottom"><div><h2 id="project-name-1">Nazwa projektu 01</h2><p class="placeholder-description">Krótki opis do uzupełnienia</p></div><p class="placeholder-area">Metraż — do uzupełnienia <span>m²</span></p></div></article><article class="project-placeholder" id="projekt-02" tabindex="0" aria-labelledby="project-name-2"><p class="placeholder-location">Miejscowość — do uzupełnienia</p><div class="placeholder-center" aria-hidden="true"><span>02 / 05</span><p>Miejsce na zdjęcie</p></div><div class="placeholder-bottom"><div><h2 id="project-name-2">Nazwa projektu 02</h2><p class="placeholder-description">Krótki opis do uzupełnienia</p></div><p class="placeholder-area">Metraż — do uzupełnienia <span>m²</span></p></div></article><article class="project-placeholder" id="projekt-03" tabindex="0" aria-labelledby="project-name-3"><p class="placeholder-location">Miejscowość — do uzupełnienia</p><div class="placeholder-center" aria-hidden="true"><span>03 / 05</span><p>Miejsce na zdjęcie</p></div><div class="placeholder-bottom"><div><h2 id="project-name-3">Nazwa projektu 03</h2><p class="placeholder-description">Krótki opis do uzupełnienia</p></div><p class="placeholder-area">Metraż — do uzupełnienia <span>m²</span></p></div></article><article class="project-placeholder" id="projekt-04" tabindex="0" aria-labelledby="project-name-4"><p class="placeholder-location">Miejscowość — do uzupełnienia</p><div class="placeholder-center" aria-hidden="true"><span>04 / 05</span><p>Miejsce na zdjęcie</p></div><div class="placeholder-bottom"><div><h2 id="project-name-4">Nazwa projektu 04</h2><p class="placeholder-description">Krótki opis do uzupełnienia</p></div><p class="placeholder-area">Metraż — do uzupełnienia <span>m²</span></p></div></article><article class="project-placeholder" id="projekt-05" tabindex="0" aria-labelledby="project-name-5"><p class="placeholder-location">Miejscowość — do uzupełnienia</p><div class="placeholder-center" aria-hidden="true"><span>05 / 05</span><p>Miejsce na zdjęcie</p></div><div class="placeholder-bottom"><div><h2 id="project-name-5">Nazwa projektu 05</h2><p class="placeholder-description">Krótki opis do uzupełnienia</p></div><p class="placeholder-area">Metraż — do uzupełnienia <span>m²</span></p></div></article></section></main><footer class="footer"><div class="wrap"><div class="footer-top"><a class="footer-wordmark" href="./"><img src="assets/archisfera-logo-simple.png" alt="ArchiSfera" loading="lazy"></a><p>mgr inż. arch.<br>Kamila Chęcielewska</p><nav aria-label="Nawigacja w stopce"><a href="./#pracownia">O mnie</a><a href="projekty/">Projekty</a><a href="oferta/">Oferta</a><a href="./#proces">Współpraca</a><a href="kontakt/">Kontakt</a></nav></div><div class="footer-bottom"><span class="micro">© 2026 ARCHISFERA / KAMILA CHĘCIELEWSKA</span></div></div></footer><dialog id="bio-dialog" class="bio-dialog" aria-labelledby="bio-title"><div class="dialog-top micro"><span>/01 — O MNIE</span><button class="close-dialog" aria-label="Zamknij biografię">ZAMKNIJ ×</button></div><div class="bio-layout"><div><h2 id="bio-title">Moja historia.</h2><div id="bio-text"></div></div></div></dialog>
-<dialog id="project-dialog" class="project-dialog" aria-labelledby="project-title"><div class="dialog-top micro"><span id="project-category"></span><button class="close-dialog" aria-label="Zamknij projekt">ZAMKNIJ ×</button></div><h2 id="project-title"></h2><p id="project-description"></p><div class="gallery-stage"><button id="gallery-prev" aria-label="Poprzednie zdjęcie">←</button><img id="gallery-image" alt=""><button id="gallery-next" aria-label="Następne zdjęcie">→</button></div><div class="gallery-bottom micro"><span id="gallery-counter" aria-live="polite"></span><a id="project-source" target="_blank" rel="noopener">PROJEKT NA STRONIE PRACOWNI ↗</a></div><div class="gallery-thumbnails" id="gallery-thumbnails"></div></dialog>
-</body></html>
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="../" />
+    <meta name="theme-color" content="#f5f3ee" />
+    <meta
+      name="description"
+      content="ArchiSfera — autorska pracownia architektoniczna Kamili Chęcielewskiej. Architektura mieszkaniowa i usługowa, od koncepcji po pozwolenie na budowę."
+    />
+    <title>Projekty — ArchiSfera</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/fonts/manrope-400.ttf" as="font" type="font/ttf" crossorigin="" />
+    <link rel="preload" href="assets/fonts/manrope-500.ttf" as="font" type="font/ttf" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="subpages.css" />
+    <script src="portfolio.js" defer=""></script>
+    <script src="app.js" defer=""></script>
+  </head>
+  <body class="subpage" data-page="projekty">
+    <a class="skip-link" href="projekty/#main">Przejdź do treści</a>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="ArchiSfera — strona główna"
+        ><img src="assets/archisfera-logo.png" alt="" width="1753" height="646" /></a
+      ><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation">
+        Menu <span aria-hidden="true">+</span>
+      </button>
+      <nav id="navigation" aria-label="Nawigacja główna">
+        <a href="projekty/" aria-current="page">Projekty</a><a href="oferta/">Oferta</a
+        ><a href="kontakt/">Kontakt</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="page-photo-hero">
+        <img
+          class="page-hero-photo"
+          src="assets/portfolio/project-03-01.webp"
+          alt="Budynki mieszkalne wielorodzinne w Łodzi. Wizualizacja projektu."
+          width="2200"
+          height="1650"
+          fetchpriority="high"
+        />
+        <div class="page-hero-caption wrap"><h1>Projekty.</h1></div>
+      </section>
+      <section class="portfolio-intro wrap">
+        <p class="eyebrow">Portfolio / 08 projektów</p>
+        <p>Architektura mieszkaniowa.<br />Różne potrzeby, indywidualne rozwiązania.</p>
+      </section>
+      <section class="project-list wrap" aria-label="Projekty pracowni">
+        <article class="portfolio-project" id="projekt-01">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">01 / Łódź</span
+            ><button class="text-link" type="button" data-project-id="1">
+              Zobacz projekt <span>(3)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="1"
+            aria-label="Otwórz galerię — Budynek wielorodzinny, Łódź"
+          >
+            <img
+              src="assets/portfolio/project-01-02.webp"
+              alt="Budynek mieszkalny wielorodzinny w Łodzi. Wizualizacja projektu."
+              width="2200"
+              height="1467"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Budynek wielorodzinny</h2>
+              <p>Budynek mieszkalny wielorodzinny w Łodzi.</p>
+            </div>
+            <div class="project-facts">
+              <p>Budynek zrealizowany</p>
+              <strong>2422 m²</strong><span>Powierzchnia użytkowa</span>
+            </div>
+          </div>
+        </article>
+        <article class="portfolio-project" id="projekt-02">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">02 / Łódź</span
+            ><button class="text-link" type="button" data-project-id="2">
+              Zobacz projekt <span>(5)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="2"
+            aria-label="Otwórz galerię — Budynek wielorodzinny, Łódź"
+          >
+            <img
+              src="assets/portfolio/project-02-01.webp"
+              alt="Budynek mieszkalny wielorodzinny w Łodzi. Wizualizacja projektu."
+              width="1600"
+              height="1000"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Budynek wielorodzinny</h2>
+              <p>Budynek mieszkalny wielorodzinny w Łodzi.</p>
+            </div>
+            <div class="project-facts">
+              <p>W trakcie realizacji</p>
+              <strong>2375 m²</strong><span>Powierzchnia użytkowa</span>
+            </div>
+          </div>
+        </article>
+        <article class="portfolio-project" id="projekt-03">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">03 / Łódź</span
+            ><button class="text-link" type="button" data-project-id="3">
+              Zobacz projekt <span>(3)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="3"
+            aria-label="Otwórz galerię — Zespół budynków wielorodzinnych, Łódź"
+          >
+            <img
+              src="assets/portfolio/project-03-01.webp"
+              alt="Budynki mieszkalne wielorodzinne w Łodzi. Wizualizacja projektu."
+              width="2200"
+              height="1650"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Zespół budynków wielorodzinnych</h2>
+              <p>Budynki mieszkalne wielorodzinne w Łodzi.</p>
+            </div>
+            <div class="project-facts">
+              <p>Budynki zrealizowane</p>
+              <strong>1900 m²</strong><span>Powierzchnia użytkowa</span>
+            </div>
+          </div>
+        </article>
+        <article class="portfolio-project" id="projekt-04">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">04 / Ksawerów</span
+            ><button class="text-link" type="button" data-project-id="4">
+              Zobacz projekt <span>(4)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="4"
+            aria-label="Otwórz galerię — Zabudowa bliźniacza, Ksawerów"
+          >
+            <img
+              src="assets/portfolio/project-04-02.webp"
+              alt="Budynki mieszkalne jednorodzinne w zabudowie bliźniaczej w Ksawerowie. Wizualizacja projektu."
+              width="2200"
+              height="1072"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Zabudowa bliźniacza</h2>
+              <p>Budynki mieszkalne jednorodzinne w zabudowie bliźniaczej w Ksawerowie.</p>
+            </div>
+            <div class="project-facts">
+              <p>Budynki zrealizowane</p>
+              <strong>123 m²</strong><span>Powierzchnia użytkowa pojedynczego budynku</span>
+            </div>
+          </div>
+        </article>
+        <article class="portfolio-project" id="projekt-05">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">05 / Rąbień</span
+            ><button class="text-link" type="button" data-project-id="5">
+              Zobacz projekt <span>(3)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="5"
+            aria-label="Otwórz galerię — Domy jednorodzinne, Rąbień"
+          >
+            <img
+              src="assets/portfolio/project-05-02.webp"
+              alt="Budynki mieszkalne jednorodzinne w Rąbieniu. Wizualizacja projektu."
+              width="2200"
+              height="1072"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Domy jednorodzinne</h2>
+              <p>Budynki mieszkalne jednorodzinne w Rąbieniu.</p>
+            </div>
+            <div class="project-facts">
+              <p>Budynki zrealizowane</p>
+              <strong>173 m²</strong><span>Powierzchnia użytkowa pojedynczego budynku</span>
+            </div>
+          </div>
+        </article>
+        <article class="portfolio-project" id="projekt-06">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">06 / Sokolniki Las</span
+            ><button class="text-link" type="button" data-project-id="6">
+              Zobacz projekt <span>(5)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="6"
+            aria-label="Otwórz galerię — Dom wśród sosen, Sokolniki Las"
+          >
+            <img
+              src="assets/portfolio/project-06-01.webp"
+              alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Wizualizacja projektu."
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Dom wśród sosen</h2>
+              <p>Budynek mieszkalny jednorodzinny w Sokolnikach Las.</p>
+            </div>
+            <div class="project-facts">
+              <p>W trakcie realizacji</p>
+              <strong>195 m²</strong><span>Powierzchnia użytkowa</span>
+            </div>
+          </div>
+        </article>
+        <article class="portfolio-project" id="projekt-07">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">07 / Okolice Łodzi</span
+            ><button class="text-link" type="button" data-project-id="7">
+              Zobacz projekt <span>(4)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="7"
+            aria-label="Otwórz galerię — Dom jednorodzinny, Okolice Łodzi"
+          >
+            <img
+              src="assets/portfolio/project-07-02.webp"
+              alt="Budynek mieszkalny jednorodzinny pod Łodzią. Wizualizacja projektu."
+              width="1973"
+              height="1247"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Dom jednorodzinny</h2>
+              <p>Budynek mieszkalny jednorodzinny pod Łodzią.</p>
+            </div>
+            <div class="project-facts">
+              <p>Budynek zrealizowany</p>
+              <strong>270 m²</strong><span>Powierzchnia użytkowa</span>
+            </div>
+          </div>
+        </article>
+        <article class="portfolio-project" id="projekt-08">
+          <div class="portfolio-project-top">
+            <span class="eyebrow">08 / Ksawerów</span
+            ><button class="text-link" type="button" data-project-id="8">
+              Zobacz projekt <span>(3)</span>
+            </button>
+          </div>
+          <button
+            class="portfolio-image"
+            type="button"
+            data-project-id="8"
+            aria-label="Otwórz galerię — Domy dwulokalowe, Ksawerów"
+          >
+            <img
+              src="assets/portfolio/project-08-03.webp"
+              alt="Budynki mieszkalne jednorodzinne dwulokalowe w zabudowie bliźniaczej w Ksawerowie. Wizualizacja projektu."
+              width="2200"
+              height="1072"
+              loading="lazy"
+            />
+          </button>
+          <div class="portfolio-project-info">
+            <div>
+              <h2>Domy dwulokalowe</h2>
+              <p>Budynki mieszkalne jednorodzinne dwulokalowe w zabudowie bliźniaczej w Ksawerowie.</p>
+            </div>
+            <div class="project-facts">
+              <p>W trakcie realizacji</p>
+              <strong>220 m²</strong><span>Powierzchnia użytkowa pojedynczego budynku</span>
+            </div>
+          </div>
+        </article>
+      </section>
+      <section class="full-width-cta">
+        <div class="wrap">
+          <h2>Twój projekt<br />może być następny.</h2>
+          <a class="dark-button" href="kontakt/">Napisz o swojej inwestycji</a>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <a class="footer-wordmark" href="./" aria-label="ArchiSfera — strona główna"
+            ><img
+              src="assets/archisfera-logo-simple.png"
+              alt="ArchiSfera"
+              width="1071"
+              height="705"
+              loading="lazy"
+          /></a>
+          <p>mgr inż. arch.<br />Kamila Chęcielewska</p>
+          <nav aria-label="Nawigacja w stopce">
+            <a href="./#pracownia">O mnie</a><a href="projekty/">Projekty</a><a href="oferta/">Oferta</a
+            ><a href="kontakt/">Kontakt</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 ArchiSfera / Kamila Chęcielewska</span
+          ><a href="mailto:biuro@archisfera.net">biuro@archisfera.net</a>
+        </div>
+      </div>
+    </footer>
+    <dialog id="bio-dialog" class="bio-dialog" aria-labelledby="bio-title">
+      <div class="dialog-top">
+        <span>ArchiSfera / Pracownia</span
+        ><button type="button" class="close-dialog" aria-label="Zamknij historię">
+          Zamknij <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="bio-layout">
+        <h2 id="bio-title">Moja historia.</h2>
+        <div id="bio-text">
+          <p>
+            Prowadzę autorską pracownię, w której od 2013 roku wspieram inwestorów w procesach budowlanych –
+            od etapu koncepcji po prawomocne pozwolenie na budowę. Specjalizuję się w architekturze
+            mieszkaniowej i usługowej. Moja rola to nie tylko projektowanie, to przede wszystkim skuteczna
+            koordynacja: przeprowadzam przez trudne procedury administracyjne, skomplikowane uzgodnienia
+            branżowe i procesy formalne. Twój projekt jest bezpieczny w rękach doświadczonego architekta.
+          </p>
+          <p>
+            Projektuję z myślą o realnych potrzebach Inwestorów, tworząc architekturę, która łączy techniczną
+            rzetelność z wysoką jakością użytkową.
+          </p>
+          <h3>Co zyskujesz, wybierając ArchiSferę?</h3>
+          <ul>
+            <li>
+              Oszczędność czasu: Przejmuję na siebie całą ścieżkę formalną – od uzyskiwania nietypowych
+              decyzji i odstępstw, po uzgodnienia PPOŻ, Sanepid i BHP.
+            </li>
+            <li>
+              Wielobranżowe bezpieczeństwo: Koordynuję pracę wszystkich specjalistów branżowych. Dostarczam
+              kompletny projekt wielobranżowy, który stanowi gotową i rzetelną podstawę do rozpoczęcia budowy.
+            </li>
+            <li>
+              Doświadczenie: Od ponad 25 lat projektuję obiekty mieszkalne, usługowe (medyczne, edukacyjne,
+              biurowe), skutecznie rozwiązując ograniczenia wynikające z lokalizacji inwestycji oraz zapisów
+              prawa budowlanego.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </dialog>
+    <dialog id="project-dialog" class="project-dialog" aria-labelledby="project-title">
+      <div class="dialog-top">
+        <span id="project-category"></span
+        ><button type="button" class="close-dialog" aria-label="Zamknij projekt">
+          Zamknij <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="project-dialog-heading">
+        <h2 id="project-title"></h2>
+        <p id="project-description"></p>
+      </div>
+      <div class="gallery-stage">
+        <button type="button" id="gallery-prev" aria-label="Poprzednia wizualizacja">←</button
+        ><img id="gallery-image" alt="" /><button
+          type="button"
+          id="gallery-next"
+          aria-label="Następna wizualizacja"
+        >
+          →
+        </button>
+      </div>
+      <div class="gallery-bottom">
+        <span id="gallery-counter" aria-live="polite"></span><span>Wizualizacje projektu / ArchiSfera</span>
+      </div>
+      <div class="gallery-thumbnails" id="gallery-thumbnails" aria-label="Wybierz wizualizację"></div>
+    </dialog>
+  </body>
+</html>

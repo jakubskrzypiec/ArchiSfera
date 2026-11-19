@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "files": [
+      {
+        "source": "View_01_optionB.png",
+        "asset": "assets/portfolio/project-01-01.webp"
+      },
+      {
+        "source": "View_02_optionB.png",
+        "asset": "assets/portfolio/project-01-02.webp"
+      },
+      {
+        "source": "View_03.png",
+        "asset": "assets/portfolio/project-01-03.webp"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "files": [
+      {
+        "source": "ASf23-001-Łączna-c00_1.jpg",
+        "asset": "assets/portfolio/project-02-01.webp"
+      },
+      {
+        "source": "ASf23-001-Łączna-c01_1.jpg",
+        "asset": "assets/portfolio/project-02-02.webp"
+      },
+      {
+        "source": "ASf23-001-Łączna-c03_1.jpg",
+        "asset": "assets/portfolio/project-02-03.webp"
+      },
+      {
+        "source": "ASf23-001-Łączna-c04_1.jpg",
+        "asset": "assets/portfolio/project-02-04.webp"
+      },
+      {
+        "source": "ASf23-001-Łączna-c05_1.jpg",
+        "asset": "assets/portfolio/project-02-05.webp"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "files": [
+      {
+        "source": "Przędzalniana_80-01_HQ.tif",
+        "asset": "assets/portfolio/project-03-01.webp"
+      },
+      {
+        "source": "Przędzalniana_80-02_HQ.tif",
+        "asset": "assets/portfolio/project-03-02.webp"
+      },
+      {
+        "source": "Przędzalniana_80-04_HQ.tif",
+        "asset": "assets/portfolio/project-03-03.webp"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "files": [
+      {
+        "source": "KSAW_ZYT_model_25032025_20261118_1319.png",
+        "asset": "assets/portfolio/project-04-01.webp"
+      },
+      {
+        "source": "KSAW_ZYT_model_25032025_20261118_1320.png",
+        "asset": "assets/portfolio/project-04-02.webp"
+      },
+      {
+        "source": "KSAW_ZYT_model_25032025_20261118_1339.png",
+        "asset": "assets/portfolio/project-04-03.webp"
+      },
+      {
+        "source": "KSAW_ZYT_model_25032025_20261119_0855.png",
+        "asset": "assets/portfolio/project-04-04.webp"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "files": [
+      {
+        "source": "Rąbień 01.png",
+        "asset": "assets/portfolio/project-05-01.webp"
+      },
+      {
+        "source": "Rąbień 02.png",
+        "asset": "assets/portfolio/project-05-02.webp"
+      },
+      {
+        "source": "Rąbień 03.png",
+        "asset": "assets/portfolio/project-05-03.webp"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "files": [
+      {
+        "source": "11.png",
+        "asset": "assets/portfolio/project-06-01.webp"
+      },
+      {
+        "source": "12.png",
+        "asset": "assets/portfolio/project-06-02.webp"
+      },
+      {
+        "source": "13.png",
+        "asset": "assets/portfolio/project-06-03.webp"
+      },
+      {
+        "source": "16.png",
+        "asset": "assets/portfolio/project-06-04.webp"
+      },
+      {
+        "source": "SOK_KONC_model_14012025_20261119_0946.png",
+        "asset": "assets/portfolio/project-06-05.webp"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "files": [
+      {
+        "source": "NOWA LIPA _model_02042021_20261118_1202.png",
+        "asset": "assets/portfolio/project-07-01.webp"
+      },
+      {
+        "source": "NOWA LIPA _model_02042021_20261118_1204.png",
+        "asset": "assets/portfolio/project-07-02.webp"
+      },
+      {
+        "source": "NOWA LIPA _model_02042021_20261118_1211.png",
+        "asset": "assets/portfolio/project-07-03.webp"
+      },
+      {
+        "source": "NOWA LIPA _model_02042021_20261118_1315.png",
+        "asset": "assets/portfolio/project-07-04.webp"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "files": [
+      {
+        "source": "SADOWA_KONC_model_20261119_0909.png",
+        "asset": "assets/portfolio/project-08-01.webp"
+      },
+      {
+        "source": "SADOWA_KONC_model_20261119_0913.png",
+        "asset": "assets/portfolio/project-08-02.webp"
+      },
+      {
+        "source": "SADOWA_KONC_model_20261119_0919.png",
+        "asset": "assets/portfolio/project-08-03.webp"
+      }
+    ]
+  }
+]

@@ -1,120 +1,258 @@
-'use strict';
-const $ = selector => document.querySelector(selector);
-const content = window.archisferaContent;
-const categories = {all:'Wszystkie', 'od-podstaw':'Od podstaw', rozbudowy:'Rozbudowy i przebudowy', wnetrza:'Wnętrza', zdrowie:'Służba zdrowia', przedszkola:'Przedszkola i żłobki', inwentaryzacje:'Inwentaryzacje'};
-const sentence = text => {
-  const result = text.replace(/\u200b/g,'').trim().toLocaleLowerCase('pl');
-  return (result.charAt(0).toLocaleUpperCase('pl')+result.slice(1)).replace(/łodzi/g,'Łodzi').replace(/łódzkim/g,'Łódzkim').replace(/łódź/g,'Łódź').replace(/warszawie/g,'Warszawie').replace(/sokolnikach/g,'Sokolnikach').replace(/ksawerowie/g,'Ksawerowie').replace(/strykowie/g,'Strykowie').replace(/sulejówku/g,'Sulejówku').replace(/zgierzu/g,'Zgierzu').replace(/rzgowie/g,'Rzgowie').replace(/radomiu/g,'Radomiu').replace(/końskich/g,'Końskich').replace(/konstantynowie/g,'Konstantynowie').replace(/skierniewicach/g,'Skierniewicach').replace(/łasku/g,'Łasku').replace(/sieradzu/g,'Sieradzu');
-};
-const projects = [];
-if (content) {
-  for (const key of Object.keys(categories).filter(k => k !== 'all')) {
-    const page = content[key];
-    if (!page) continue;
-    for (const image of page.images) {
-      if (!image.preceding || image.preceding.startsWith('©')) continue;
-      let project = projects.find(p => p.key === key && p.original === image.preceding);
-      if (!project) {
-        const lines = image.preceding.replace(/\u200b/g,'').split('\n').filter(Boolean);
-        const title = key === 'zdrowie' ? 'Placówki służby zdrowia' : sentence(lines[0]).replace(/\.$/,'');
-        project = {id:projects.length,key,original:image.preceding,title,description:lines.slice(1).map(sentence).join('\n'),images:[],source:page.url,categories:[key]};
-        if (/przedszkol|żłob|malucha/i.test(image.preceding)) project.categories.push('przedszkola');
-        if (/ambulator|chorych/i.test(image.preceding)) project.categories.push('zdrowie');
-        projects.push(project);
-      }
-      if (!project.images.includes(image.local)) project.images.push(image.local);
+"use strict";
+
+const find = (selector) => document.querySelector(selector);
+const projects = window.archisferaProjects || [];
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const formatNumber = (value) => String(value).padStart(2, "0");
+
+// A single header is shared by the home page and all subpages.
+const header = find(".topbar");
+const menuButton = find(".menu-toggle");
+const navigation = find("#navigation");
+function updateHeader() {
+  header.classList.toggle("is-scrolled", window.scrollY > 48);
+}
+function closeMenu() {
+  navigation.classList.remove("open");
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.querySelector("span").textContent = "+";
+}
+menuButton.addEventListener("click", () => {
+  const isOpen = navigation.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.querySelector("span").textContent = isOpen ? "−" : "+";
+});
+navigation.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeMenu();
+});
+window.addEventListener("scroll", updateHeader, { passive: true });
+window.addEventListener("pageshow", updateHeader);
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 560) closeMenu();
+});
+updateHeader();
+
+// Show one supplied visualization per project. Pause during interaction and in hidden tabs.
+const hero = find("#hero");
+if (hero) {
+  const slides = Array.from(hero.querySelectorAll(".hero-slide"));
+  const pauseButton = find("#hero-pause");
+  let currentSlide = 0;
+  let paused = reducedMotion.matches;
+  let hovering = false;
+  let timer;
+  let slideRequest = 0;
+
+  function stopTimer() {
+    window.clearTimeout(timer);
+  }
+  function scheduleSlide() {
+    stopTimer();
+    if (paused || hovering || document.hidden || hero.contains(document.activeElement)) return;
+    timer = window.setTimeout(() => showSlide(currentSlide + 1), 6500);
+  }
+  function updatePauseButton() {
+    pauseButton.textContent = paused ? "Odtwórz" : "Pauza";
+    pauseButton.setAttribute("aria-pressed", String(paused));
+    pauseButton.setAttribute("aria-label", paused ? "Uruchom pokaz projektów" : "Wstrzymaj pokaz projektów");
+  }
+  async function showSlide(target) {
+    stopTimer();
+    const nextIndex = (target + slides.length) % slides.length;
+    const nextSlide = slides[nextIndex];
+    const request = ++slideRequest;
+    nextSlide.loading = "eager";
+    try {
+      await nextSlide.decode();
+    } catch {
+      scheduleSlide();
+      return;
     }
+    if (request !== slideRequest) return;
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("is-active", index === nextIndex);
+      slide.setAttribute("aria-hidden", String(index !== nextIndex));
+    });
+    currentSlide = nextIndex;
+    const project = projects.find((item) => item.id === Number(nextSlide.dataset.project));
+    find("#hero-project-location").textContent = project.location;
+    find("#hero-project-name").textContent = project.title;
+    find("#hero-project-link").href = `projekty/#projekt-${formatNumber(project.id)}`;
+    find("#hero-counter").textContent = `${formatNumber(nextIndex + 1)} / ${formatNumber(slides.length)}`;
+    scheduleSlide();
   }
-  const portrait = content['o-mnie'].images.find(i => i.alt === 'KCH');
-  if (portrait) for (const selector of ['#portrait','#bio-portrait']) $(selector)?.setAttribute('src',portrait.local);
-}
-function makeCard(project, title, image,asPageLink=false) {
-  const button=document.createElement(asPageLink?'a':'button');button.className='project-card';button.setAttribute('aria-label',`Zobacz projekt: ${title || project.title}`);
-  const frame=document.createElement('div');frame.className='project-image';
-  const img=document.createElement('img');img.src=image || project.images[0];img.alt=title || project.title;img.loading='lazy';img.width=800;img.height=600;frame.append(img);
-  const caption=document.createElement('div');caption.className='project-caption';const heading=document.createElement('h3');heading.textContent=title || project.title;const category=document.createElement('p');category.textContent=categories[project.key];caption.append(heading,category);button.append(frame,caption);if(asPageLink)button.href='projekty/';else button.addEventListener('click',()=>openProject(project));return button;
-}
-if (content && projects.length) {
-  for (const [key,label] of Object.entries(categories)) {
-    const button=document.createElement('button');button.textContent=label;button.dataset.filter=key;button.setAttribute('aria-pressed',String(key==='all'));button.addEventListener('click',()=>filterProjects(key));$('.filters')?.append(button);
-  }
-  for(const [key,label] of Object.entries(categories).filter(([key])=>key!=='all')){
-    const section=document.createElement('section'),heading=document.createElement('h4');heading.textContent=label;section.append(heading);
-    for(const text of content[key].texts.filter(text=>!text.startsWith('©'))){const p=document.createElement('p');p.textContent=sentence(text);section.append(p);}
-    const link=document.createElement('a');link.href=content[key].url;link.target='_blank';link.rel='noopener';link.textContent='ZOBACZ NA STRONIE PRACOWNI ↗';section.append(link);$('#register-content')?.append(section);
-  }
-}
-let activeCategory='all';
-function filterProjects(key) {
-  activeCategory=Object.hasOwn(categories,key)?key:'all';key=activeCategory;
-  document.querySelectorAll('[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===key)));
-  const query=($('#project-search')?.value || '').trim();
-  const normalize=text=>text.toLocaleLowerCase('pl').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ł/g,'l');
-  const filtered=projects.filter(p=>(key==='all' || p.categories.includes(key)) && normalize(p.original+' '+categories[p.key]).includes(normalize(query)));
-  $('#portfolio-grid').replaceChildren(...filtered.map(p=>makeCard(p)));
-  let description='';
-  if(key==='zdrowie' || key==='przedszkola') description=content[key].texts[1];
-  else if(key!=='all') description=content[key].texts[0];
-  $('#category-description').textContent=description;
-  const word=filtered.length===1?'projekt':(filtered.length%10>=2&&filtered.length%10<=4&&(filtered.length%100<12||filtered.length%100>14)?'projekty':'projektów');
-  $('#portfolio-count').textContent=`${filtered.length} ${word} · materiały pracowni ArchiSfera`;
-  if($('#portfolio-empty'))$('#portfolio-empty').hidden=filtered.length>0;
-}
-$('#show-projects')?.addEventListener('click',()=>{
-  const open=$('#portfolio').hidden;$('#portfolio').hidden=!open;$('#show-projects').setAttribute('aria-expanded',String(open));$('#show-projects').innerHTML=open?'Zwiń archiwum <span>−</span>':'Wszystkie projekty <span>↗</span>';
-  if(open){filterProjects('all');$('#portfolio').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}
-});
-function openDialog(dialog){dialog.showModal();dialog.scrollTop=0;document.body.classList.add('modal-open');}
-$('#open-bio')?.addEventListener('click',()=>openDialog($('#bio-dialog')));
-document.querySelectorAll('dialog').forEach(dialog=>{
-  dialog.querySelector('.close-dialog').addEventListener('click',()=>dialog.close());
-  dialog.addEventListener('close',()=>document.body.classList.remove('modal-open'));
-  dialog.addEventListener('click',event=>{const r=dialog.getBoundingClientRect();if(event.target===dialog && (event.clientX<r.left || event.clientX>r.right || event.clientY<r.top || event.clientY>r.bottom))dialog.close();});
-});
-let currentProject, imageIndex=0;
-function openProject(project){
-  currentProject=project;imageIndex=0;$('#project-title').textContent=project.title;$('#project-category').textContent=categories[project.key].toLocaleUpperCase('pl');$('#project-description').textContent=project.description;$('#project-source').href=project.source;
-  const thumbnails=project.images.map((image,index)=>{const button=document.createElement('button');button.setAttribute('aria-label',`Zdjęcie ${index+1}`);const img=document.createElement('img');img.src=image;img.alt='';img.loading='lazy';button.append(img);button.addEventListener('click',()=>{imageIndex=index;renderGallery();});return button;});
-  $('#gallery-thumbnails').replaceChildren(...thumbnails);renderGallery();openDialog($('#project-dialog'));
-}
-function renderGallery(){
-  const project=currentProject;$('#gallery-image').src=project.images[imageIndex];$('#gallery-image').alt=`${project.title} — widok ${imageIndex+1}`;$('#gallery-counter').textContent=`${String(imageIndex+1).padStart(2,'0')} / ${String(project.images.length).padStart(2,'0')}`;
-  $('#gallery-prev').hidden=project.images.length<2;$('#gallery-next').hidden=project.images.length<2;
-  [...$('#gallery-thumbnails').children].forEach((button,index)=>button.setAttribute('aria-pressed',String(index===imageIndex)));
-}
-function nextImage(delta){imageIndex=(imageIndex+delta+currentProject.images.length)%currentProject.images.length;renderGallery();}
-$('#gallery-prev').addEventListener('click',()=>nextImage(-1));$('#gallery-next').addEventListener('click',()=>nextImage(1));
-$('#project-dialog').addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();nextImage(-1);}if(event.key==='ArrowRight'){event.preventDefault();nextImage(1);}});
-const menuButton=$('.menu-toggle'),nav=$('#navigation');
-function closeMenu(){nav.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.querySelector('span').textContent='+';}
-menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.querySelector('span').textContent=open?'−':'+';});
-nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
-document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();});
-if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}},{threshold:.08});
-  document.querySelectorAll('.section-space').forEach(section=>{section.classList.add('reveal');observer.observe(section);});
-}
-const contactForm=$('#contact-form');
-if(contactForm){
-  const serviceNames={koncepcja:'projekt koncepcyjny',budowlany:'projekt budowlany wielobranżowy',technologia:'projekt technologiczny',wizualizacja:'wizualizacja'};
-  const service=new URLSearchParams(location.search).get('usluga');
-  if(Object.hasOwn(serviceNames,service) && !contactForm.elements.message.value)contactForm.elements.message.value=`Interesuje mnie ${serviceNames[service]}.\n\n`;
-  const status=$('#form-status'),copyButton=$('#copy-message');
-  const mailLink=document.createElement('a');mailLink.className='prepared-mail';mailLink.hidden=true;mailLink.textContent='Otwórz wiadomość w poczcie ↗';status.before(mailLink);
-  const prepareMessage=()=>{const values=Object.fromEntries(new FormData(contactForm));values.type=values.type.trim() || 'Do ustalenia';return {subject:`Zapytanie o projekt — ${values.type}`,body:`Dzień dobry,\n\n${values.message.trim()}\n\nRodzaj projektu: ${values.type}\nLokalizacja: ${values.location.trim() || 'Do ustalenia'}\n\nKontakt:\n${values.name.trim()}\nE-mail: ${values.email.trim()}\nTelefon: ${values.phone.trim() || 'Nie podano'}`};};
-  contactForm.addEventListener('submit',event=>{event.preventDefault();if(!contactForm.reportValidity())return;const message=prepareMessage();mailLink.href=`mailto:biuro@archisfera.net?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;mailLink.hidden=false;status.textContent='Wiadomość jest przygotowana. Otwórz ją w poczcie, aby wysłać, lub skopiuj treść.';mailLink.focus();});
-  contactForm.addEventListener('input',()=>{mailLink.hidden=true;status.textContent='';});
-  copyButton.addEventListener('click',async()=>{if(!contactForm.reportValidity())return;const message=prepareMessage();const text=`Do: biuro@archisfera.net\nTemat: ${message.subject}\n\n${message.body}`;try{await navigator.clipboard.writeText(text);status.textContent='Treść została skopiowana. Wklej ją do wiadomości i wyślij na biuro@archisfera.net.';}catch{status.textContent='Nie udało się skopiować automatycznie. Użyj przycisku „Przygotuj wiadomość”, aby otworzyć ją w swojej poczcie.';}});
-}
-if(document.body.dataset.page==='projects' && $('#portfolio-grid')){
-  filterProjects('all');
-  $('#project-search').addEventListener('input',()=>filterProjects(activeCategory));
-  $('#clear-project-search').addEventListener('click',()=>{$('#project-search').value='';filterProjects('all');$('#project-search').focus();});
+  find("#hero-next").addEventListener("click", () => showSlide(currentSlide + 1));
+  find("#hero-prev").addEventListener("click", () => showSlide(currentSlide - 1));
+  pauseButton.addEventListener("click", () => {
+    paused = !paused;
+    updatePauseButton();
+    scheduleSlide();
+  });
+  hero.addEventListener("pointerenter", (event) => {
+    if (event.pointerType !== "mouse") return;
+    hovering = true;
+    stopTimer();
+  });
+  hero.addEventListener("pointerleave", () => {
+    hovering = false;
+    scheduleSlide();
+  });
+  hero.addEventListener("focusin", stopTimer);
+  hero.addEventListener("focusout", () => window.setTimeout(scheduleSlide, 0));
+  document.addEventListener("visibilitychange", scheduleSlide);
+  reducedMotion.addEventListener("change", () => {
+    paused = reducedMotion.matches;
+    updatePauseButton();
+    scheduleSlide();
+  });
+  updatePauseButton();
+  scheduleSlide();
 }
 
-// Keep a single navigation bar consistent across every page.
-const topbar = $('.topbar');
-function updateTopbar(){topbar.classList.toggle('is-scrolled', window.scrollY > 48);}
-window.addEventListener('scroll', updateTopbar, {passive:true});
-window.addEventListener('pageshow', updateTopbar);
-updateTopbar();
+function openDialog(dialog) {
+  dialog.showModal();
+  dialog.scrollTop = 0;
+  document.body.classList.add("modal-open");
+}
+document.querySelectorAll("dialog").forEach((dialog) => {
+  dialog.querySelector(".close-dialog").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", () => document.body.classList.remove("modal-open"));
+  dialog.addEventListener("click", (event) => {
+    const bounds = dialog.getBoundingClientRect();
+    if (event.target !== dialog) return;
+    if (
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom
+    )
+      dialog.close();
+  });
+});
+find("#open-bio")?.addEventListener("click", () => openDialog(find("#bio-dialog")));
+
+// The portfolio uses the eight numbered folders and metadata supplied by the client.
+let activeProject;
+let imageIndex = 0;
+function renderGallery() {
+  const image = find("#gallery-image");
+  image.src = activeProject.images[imageIndex];
+  image.alt = `${activeProject.description} Wizualizacja ${imageIndex + 1} z ${activeProject.images.length}.`;
+  find("#gallery-counter").textContent =
+    `${formatNumber(imageIndex + 1)} / ${formatNumber(activeProject.images.length)}`;
+  Array.from(find("#gallery-thumbnails").children).forEach((button, index) => {
+    button.setAttribute("aria-pressed", String(index === imageIndex));
+  });
+}
+function openProject(project) {
+  activeProject = project;
+  imageIndex = 0;
+  find("#project-category").textContent = `${project.location} / ${project.status}`;
+  find("#project-title").textContent = project.title;
+  const areaLabel = project.perBuilding
+    ? "Powierzchnia użytkowa pojedynczego budynku"
+    : "Powierzchnia użytkowa";
+  find("#project-description").textContent = `${areaLabel} · ${project.area.toLocaleString("pl-PL")} m²`;
+  const thumbnails = project.images.map((source, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("aria-label", `Pokaż wizualizację ${index + 1}`);
+    const image = document.createElement("img");
+    image.src = source;
+    image.alt = "";
+    image.width = 90;
+    image.height = 60;
+    image.loading = "lazy";
+    button.append(image);
+    button.addEventListener("click", () => {
+      imageIndex = index;
+      renderGallery();
+    });
+    return button;
+  });
+  find("#gallery-thumbnails").replaceChildren(...thumbnails);
+  renderGallery();
+  openDialog(find("#project-dialog"));
+}
+function nextImage(delta) {
+  imageIndex = (imageIndex + delta + activeProject.images.length) % activeProject.images.length;
+  renderGallery();
+}
+document.querySelectorAll("[data-project-id]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const project = projects.find((item) => item.id === Number(button.dataset.projectId));
+    if (project) openProject(project);
+  });
+});
+find("#gallery-prev").addEventListener("click", () => nextImage(-1));
+find("#gallery-next").addEventListener("click", () => nextImage(1));
+find("#project-dialog").addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    nextImage(-1);
+  }
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    nextImage(1);
+  }
+});
+if (document.body.dataset.page === "projekty") {
+  const requestedId = Number(new URLSearchParams(location.search).get("projekt"));
+  const requestedProject = projects.find((project) => project.id === requestedId);
+  if (requestedProject) openProject(requestedProject);
+}
+
+// Prepare the user's message in their email application, as on the existing site.
+const contactForm = find("#contact-form");
+if (contactForm) {
+  const serviceNames = {
+    koncepcja: "projekt koncepcyjny",
+    budowlany: "projekt budowlany wielobranżowy",
+    technologia: "projekt technologiczny",
+  };
+  const service = new URLSearchParams(location.search).get("usluga");
+  if (Object.hasOwn(serviceNames, service) && !contactForm.elements.message.value) {
+    contactForm.elements.message.value = `Interesuje mnie ${serviceNames[service]}.\n\n`;
+  }
+  const status = find("#form-status");
+  const emailLink = document.createElement("a");
+  emailLink.className = "prepared-mail";
+  emailLink.hidden = true;
+  emailLink.textContent = "Otwórz wiadomość w poczcie ↗";
+  status.before(emailLink);
+
+  function prepareMessage() {
+    const values = Object.fromEntries(new FormData(contactForm));
+    const type = values.type.trim() || "Do ustalenia";
+    return {
+      subject: `Zapytanie o projekt — ${type}`,
+      body: `Dzień dobry,\n\n${values.message.trim()}\n\nRodzaj projektu: ${type}\nLokalizacja: ${values.location.trim() || "Do ustalenia"}\n\nKontakt:\n${values.name.trim()}\nE-mail: ${values.email.trim()}\nTelefon: ${values.phone.trim() || "Nie podano"}`,
+    };
+  }
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+    const message = prepareMessage();
+    emailLink.href = `mailto:biuro@archisfera.net?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;
+    emailLink.hidden = false;
+    status.textContent = "Wiadomość jest przygotowana. Otwórz ją w poczcie, aby wysłać, lub skopiuj treść.";
+    emailLink.focus();
+  });
+  contactForm.addEventListener("input", () => {
+    emailLink.hidden = true;
+    status.textContent = "";
+  });
+  find("#copy-message").addEventListener("click", async () => {
+    if (!contactForm.reportValidity()) return;
+    const message = prepareMessage();
+    const text = `Do: biuro@archisfera.net\nTemat: ${message.subject}\n\n${message.body}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      status.textContent =
+        "Treść została skopiowana. Wklej ją do wiadomości i wyślij na biuro@archisfera.net.";
+    } catch {
+      status.textContent = "Użyj przycisku „Przygotuj wiadomość”, aby otworzyć ją w swojej poczcie.";
+    }
+  });
+}
