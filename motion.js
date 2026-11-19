@@ -15,7 +15,11 @@ function animateElement(element, frames, options) {
 }
 
 function startMotion() {
-  if (motionPreference.matches || !Element.prototype.animate || !("IntersectionObserver" in window)) {
+  if (
+    motionPreference.matches ||
+    !Element.prototype.animate ||
+    !("IntersectionObserver" in window)
+  ) {
     return;
   }
 
@@ -54,6 +58,26 @@ function startMotion() {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         revealObserver.unobserve(entry.target);
+        entry.target.classList.add("motion-revealed");
+        if (entry.target.matches(".process-steps > article")) {
+          entry.target
+            .querySelectorAll(".step-number, h3, p")
+            .forEach((part, index) => {
+              animateElement(
+                part,
+                [
+                  { opacity: 0, transform: "translateY(16px)" },
+                  { opacity: 1, transform: "translateY(0)" },
+                ],
+                {
+                  duration: 600,
+                  delay: (delays.get(entry.target) || 0) + 120 + index * 100,
+                  easing: "cubic-bezier(.2,.7,.2,1)",
+                  fill: "backwards",
+                },
+              );
+            });
+        }
         animateElement(
           entry.target,
           [
@@ -97,6 +121,9 @@ function stopMotion() {
   runningAnimations.forEach((animation) => animation.cancel());
   runningAnimations.clear();
   document.documentElement.classList.remove("motion-enabled");
+  document
+    .querySelectorAll(".motion-revealed")
+    .forEach((element) => element.classList.remove("motion-revealed"));
 }
 
 motionPreference.addEventListener("change", () => {
@@ -132,11 +159,13 @@ let progressFrame;
 function updateProgress() {
   progressFrame = undefined;
   const distance = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
+  const progress =
+    distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
   pageProgress.style.transform = `scaleX(${progress})`;
 }
 function queueProgress() {
-  if (progressFrame === undefined) progressFrame = window.requestAnimationFrame(updateProgress);
+  if (progressFrame === undefined)
+    progressFrame = window.requestAnimationFrame(updateProgress);
 }
 window.addEventListener("scroll", queueProgress, { passive: true });
 window.addEventListener("resize", queueProgress);

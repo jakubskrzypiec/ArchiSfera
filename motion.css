@@ -14,6 +14,74 @@
   overflow: hidden;
 }
 
+/* Draw the accent along the card edge without moving its content. */
+.service-card,
+.service-detail,
+.process-steps > article {
+  position: relative;
+}
+
+.service-card::before,
+.service-detail::before,
+.process-steps > article::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0 auto;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+
+.service-card:focus-within::before,
+.service-detail:focus-within::before,
+.service-card:active::before,
+.service-detail:active::before,
+.process-steps > article:active::before {
+  transform: scaleX(1);
+}
+
+.service-index,
+.step-number,
+.service-card h3,
+.service-detail h3,
+.process-steps h3 {
+  transition:
+    transform 0.35s ease,
+    color 0.25s ease,
+    box-shadow 0.35s ease;
+}
+
+.process-steps > article {
+  transition: transform 0.35s ease;
+}
+
+html.motion-enabled .process-steps > .motion-revealed::before {
+  animation: step-line 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  transform: scaleX(1);
+}
+
+html.motion-enabled .process-steps > :nth-child(2)::before {
+  animation-delay: 0.15s;
+}
+html.motion-enabled .process-steps > :nth-child(3)::before {
+  animation-delay: 0.3s;
+}
+html.motion-enabled .process-steps > :nth-child(4)::before {
+  animation-delay: 0.45s;
+}
+
+@keyframes step-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 .pill-button,
 .dark-button {
   transition:
@@ -137,6 +205,35 @@ html.motion-enabled .page-hero-photo {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .service-card:hover::before,
+  .service-detail:hover::before,
+  .process-steps > article:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-card:is(:hover, :focus-within) .service-index,
+  .service-detail:is(:hover, :focus-within) .service-index {
+    transform: translateX(6px);
+  }
+
+  .service-card:is(:hover, :focus-within) h3,
+  .service-detail:is(:hover, :focus-within) h3 {
+    transform: translateY(-3px);
+  }
+
+  .process-steps > article:hover {
+    transform: translateY(-5px);
+  }
+
+  .process-steps > article:hover .step-number {
+    transform: translateY(-3px) scale(1.12);
+    box-shadow: 0 6px 15px #14141418;
+  }
+
+  .process-steps > article:hover h3 {
+    transform: translateX(5px);
+  }
+
   .pill-button:hover,
   .dark-button:hover {
     transform: translateY(-2px);
@@ -209,6 +306,14 @@ html.motion-enabled .page-hero-photo {
   .menu-toggle span,
   .gallery-stage > button,
   .gallery-thumbnails button {
+    transform: none !important;
+  }
+  .process-steps > article,
+  .step-number,
+  .service-index,
+  .service-card h3,
+  .service-detail h3,
+  .process-steps h3 {
     transform: none !important;
   }
 }
