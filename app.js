@@ -45,7 +45,7 @@ window.addEventListener("resize", () => {
 });
 updateHeader();
 
-// Load only the first view during startup, then prepare the next view ahead of its five-second turn.
+// Load only the first view during startup, then prepare the next view ahead of its 3.5-second turn.
 const hero = find("#hero");
 if (hero) {
   const slides = Array.from(hero.querySelectorAll(".hero-slide"));
@@ -65,7 +65,7 @@ if (hero) {
     const keyboardFocus =
       hero.contains(document.activeElement) && document.activeElement.matches(":focus-visible");
     if (paused || document.hidden || (keyboardFocus && !allowFocusedPlayback)) return;
-    timer = window.setTimeout(() => showSlide(currentSlide + 1), 5000);
+    timer = window.setTimeout(() => showSlide(currentSlide + 1), 3500);
   }
   function prepareSlide(slide) {
     const source = slide.closest("picture")?.querySelector("source");
