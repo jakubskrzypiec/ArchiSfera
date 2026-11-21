@@ -100,24 +100,20 @@
     "id": 6,
     "files": [
       {
-        "source": "11.png",
-        "asset": "assets/portfolio/project-06-01.webp"
+        "source": "nr 1.png",
+        "asset": "assets/portfolio/project-06-revised-01.webp"
       },
       {
-        "source": "12.png",
-        "asset": "assets/portfolio/project-06-02.webp"
+        "source": "nr 2.png",
+        "asset": "assets/portfolio/project-06-revised-02.webp"
       },
       {
-        "source": "13.png",
-        "asset": "assets/portfolio/project-06-03.webp"
+        "source": "nr 3.png",
+        "asset": "assets/portfolio/project-06-revised-03.webp"
       },
       {
-        "source": "16.png",
-        "asset": "assets/portfolio/project-06-04.webp"
-      },
-      {
-        "source": "SOK_KONC_model_14012025_20261119_0946.png",
-        "asset": "assets/portfolio/project-06-05.webp"
+        "source": "nr 4.png",
+        "asset": "assets/portfolio/project-06-revised-04.webp"
       }
     ]
   },
@@ -156,6 +152,23 @@
       {
         "source": "SADOWA_KONC_model_20261119_0919.png",
         "asset": "assets/portfolio/project-08-03.webp"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "files": [
+      {
+        "source": "nr 1.png",
+        "asset": "assets/portfolio/project-09-revised-01.webp"
+      },
+      {
+        "source": "nr 2.png",
+        "asset": "assets/portfolio/project-09-revised-02.webp"
+      },
+      {
+        "source": "nr 3.png",
+        "asset": "assets/portfolio/project-09-revised-03.webp"
       }
     ]
   }

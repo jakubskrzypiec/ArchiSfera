@@ -513,3 +513,73 @@ a.contact-method:hover strong {
 :root[data-palette="coral"] .full-width-cta .dark-button {
   color: #ffffff;
 }
+
+.portfolio-project-top .text-link,
+.project-facts > p,
+.project-facts > span {
+  font-size: 0.875rem;
+}
+.contact-page-form .contact-form label {
+  font-size: 1rem;
+}
+.contact-page-form .contact-form .form-consent {
+  font-size: 0.875rem;
+}
+.service-detail-copy p,
+.service-detail li,
+.service-detail > .text-link,
+.faq-list details > p,
+.contact-method p,
+.contact-method a {
+  font-size: 1rem;
+}
+.portfolio-project-info h2 {
+  max-width: 850px;
+  line-height: 1.25;
+}
+.portfolio-project-info {
+  border-left: 3px solid var(--accent);
+}
+.page-hero-photo {
+  object-fit: contain;
+}
+.page-photo-hero {
+  background: #202020;
+}
+:root[data-palette="coral"] .full-width-cta {
+  background: var(--accent);
+  color: white;
+}
+:root[data-palette="coral"] .full-width-cta .dark-button {
+  background: white;
+  color: #b02b1b;
+}
+:root[data-palette="coral"] .full-width-cta .dark-button:hover {
+  background: white;
+  outline-color: white;
+}
+@media (max-width: 560px) {
+  .portfolio-project-top .text-link,
+  .project-facts > p,
+  .project-facts > span {
+    font-size: 0.875rem;
+  }
+  .portfolio-project-top {
+    gap: 14px;
+  }
+  .portfolio-project-top .eyebrow {
+    font-size: 0.875rem;
+    letter-spacing: 0.03em;
+  }
+  .portfolio-intro > p:last-child {
+    font-size: 1.125rem;
+  }
+  .service-detail-copy p,
+  .service-detail li,
+  .faq-list details > p {
+    font-size: 1rem;
+  }
+  .contact-method h3 {
+    overflow-wrap: anywhere;
+  }
+}

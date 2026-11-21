@@ -62,7 +62,7 @@ if (hero) {
   function scheduleSlide() {
     stopTimer();
     if (paused || hovering || document.hidden || hero.contains(document.activeElement)) return;
-    timer = window.setTimeout(() => showSlide(currentSlide + 1), 6500);
+    timer = window.setTimeout(() => showSlide(currentSlide + 1), 4000);
   }
   function updatePauseButton() {
     pauseButton.textContent = paused ? "Odtwórz" : "Pauza";
@@ -152,7 +152,9 @@ function renderGallery() {
   image.src = activeProject.images[imageIndex];
   image.alt = `${activeProject.description} Wizualizacja ${imageIndex + 1} z ${activeProject.images.length}.`;
   find("#gallery-counter").textContent =
-    `${formatNumber(imageIndex + 1)} / ${formatNumber(activeProject.images.length)}`;
+    find("#project-dialog").dataset.galleryView === "overview"
+      ? `Wszystkie ujęcia · ${formatNumber(activeProject.images.length)}`
+      : `${formatNumber(imageIndex + 1)} / ${formatNumber(activeProject.images.length)}`;
   Array.from(find("#gallery-thumbnails").children).forEach((button, index) => {
     button.setAttribute("aria-pressed", String(index === imageIndex));
   });
@@ -169,24 +171,43 @@ function openProject(project) {
   const thumbnails = project.images.map((source, index) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.setAttribute("aria-label", `Pokaż wizualizację ${index + 1}`);
+    button.setAttribute("aria-label", `Powiększ wizualizację ${index + 1}`);
     const image = document.createElement("img");
     image.src = source;
     image.alt = "";
     image.width = 90;
     image.height = 60;
-    image.loading = "lazy";
+    image.loading = "eager";
     button.append(image);
+    const label = document.createElement("span");
+    label.textContent = `Ujęcie ${formatNumber(index + 1)}`;
+    button.append(label);
     button.addEventListener("click", () => {
       imageIndex = index;
+      setGalleryView("detail");
       renderGallery();
+      find("#gallery-overview-toggle").focus();
     });
     return button;
   });
   find("#gallery-thumbnails").replaceChildren(...thumbnails);
+  setGalleryView("overview");
   renderGallery();
   openDialog(find("#project-dialog"));
 }
+function setGalleryView(view) {
+  find("#project-dialog").dataset.galleryView = view;
+  find("#gallery-overview-toggle").hidden = view === "overview";
+  find("#gallery-thumbnails").setAttribute(
+    "aria-label",
+    view === "overview" ? "Wszystkie ujęcia projektu" : "Wybierz wizualizację",
+  );
+}
+find("#gallery-overview-toggle").addEventListener("click", () => {
+  setGalleryView("overview");
+  renderGallery();
+  find("#gallery-thumbnails").children[imageIndex]?.focus();
+});
 function nextImage(delta) {
   imageIndex = (imageIndex + delta + activeProject.images.length) % activeProject.images.length;
   renderGallery();
@@ -201,10 +222,12 @@ find("#gallery-prev").addEventListener("click", () => nextImage(-1));
 find("#gallery-next").addEventListener("click", () => nextImage(1));
 find("#project-dialog").addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
+    if (find("#project-dialog").dataset.galleryView !== "detail") return;
     event.preventDefault();
     nextImage(-1);
   }
   if (event.key === "ArrowRight") {
+    if (find("#project-dialog").dataset.galleryView !== "detail") return;
     event.preventDefault();
     nextImage(1);
   }
