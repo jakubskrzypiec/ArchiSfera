@@ -45,11 +45,12 @@ window.addEventListener("resize", () => {
 });
 updateHeader();
 
-// Show one supplied visualization per project. Pause during interaction and in hidden tabs.
+// Cycle supplied views every six seconds; pointer movement over the photo must not stop playback.
 const hero = find("#hero");
 if (hero) {
   const slides = Array.from(hero.querySelectorAll(".hero-slide"));
   const pauseButton = find("#hero-pause");
+  const heroControls = find(".hero-controls");
   let currentSlide = 0;
   let paused = reducedMotion.matches;
   let hovering = false;
@@ -62,7 +63,7 @@ if (hero) {
   function scheduleSlide() {
     stopTimer();
     if (paused || hovering || document.hidden || hero.contains(document.activeElement)) return;
-    timer = window.setTimeout(() => showSlide(currentSlide + 1), 4000);
+    timer = window.setTimeout(() => showSlide(currentSlide + 1), 6000);
   }
   function updatePauseButton() {
     pauseButton.textContent = paused ? "Odtwórz" : "Pauza";
@@ -101,12 +102,12 @@ if (hero) {
     updatePauseButton();
     scheduleSlide();
   });
-  hero.addEventListener("pointerenter", (event) => {
+  heroControls.addEventListener("pointerenter", (event) => {
     if (event.pointerType !== "mouse") return;
     hovering = true;
     stopTimer();
   });
-  hero.addEventListener("pointerleave", () => {
+  heroControls.addEventListener("pointerleave", () => {
     hovering = false;
     scheduleSlide();
   });
