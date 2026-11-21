@@ -12,6 +12,14 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="assets/fonts/manrope-400.ttf" as="font" type="font/ttf" crossorigin="" />
     <link rel="preload" href="assets/fonts/manrope-500.ttf" as="font" type="font/ttf" crossorigin="" />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset="assets/hero/project-06-01-w768.avif 768w, assets/hero/project-06-01-w1280.avif 1280w, assets/hero/project-06-01-w1973.avif 1973w"
+      imagesizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)"
+      fetchpriority="high"
+    />
     <script src="theme.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="motion.css" />
@@ -34,47 +42,86 @@
     <main id="main">
       <section class="hero" id="hero" aria-labelledby="hero-title" aria-roledescription="karuzela">
         <div class="hero-slides">
-          <img
-            class="hero-slide is-active"
-            src="assets/hero/project-06-01.webp"
-            data-project="6"
-            alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 1."
-            width="1973"
-            height="1247"
-            loading="eager"
-            aria-hidden="false"
-            fetchpriority="high"
-          />
-          <img
-            class="hero-slide"
-            src="assets/hero/project-06-02.webp"
-            data-project="6"
-            alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 2."
-            width="1673"
-            height="942"
-            loading="lazy"
-            aria-hidden="true"
-          />
-          <img
-            class="hero-slide"
-            src="assets/hero/project-06-03.webp"
-            data-project="6"
-            alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 3."
-            width="1737"
-            height="993"
-            loading="lazy"
-            aria-hidden="true"
-          />
-          <img
-            class="hero-slide"
-            src="assets/hero/project-06-04.webp"
-            data-project="6"
-            alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 4."
-            width="1973"
-            height="1247"
-            loading="lazy"
-            aria-hidden="true"
-          />
+          <picture
+            ><source
+              type="image/avif"
+              srcset="
+                assets/hero/project-06-01-w768.avif   768w,
+                assets/hero/project-06-01-w1280.avif 1280w,
+                assets/hero/project-06-01-w1973.avif 1973w
+              "
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)" />
+            <img
+              srcset="
+                assets/hero/project-06-01-w768.webp   768w,
+                assets/hero/project-06-01-w1280.webp 1280w,
+                assets/hero/project-06-01.webp       1973w
+              "
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)"
+              class="hero-slide is-active"
+              src="assets/hero/project-06-01.webp"
+              data-project="6"
+              alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 1."
+              width="1973"
+              height="1247"
+              loading="eager"
+              aria-hidden="false"
+              fetchpriority="high"
+          /></picture>
+          <picture
+            ><source
+              type="image/avif"
+              data-srcset="assets/hero/project-06-02-w768.avif 768w, assets/hero/project-06-02-w1280.avif 1280w, assets/hero/project-06-02-w1673.avif 1673w"
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)" />
+            <img
+              data-srcset="assets/hero/project-06-02-w768.webp 768w, assets/hero/project-06-02-w1280.webp 1280w, assets/hero/project-06-02.webp 1673w"
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)"
+              class="hero-slide"
+              data-src="assets/hero/project-06-02.webp"
+              data-project="6"
+              alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 2."
+              width="1673"
+              height="942"
+              loading="eager"
+              fetchpriority="low"
+              aria-hidden="true"
+          /></picture>
+          <picture
+            ><source
+              type="image/avif"
+              data-srcset="assets/hero/project-06-03-w768.avif 768w, assets/hero/project-06-03-w1280.avif 1280w, assets/hero/project-06-03-w1737.avif 1737w"
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)" />
+            <img
+              data-srcset="assets/hero/project-06-03-w768.webp 768w, assets/hero/project-06-03-w1280.webp 1280w, assets/hero/project-06-03.webp 1737w"
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)"
+              class="hero-slide"
+              data-src="assets/hero/project-06-03.webp"
+              data-project="6"
+              alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 3."
+              width="1737"
+              height="993"
+              loading="eager"
+              fetchpriority="low"
+              aria-hidden="true"
+          /></picture>
+          <picture
+            ><source
+              type="image/avif"
+              data-srcset="assets/hero/project-06-04-w768.avif 768w, assets/hero/project-06-04-w1280.avif 1280w, assets/hero/project-06-04-w1973.avif 1973w"
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)" />
+            <img
+              data-srcset="assets/hero/project-06-04-w768.webp 768w, assets/hero/project-06-04-w1280.webp 1280w, assets/hero/project-06-04.webp 1973w"
+              sizes="(max-width: 800px) 100vw, max(100vw, 158.2svh)"
+              class="hero-slide"
+              data-src="assets/hero/project-06-04.webp"
+              data-project="6"
+              alt="Budynek mieszkalny jednorodzinny w Sokolnikach Las. Ujęcie 4."
+              width="1973"
+              height="1247"
+              loading="eager"
+              fetchpriority="low"
+              aria-hidden="true"
+          /></picture>
         </div>
         <div class="hero-shade"></div>
         <div class="hero-content wrap">

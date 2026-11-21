@@ -45,16 +45,16 @@ window.addEventListener("resize", () => {
 });
 updateHeader();
 
-// Cycle supplied views every six seconds; pointer movement over the photo must not stop playback.
+// Load only the first view during startup, then prepare the next view ahead of its five-second turn.
 const hero = find("#hero");
 if (hero) {
   const slides = Array.from(hero.querySelectorAll(".hero-slide"));
   const pauseButton = find("#hero-pause");
-  const heroControls = find(".hero-controls");
   let currentSlide = 0;
   let paused = reducedMotion.matches;
-  let hovering = false;
+  let allowFocusedPlayback = false;
   let timer;
+  let preloadTimer;
   let slideRequest = 0;
 
   function stopTimer() {
@@ -62,8 +62,30 @@ if (hero) {
   }
   function scheduleSlide() {
     stopTimer();
-    if (paused || hovering || document.hidden || hero.contains(document.activeElement)) return;
-    timer = window.setTimeout(() => showSlide(currentSlide + 1), 6000);
+    const keyboardFocus =
+      hero.contains(document.activeElement) && document.activeElement.matches(":focus-visible");
+    if (paused || document.hidden || (keyboardFocus && !allowFocusedPlayback)) return;
+    timer = window.setTimeout(() => showSlide(currentSlide + 1), 5000);
+  }
+  function prepareSlide(slide) {
+    const source = slide.closest("picture")?.querySelector("source");
+    if (source?.dataset.srcset) {
+      source.srcset = source.dataset.srcset;
+      delete source.dataset.srcset;
+    }
+    if (slide.dataset.srcset) {
+      slide.srcset = slide.dataset.srcset;
+      delete slide.dataset.srcset;
+    }
+    if (slide.dataset.src) {
+      slide.src = slide.dataset.src;
+      delete slide.dataset.src;
+    }
+  }
+  function prepareNext() {
+    window.clearTimeout(preloadTimer);
+    if (paused || document.hidden) return;
+    preloadTimer = window.setTimeout(() => prepareSlide(slides[(currentSlide + 1) % slides.length]), 800);
   }
   function updatePauseButton() {
     pauseButton.textContent = paused ? "Odtwórz" : "Pauza";
@@ -76,6 +98,7 @@ if (hero) {
     const nextSlide = slides[nextIndex];
     const request = ++slideRequest;
     nextSlide.loading = "eager";
+    prepareSlide(nextSlide);
     try {
       await nextSlide.decode();
     } catch {
@@ -94,33 +117,40 @@ if (hero) {
     find("#hero-project-link").href = paletteLink(`projekty/#projekt-${formatNumber(project.id)}`);
     find("#hero-counter").textContent = `${formatNumber(nextIndex + 1)} / ${formatNumber(slides.length)}`;
     scheduleSlide();
+    prepareNext();
   }
   find("#hero-next").addEventListener("click", () => showSlide(currentSlide + 1));
   find("#hero-prev").addEventListener("click", () => showSlide(currentSlide - 1));
   pauseButton.addEventListener("click", () => {
     paused = !paused;
+    allowFocusedPlayback = !paused;
     updatePauseButton();
     scheduleSlide();
+    prepareNext();
   });
-  heroControls.addEventListener("pointerenter", (event) => {
-    if (event.pointerType !== "mouse") return;
-    hovering = true;
-    stopTimer();
+  hero.addEventListener("focusin", () => {
+    if (document.activeElement.matches(":focus-visible") && !allowFocusedPlayback) stopTimer();
   });
-  heroControls.addEventListener("pointerleave", () => {
-    hovering = false;
+  hero.addEventListener("focusout", () =>
+    window.setTimeout(() => {
+      if (!hero.contains(document.activeElement)) allowFocusedPlayback = false;
+      scheduleSlide();
+    }, 0),
+  );
+  document.addEventListener("visibilitychange", () => {
     scheduleSlide();
+    prepareNext();
   });
-  hero.addEventListener("focusin", stopTimer);
-  hero.addEventListener("focusout", () => window.setTimeout(scheduleSlide, 0));
-  document.addEventListener("visibilitychange", scheduleSlide);
   reducedMotion.addEventListener("change", () => {
     paused = reducedMotion.matches;
     updatePauseButton();
     scheduleSlide();
+    prepareNext();
   });
   updatePauseButton();
   scheduleSlide();
+  if (document.readyState === "complete") prepareNext();
+  else window.addEventListener("load", prepareNext, { once: true });
 }
 
 function openDialog(dialog) {
