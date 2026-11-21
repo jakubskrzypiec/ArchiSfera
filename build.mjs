@@ -10,6 +10,7 @@ for (const name of [
   "projekty",
   "oferta",
   "kontakt",
+  "podglad-projektow",
   "styles.css",
   "subpages.css",
   "app.js",
