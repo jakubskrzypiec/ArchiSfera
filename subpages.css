@@ -541,7 +541,7 @@ a.contact-method:hover strong {
   border-left: 3px solid var(--accent);
 }
 .page-hero-photo {
-  object-fit: contain;
+  object-fit: cover;
 }
 .page-photo-hero {
   background: #202020;

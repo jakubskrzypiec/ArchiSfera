@@ -1706,20 +1706,23 @@ dialog::backdrop {
 }
 
 #hero {
-  height: min(100svh, 63.21vw);
+  height: 63.21vw;
   min-height: 0;
   max-height: none;
   background: #252723;
 }
 #hero .hero-slide {
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 #hero .hero-shade {
   background: linear-gradient(180deg, #14141430, transparent 35%, #141414a6);
 }
 #hero .hero-content {
-  bottom: 145px;
+  bottom: max(145px, calc(100% - 100svh + 145px));
+}
+#hero .hero-bottom {
+  bottom: max(33px, calc(100% - 100svh + 33px));
 }
 #hero h1 {
   font-size: clamp(36px, 4.8vw, 76px);
@@ -1737,6 +1740,10 @@ dialog::backdrop {
 }
 
 .featured-projects {
+  width: calc(100% - var(--gutter) * 2);
+  max-width: 1560px;
+  margin-inline: auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 30px;
 }
 .project-card {
@@ -1749,7 +1756,7 @@ dialog::backdrop {
 .project-card > img {
   height: auto;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: auto;
   object-fit: contain;
   background: #f6f6f6;
 }
@@ -1771,7 +1778,7 @@ dialog::backdrop {
 }
 .project-card .project-caption h3 {
   max-width: none;
-  font-size: clamp(22px, 2.1vw, 32px);
+  font-size: clamp(22px, 1.7vw, 29px);
   line-height: 1.3;
 }
 .project-card .project-card-meta {
@@ -1949,6 +1956,10 @@ dialog::backdrop {
   }
 }
 @media (max-width: 560px) {
+  .featured-projects {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
   .project-card > img {
     height: auto;
   }
