@@ -1780,6 +1780,18 @@ dialog::backdrop {
 .project-dialog-heading p {
   font-size: 0.9375rem;
 }
+.project-title-location {
+  display: block;
+}
+#pracownia .about-photo {
+  display: block;
+  max-width: 435px;
+}
+#pracownia .about-photo img {
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
 .gallery-thumbnails img {
   object-fit: contain;
 }

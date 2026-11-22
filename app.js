@@ -45,7 +45,7 @@ window.addEventListener("resize", () => {
 });
 updateHeader();
 
-// Load only the first view during startup, then prepare the next view ahead of its 3.5-second turn.
+// Load only the first view during startup, then prepare the next view ahead of its three-second turn.
 const hero = find("#hero");
 if (hero) {
   const slides = Array.from(hero.querySelectorAll(".hero-slide"));
@@ -65,7 +65,7 @@ if (hero) {
     const keyboardFocus =
       hero.contains(document.activeElement) && document.activeElement.matches(":focus-visible");
     if (paused || document.hidden || (keyboardFocus && !allowFocusedPlayback)) return;
-    timer = window.setTimeout(() => showSlide(currentSlide + 1), 3500);
+    timer = window.setTimeout(() => showSlide(currentSlide + 1), 3000);
   }
   function prepareSlide(slide) {
     const source = slide.closest("picture")?.querySelector("source");
@@ -175,7 +175,7 @@ document.querySelectorAll("dialog").forEach((dialog) => {
 });
 find("#open-bio")?.addEventListener("click", () => openDialog(find("#bio-dialog")));
 
-// The portfolio uses the eight numbered folders and metadata supplied by the client.
+// The portfolio uses the numbered project folders and metadata supplied by the client.
 let activeProject;
 let imageIndex = 0;
 function renderGallery() {
@@ -194,7 +194,16 @@ function openProject(project) {
   activeProject = project;
   imageIndex = 0;
   find("#project-category").textContent = `${project.location} / ${project.status}`;
-  find("#project-title").textContent = project.title;
+  const title = find("#project-title");
+  if (project.titleMain && project.titleLocation) {
+    const bind = (text) => text.replace(/\b([wi])\s+/g, "$1\u00a0");
+    const place = document.createElement("span");
+    place.className = "project-title-location";
+    place.textContent = bind(project.titleLocation);
+    title.replaceChildren(document.createTextNode(bind(project.titleMain) + " "), place);
+  } else {
+    title.textContent = project.title;
+  }
   const areaLabel = project.perBuilding
     ? "Powierzchnia użytkowa pojedynczego budynku"
     : "Powierzchnia użytkowa";

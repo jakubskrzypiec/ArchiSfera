@@ -14,6 +14,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-04-04.webp",
     ],
     cover: "assets/portfolio/project-04-02.webp",
+    titleMain: "Budynki mieszkalne jednorodzinne w zabudowie bliźniaczej",
+    titleLocation: "w Ksawerowie",
   },
   {
     id: 8,
@@ -29,6 +31,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-08-03.webp",
     ],
     cover: "assets/portfolio/project-08-03.webp",
+    titleMain: "Budynki mieszkalne jednorodzinne dwulokalowe w zabudowie bliźniaczej",
+    titleLocation: "w Ksawerowie",
   },
   {
     id: 1,
@@ -44,6 +48,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-01-03.webp",
     ],
     cover: "assets/portfolio/project-01-02.webp",
+    titleMain: "Budynek mieszkalny wielorodzinny",
+    titleLocation: "w Łodzi",
   },
   {
     id: 2,
@@ -61,6 +67,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-02-05.webp",
     ],
     cover: "assets/portfolio/project-02-01.webp",
+    titleMain: "Budynek mieszkalny wielorodzinny",
+    titleLocation: "w Łodzi",
   },
   {
     id: 5,
@@ -76,6 +84,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-05-03.webp",
     ],
     cover: "assets/portfolio/project-05-02.webp",
+    titleMain: "Budynki mieszkalne jednorodzinne",
+    titleLocation: "w Rąbieniu",
   },
   {
     id: 7,
@@ -92,6 +102,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-07-04.webp",
     ],
     cover: "assets/portfolio/project-07-02.webp",
+    titleMain: "Budynek mieszkalny jednorodzinny",
+    titleLocation: "pod Łodzią",
   },
   {
     id: 6,
@@ -108,6 +120,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-06-revised-04.webp",
     ],
     cover: "assets/portfolio/project-06-revised-01.webp",
+    titleMain: "Budynek mieszkalny jednorodzinny",
+    titleLocation: "w Sokolnikach Las",
   },
   {
     id: 9,
@@ -123,6 +137,8 @@ window.archisferaProjects = [
       "assets/portfolio/project-09-revised-03.webp",
     ],
     cover: "assets/portfolio/project-09-revised-01.webp",
+    titleMain: "Budynek mieszkalny jednorodzinny",
+    titleLocation: "w Łodzi",
   },
   {
     id: 3,
@@ -138,5 +154,25 @@ window.archisferaProjects = [
       "assets/portfolio/project-03-03.webp",
     ],
     cover: "assets/portfolio/project-03-01.webp",
+    titleMain: "Budynki mieszkalne wielorodzinne",
+    titleLocation: "w Łodzi",
+  },
+  {
+    id: 10,
+    title: "Rozbudowa i przebudowa budynku mieszkalnego jednorodzinnego w Warszawie",
+    location: "Warszawa",
+    area: 515,
+    status: "Budowa zrealizowana",
+    perBuilding: false,
+    description: "Rozbudowa i przebudowa budynku mieszkalnego jednorodzinnego w Warszawie.",
+    images: [
+      "assets/portfolio/project-10-01.webp",
+      "assets/portfolio/project-10-02.webp",
+      "assets/portfolio/project-10-03.webp",
+      "assets/portfolio/project-10-04.webp",
+    ],
+    cover: "assets/portfolio/project-10-01.webp",
+    titleMain: "Rozbudowa i przebudowa budynku mieszkalnego jednorodzinnego",
+    titleLocation: "w Warszawie",
   },
 ];
