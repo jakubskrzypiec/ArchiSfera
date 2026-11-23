@@ -28,25 +28,64 @@ const navigation = find("#navigation");
 function updateHeader() {
   header.classList.toggle("is-scrolled", window.scrollY > 48);
 }
-function closeMenu() {
+const mobileNavigation = window.matchMedia("(max-width: 800px)");
+let menuScrollPosition = 0;
+function closeMenu(restoreFocus = false) {
+  const wasOpen = navigation.classList.contains("open");
   navigation.classList.remove("open");
+  header.classList.remove("menu-open");
   menuButton.setAttribute("aria-expanded", "false");
-  menuButton.querySelector("span").textContent = "+";
+  menuButton.setAttribute("aria-label", "Otwórz menu");
+  menuButton.querySelector(".menu-label").textContent = "Menu";
+  navigation.inert = mobileNavigation.matches;
+  if (wasOpen) {
+    document.body.classList.remove("navigation-open");
+    document.body.style.top = "";
+    // Instant restoration avoids smooth scrolling and jumps when unlocking iOS Safari.
+    window.scrollTo({ top: menuScrollPosition, behavior: "instant" });
+    if (restoreFocus) menuButton.focus({ preventScroll: true });
+  }
+}
+function openMenu() {
+  menuScrollPosition = window.scrollY;
+  document.body.style.top = "-" + menuScrollPosition + "px";
+  document.body.classList.add("navigation-open");
+  header.classList.add("menu-open");
+  navigation.inert = false;
+  navigation.classList.add("open");
+  menuButton.setAttribute("aria-expanded", "true");
+  menuButton.setAttribute("aria-label", "Zamknij menu");
+  menuButton.querySelector(".menu-label").textContent = "Zamknij";
 }
 menuButton.addEventListener("click", () => {
-  const isOpen = navigation.classList.toggle("open");
-  menuButton.setAttribute("aria-expanded", String(isOpen));
-  menuButton.querySelector("span").textContent = isOpen ? "−" : "+";
+  if (navigation.classList.contains("open")) closeMenu();
+  else openMenu();
 });
-navigation.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+navigation.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => closeMenu()));
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeMenu();
+  if (!navigation.classList.contains("open")) return;
+  if (event.key === "Escape") closeMenu(true);
+  if (event.key === "Tab") {
+    const focusable = [menuButton, ...navigation.querySelectorAll("a[href]")];
+    const first = focusable[0],
+      last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 });
 window.addEventListener("scroll", updateHeader, { passive: true });
-window.addEventListener("pageshow", updateHeader);
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 560) closeMenu();
+window.addEventListener("pageshow", () => {
+  closeMenu();
+  updateHeader();
 });
+mobileNavigation.addEventListener("change", () => closeMenu());
+navigation.inert = mobileNavigation.matches;
+menuButton.setAttribute("aria-label", "Otwórz menu");
 updateHeader();
 
 // Load only the first view during startup, then prepare the next view ahead of its three-second turn.
@@ -155,6 +194,93 @@ if (hero) {
   scheduleSlide();
   if (document.readyState === "complete") prepareNext();
   else window.addEventListener("load", prepareNext, { once: true });
+}
+
+// Mobile featured projects crossfade inside a fixed frame, without scrolling the page.
+const featured = find("#featured-projects");
+if (featured) {
+  const cards = [...featured.querySelectorAll(".project-card")];
+  const controls = find(".featured-controls");
+  const pause = find("#featured-pause");
+  const mobile = window.matchMedia("(max-width: 800px)");
+  let current = 0,
+    paused = reducedMotion.matches,
+    visible = false,
+    timer;
+  function scheduleFeatured() {
+    window.clearTimeout(timer);
+    const focused =
+      featured.contains(document.activeElement) && document.activeElement.matches(":focus-visible");
+    if (
+      mobile.matches &&
+      !paused &&
+      visible &&
+      !document.hidden &&
+      !focused &&
+      !navigation.classList.contains("open")
+    ) {
+      cards[(current + 1) % cards.length].querySelector("img").loading = "eager";
+      timer = window.setTimeout(() => showFeatured(current + 1), 5000);
+    }
+  }
+  function showFeatured(index) {
+    current = (index + cards.length) % cards.length;
+    cards.forEach((card, i) => {
+      card.classList.toggle("is-current", i === current);
+      card.inert = mobile.matches && i !== current;
+      if (mobile.matches) card.setAttribute("aria-hidden", String(i !== current));
+      else card.removeAttribute("aria-hidden");
+    });
+    find("#featured-counter").textContent = formatNumber(current + 1) + " / " + formatNumber(cards.length);
+    scheduleFeatured();
+  }
+  function syncFeatured() {
+    featured.classList.add("is-carousel");
+    controls.hidden = !mobile.matches;
+    if (mobile.matches) {
+      featured.setAttribute("role", "region");
+      featured.setAttribute("aria-roledescription", "karuzela");
+      featured.setAttribute("aria-label", "Wybrane projekty");
+    } else {
+      featured.removeAttribute("role");
+      featured.removeAttribute("aria-roledescription");
+      featured.removeAttribute("aria-label");
+    }
+    showFeatured(current);
+  }
+  function syncPause() {
+    pause.textContent = paused ? "Odtwórz" : "Pauza";
+    pause.setAttribute("aria-pressed", String(paused));
+    pause.setAttribute("aria-label", paused ? "Uruchom wybrane projekty" : "Wstrzymaj wybrane projekty");
+    scheduleFeatured();
+  }
+  find("#featured-next").addEventListener("click", () => showFeatured(current + 1));
+  find("#featured-prev").addEventListener("click", () => showFeatured(current - 1));
+  pause.addEventListener("click", () => {
+    paused = !paused;
+    syncPause();
+  });
+  featured.addEventListener("focusin", scheduleFeatured);
+  featured.addEventListener("focusout", () => window.setTimeout(scheduleFeatured, 0));
+  mobile.addEventListener("change", syncFeatured);
+  reducedMotion.addEventListener("change", () => {
+    paused = reducedMotion.matches;
+    syncPause();
+  });
+  document.addEventListener("visibilitychange", scheduleFeatured);
+  new MutationObserver(scheduleFeatured).observe(navigation, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  new IntersectionObserver(
+    ([entry]) => {
+      visible = entry.isIntersecting;
+      scheduleFeatured();
+    },
+    { threshold: 0.2 },
+  ).observe(featured);
+  syncFeatured();
+  syncPause();
 }
 
 function openDialog(dialog) {

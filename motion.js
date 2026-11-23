@@ -2,11 +2,16 @@
 
 // Reveal content only through temporary animations, so it stays visible if JavaScript fails.
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const touchLayout = window.matchMedia("(max-width: 800px)");
 const runningAnimations = new Set();
 let revealObserver;
 let galleryAnimation;
 
 function animateElement(element, frames, options) {
+  if (touchLayout.matches) {
+    frames = frames.map(({ transform, ...frame }) => frame);
+    options = { ...options, duration: Math.min(options.duration, 280), delay: 0 };
+  }
   const animation = element.animate(frames, options);
   runningAnimations.add(animation);
   const release = () => runningAnimations.delete(animation);
@@ -15,11 +20,7 @@ function animateElement(element, frames, options) {
 }
 
 function startMotion() {
-  if (
-    motionPreference.matches ||
-    !Element.prototype.animate ||
-    !("IntersectionObserver" in window)
-  ) {
+  if (motionPreference.matches || !Element.prototype.animate || !("IntersectionObserver" in window)) {
     return;
   }
 
@@ -59,25 +60,24 @@ function startMotion() {
         if (!entry.isIntersecting) return;
         revealObserver.unobserve(entry.target);
         entry.target.classList.add("motion-revealed");
-        if (entry.target.matches(".process-steps > article")) {
-          entry.target
-            .querySelectorAll(".step-number, h3, p")
-            .forEach((part, index) => {
-              animateElement(
-                part,
-                [
-                  { opacity: 0, transform: "translateY(16px)" },
-                  { opacity: 1, transform: "translateY(0)" },
-                ],
-                {
-                  duration: 600,
-                  delay: (delays.get(entry.target) || 0) + 120 + index * 100,
-                  easing: "cubic-bezier(.2,.7,.2,1)",
-                  fill: "backwards",
-                },
-              );
-            });
+        if (!touchLayout.matches && entry.target.matches(".process-steps > article")) {
+          entry.target.querySelectorAll(".step-number, h3, p").forEach((part, index) => {
+            animateElement(
+              part,
+              [
+                { opacity: 0, transform: "translateY(16px)" },
+                { opacity: 1, transform: "translateY(0)" },
+              ],
+              {
+                duration: 600,
+                delay: (delays.get(entry.target) || 0) + 120 + index * 100,
+                easing: "cubic-bezier(.2,.7,.2,1)",
+                fill: "backwards",
+              },
+            );
+          });
         }
+        if (touchLayout.matches && entry.target.matches(".featured-projects > *")) return;
         animateElement(
           entry.target,
           [
@@ -159,13 +159,11 @@ let progressFrame;
 function updateProgress() {
   progressFrame = undefined;
   const distance = document.documentElement.scrollHeight - window.innerHeight;
-  const progress =
-    distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
+  const progress = distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
   pageProgress.style.transform = `scaleX(${progress})`;
 }
 function queueProgress() {
-  if (progressFrame === undefined)
-    progressFrame = window.requestAnimationFrame(updateProgress);
+  if (progressFrame === undefined) progressFrame = window.requestAnimationFrame(updateProgress);
 }
 window.addEventListener("scroll", queueProgress, { passive: true });
 window.addEventListener("resize", queueProgress);

@@ -27,9 +27,14 @@ SEO i publikacji: [DEPLOYMENT.md](DEPLOYMENT.md).
 
 Cztery strony: główna, projekty, oferta i kontakt. Portfolio zawiera 10 projektów
 oraz 36 zdjęć i wizualizacji przekazanych przez pracownię. Strona główna zachowuje
-cztery pionowe panele wybranych projektów, galerię wszystkich ujęć i automatyczne
+cztery pionowe panele wybranych projektów na komputerze, a na telefonie pojedynczy
+slajd zmieniany co pięć sekund (pętla, strzałki i pauza). Zachowuje galerię wszystkich ujęć i automatyczne
 hero z dziewięcioma slajdami zmienianymi co trzy sekundy. Podstrony mają wspólny
-baner. Zdjęcie architekt pochodzi z przesłanych materiałów.
+baner. Mobilne hero zajmuje cały mały viewport, a dobór rozdzielczości uwzględnia
+kadrowanie zdjęcia. Rozwijane menu mobilne zawiera telefon, e-mail i przycisk
+kontaktu; blokuje tło i przy zamknięciu przywraca pozycję przewijania.
+Na telefonach animacje wejścia ograniczono do krótkiego pojawiania się bez przesuwania
+tekstu. Zdjęcie architekt pochodzi z przesłanych materiałów.
 
 Białe tła, akcent koralowy #F54329 i lokalny Manrope z licencją OFL. Animacje
 uwzględniają ograniczenie ruchu w systemie. Galerie, menu i formularz obsługują
