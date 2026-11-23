@@ -21,6 +21,22 @@ document.querySelectorAll("a[href]").forEach((link) => {
   link.href = paletteLink(link.getAttribute("href"));
 });
 
+// Freeze document sizing across mobile browser-toolbar and keyboard resizes.
+// Only a real width/orientation change starts a new viewport measurement.
+let stableViewportWidth = 0;
+function measureStableViewport() {
+  const width = document.documentElement.clientWidth;
+  if (width === stableViewportWidth) return;
+  stableViewportWidth = width;
+  if (width > 800) {
+    document.documentElement.style.removeProperty("--mobile-viewport-height");
+    return;
+  }
+  document.documentElement.style.setProperty("--mobile-viewport-height", window.innerHeight + "px");
+}
+measureStableViewport();
+window.addEventListener("resize", measureStableViewport, { passive: true });
+
 // A single header is shared by the home page and all subpages.
 const header = find(".topbar");
 const menuButton = find(".menu-toggle");
@@ -99,6 +115,7 @@ if (hero) {
   let timer;
   let preloadTimer;
   let slideRequest = 0;
+  let heroVisible = false;
 
   function stopTimer() {
     window.clearTimeout(timer);
@@ -107,7 +124,14 @@ if (hero) {
     stopTimer();
     const keyboardFocus =
       hero.contains(document.activeElement) && document.activeElement.matches(":focus-visible");
-    if (paused || document.hidden || (keyboardFocus && !allowFocusedPlayback)) return;
+    if (
+      paused ||
+      !heroVisible ||
+      document.hidden ||
+      navigation.classList.contains("open") ||
+      (keyboardFocus && !allowFocusedPlayback)
+    )
+      return;
     timer = window.setTimeout(() => showSlide(currentSlide + 1), 3000);
   }
   function prepareSlide(slide) {
@@ -127,7 +151,7 @@ if (hero) {
   }
   function prepareNext() {
     window.clearTimeout(preloadTimer);
-    if (paused || document.hidden) return;
+    if (paused || !heroVisible || document.hidden) return;
     preloadTimer = window.setTimeout(() => prepareSlide(slides[(currentSlide + 1) % slides.length]), 800);
   }
   function updatePauseButton() {
@@ -190,6 +214,18 @@ if (hero) {
     scheduleSlide();
     prepareNext();
   });
+  new IntersectionObserver(
+    ([entry]) => {
+      heroVisible = entry.isIntersecting;
+      scheduleSlide();
+      prepareNext();
+    },
+    { threshold: 0.1 },
+  ).observe(hero);
+  new MutationObserver(() => {
+    scheduleSlide();
+    prepareNext();
+  }).observe(navigation, { attributes: true, attributeFilter: ["class"] });
   updatePauseButton();
   scheduleSlide();
   if (document.readyState === "complete") prepareNext();

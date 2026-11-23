@@ -2352,7 +2352,7 @@ dialog::backdrop {
     padding: 13px 12px;
   }
 }
-@media (max-width: 800px) and (max-height: 600px) {
+@media (max-width: 800px) and (orientation: landscape) {
   #hero .hero-content {
     bottom: 92px;
   }
@@ -2371,5 +2371,43 @@ dialog::backdrop {
   .topbar #navigation,
   .menu-icon i {
     transition: none;
+  }
+}
+/* Mobile document geometry must not follow browser-toolbar height changes. */
+@media (max-width: 800px) {
+  #hero {
+    height: var(--mobile-viewport-height, 100svh);
+  }
+  .featured-projects.is-carousel {
+    height: clamp(430px, calc(var(--mobile-viewport-height, 100svh) * 0.68), 620px);
+  }
+  .page-photo-hero {
+    height: calc(var(--mobile-viewport-height, 100svh) * 0.39);
+  }
+  #hero .hero-slide {
+    display: none;
+    transition: none;
+  }
+  #hero .hero-slide.is-active {
+    display: block;
+  }
+  .featured-projects.is-carousel > .project-card {
+    display: none;
+    transition: none;
+  }
+  .featured-projects.is-carousel > .project-card.is-current {
+    display: block;
+  }
+  .page-progress {
+    display: none;
+  }
+  dialog::backdrop {
+    backdrop-filter: none;
+    background: #141414cf;
+  }
+}
+@media (max-width: 560px) {
+  .page-photo-hero {
+    height: calc(var(--mobile-viewport-height, 100svh) * 0.36);
   }
 }

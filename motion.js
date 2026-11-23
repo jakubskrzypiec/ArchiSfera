@@ -20,7 +20,12 @@ function animateElement(element, frames, options) {
 }
 
 function startMotion() {
-  if (motionPreference.matches || !Element.prototype.animate || !("IntersectionObserver" in window)) {
+  if (
+    touchLayout.matches ||
+    motionPreference.matches ||
+    !Element.prototype.animate ||
+    !("IntersectionObserver" in window)
+  ) {
     return;
   }
 
@@ -126,6 +131,11 @@ function stopMotion() {
     .forEach((element) => element.classList.remove("motion-revealed"));
 }
 
+touchLayout.addEventListener("change", () => {
+  stopMotion();
+  startMotion();
+});
+
 motionPreference.addEventListener("change", () => {
   stopMotion();
   startMotion();
@@ -133,6 +143,7 @@ motionPreference.addEventListener("change", () => {
 
 document.querySelector("#gallery-image")?.addEventListener("load", (event) => {
   if (
+    touchLayout.matches ||
     motionPreference.matches ||
     !Element.prototype.animate ||
     !document.querySelector("#project-dialog").open
@@ -158,11 +169,13 @@ document.body.append(pageProgress);
 let progressFrame;
 function updateProgress() {
   progressFrame = undefined;
+  if (touchLayout.matches) return;
   const distance = document.documentElement.scrollHeight - window.innerHeight;
   const progress = distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
   pageProgress.style.transform = `scaleX(${progress})`;
 }
 function queueProgress() {
+  if (touchLayout.matches) return;
   if (progressFrame === undefined) progressFrame = window.requestAnimationFrame(updateProgress);
 }
 window.addEventListener("scroll", queueProgress, { passive: true });

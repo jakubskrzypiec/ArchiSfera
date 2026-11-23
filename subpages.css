@@ -1,6 +1,6 @@
 .page-photo-hero {
   position: relative;
-  height: 39svh;
+  height: calc(var(--mobile-viewport-height, 100svh) * 0.39);
   min-height: 240px;
   max-height: 420px;
   background: #6a7064;
@@ -325,7 +325,7 @@ a.contact-method:hover strong {
 }
 @media (max-width: 560px) {
   .page-photo-hero {
-    height: 36svh;
+    height: calc(var(--mobile-viewport-height, 100svh) * 0.36);
     min-height: 230px;
     max-height: 360px;
   }
