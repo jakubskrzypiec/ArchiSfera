@@ -1,1 +1,13 @@
-{"name":"archisfera","version":"1.0.0","private":true,"description":"ArchiSfera — projekt wstępny strony pracowni architektonicznej","scripts":{"build":"node build.mjs","dev":"node server.mjs"}}
+{
+  "name": "archisfera",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ArchiSfera — strona pracowni architektonicznej Kamili Chęcielewskiej",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:preview": "node build.mjs --preview",
+    "seo:prepare": "node scripts/seo.mjs --write-preview",
+    "check:seo": "node scripts/check-seo.mjs",
+    "dev": "node server.mjs"
+  }
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /podglad-projektow/
+Disallow: /assets/previews/
+
+Sitemap: https://www.archisfera.net/sitemap.xml

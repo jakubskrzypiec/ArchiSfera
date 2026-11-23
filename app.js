@@ -5,10 +5,14 @@ const projects = window.archisferaProjects || [];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const formatNumber = (value) => String(value).padStart(2, "0");
 
-// Keep the selected comparison palette while moving between pages.
+// Comparison palettes belong to the review preview; production navigation uses clean URLs.
 function paletteLink(href) {
   const url = new URL(href, document.baseURI);
-  if (url.origin === window.location.origin) {
+  if (
+    url.origin === window.location.origin &&
+    document.documentElement.dataset.preview === "true" &&
+    new URLSearchParams(window.location.search).has("paleta")
+  ) {
     url.searchParams.set("paleta", document.documentElement.dataset.palette);
   }
   return url.href;
@@ -207,7 +211,10 @@ function openProject(project) {
   const areaLabel = project.perBuilding
     ? "Powierzchnia użytkowa pojedynczego budynku"
     : "Powierzchnia użytkowa";
-  find("#project-description").textContent = `${areaLabel} · ${project.area.toLocaleString("pl-PL")} m²`;
+  const area = document.createElement("span");
+  area.className = "project-area-value";
+  area.textContent = `${project.area.toLocaleString("pl-PL")}\u00a0m²`;
+  find("#project-description").replaceChildren(document.createTextNode(`${areaLabel} · `), area);
   const thumbnails = project.images.map((source, index) => {
     const button = document.createElement("button");
     button.type = "button";

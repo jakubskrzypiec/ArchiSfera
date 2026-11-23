@@ -1783,6 +1783,11 @@ dialog::backdrop {
 .project-title-location {
   display: block;
 }
+.project-area-value,
+.project-card-meta span:last-child,
+.project-facts strong {
+  white-space: nowrap;
+}
 #pracownia .about-photo {
   display: block;
   max-width: 435px;
