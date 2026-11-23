@@ -15,12 +15,12 @@
       fetchpriority="high"
     />
     <script src="theme.js?v=30176d4684"></script>
-    <link rel="stylesheet" href="styles.css?v=837ebeecf8" />
+    <link rel="stylesheet" href="styles.css?v=7733b3fa2e" />
     <link rel="stylesheet" href="motion.css?v=0f72c9790a" />
     <script src="portfolio.js?v=d70430035a" defer=""></script>
-    <script src="app.js?v=dd0ee8f252" defer=""></script>
+    <script src="app.js?v=3e2a72cfbb" defer=""></script>
     <script src="motion.js?v=7b2e15fe30" defer=""></script>
-  <!-- SEO:START -->
+    <!-- SEO:START -->
     <title>ArchiSfera — architekt Łódź i Zgierz | Kamila Chęcielewska</title>
     <meta name="description" content="ArchiSfera Kamili Chęcielewskiej — architekt w Janowie koło Łodzi i Zgierza. Projekty koncepcyjne, budowlane i technologiczne. Poznaj pracownię i realizacje." />
     <meta name="theme-color" content="#ffffff" />
@@ -504,7 +504,21 @@
             <p>Janów 3t, 95-002 Smardzew<br />gmina Zgierz</p>
           </div>
         </div>
-        <form id="contact-form" class="contact-form">
+        <form
+          id="contact-form"
+          class="contact-form"
+          action="https://formsubmit.co/biuro@archisfera.net"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="Nowe zapytanie ze strony ArchiSfera" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="https://www.archisfera.net/?wyslano=1#kontakt" />
+          <input type="hidden" name="_url" value="https://www.archisfera.net/" />
+          <div class="form-honeypot" aria-hidden="true">
+            <label
+              >Pozostaw to pole puste<input type="text" name="_honey" tabindex="-1" autocomplete="off"
+            /></label>
+          </div>
           <div class="form-row">
             <label
               >Imię i nazwisko <span>*</span
@@ -557,12 +571,12 @@
             zapytania.</label
           >
           <div class="form-actions">
-            <button class="dark-button" type="submit">Przygotuj wiadomość <span>↗</span></button
+            <button class="dark-button" type="submit">Wyślij wiadomość <span>↗</span></button
             ><button id="copy-message" class="copy-button" type="button">Kopiuj treść</button>
           </div>
           <p class="form-note">
-            Otworzymy wiadomość w Twojej aplikacji pocztowej. Możesz też skopiować treść i wysłać ją na
-            biuro@archisfera.net.
+            Wiadomość trafi na biuro@archisfera.net. Formularz obsługuje FormSubmit. Możesz też skopiować
+            treść i wysłać ją ze swojej poczty.
           </p>
           <p id="form-status" role="status" aria-live="polite"></p>
         </form>

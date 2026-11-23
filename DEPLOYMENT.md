@@ -35,7 +35,9 @@ Po zmianie treści ustaw rzeczywistą datę aktualizacji `lastmod` i ponów budo
 
 Serwery DNS są obecnie obsługiwane przez Wix. Zaproszenie do współpracy zostało
 odnalezione w korespondencji; zakres uprawnień do DNS nie został jeszcze
-potwierdzony, ponieważ panel w dostępnej sesji wymaga logowania.
+potwierdzony. Po zalogowaniu 23.11 konto jakubskrzypiec.dev@gmail.com ma pustą
+listę stron; ArchiSfera nie jest jeszcze widoczna jako udostępniona strona.
+Właściciel konta powinien przyjąć zaproszenie klientki z wiadomości Wix.
 
 Gotowe pliki statyczne wymagają hostingu obsługującego ich publikację. Po wybraniu
 hostingu należy skonfigurować domenę i certyfikat TLS, a następnie odpowiednie
@@ -57,9 +59,28 @@ są zabezpieczeniem pomocniczym i nie zastępują przekierowania HTTP 301.
 4. Otwórz `/robots.txt` i `/sitemap.xml`; potwierdź brak `noindex` na czterech stronach produkcyjnych.
 5. Dodaj lub zweryfikuj domenę w Google Search Console i zgłoś sitemapę po uruchomieniu.
 
-Formularz przygotowuje wiadomość w programie pocztowym użytkownika; nie ma
-serwerowego wysyłania ani przechowywania zapytań. Search Console nie został
-jeszcze skonfigurowany, a sitemapę przygotowano lokalnie.
+## Formularz FormSubmit
+
+Formularze na stronie głównej i Kontakt wysyłają standardowy POST na
+https://formsubmit.co/biuro@archisfera.net. Adres potwierdzono w korespondencji Gmail.
+Ustawione są temat wiadomości, szablon tabeli, adres źródła i powrót do właściwego
+formularza. Adres powrotu dopasowuje się do aktualnego hostingu. Ochrona reCAPTCHA
+pozostaje włączona; dodatkowy honeypot odrzuca typowe automatyczne wypełnienia.
+Przycisk blokuje wielokrotne wysyłanie i wraca do działania po powrocie z usługi.
+Formularze działają także bez JavaScript, z domyślnym podziękowaniem FormSubmit.
+
+**Aktywacja wymaga klientki:** po pierwszym wysłaniu formularza FormSubmit wysyła
+link potwierdzający na biuro@archisfera.net. Klientka musi otworzyć tę wiadomość
+i potwierdzić formularz. Integracja została sprawdzona przez przechwycenie żądania
+w lokalnym teście; nie wysłano testowej wiadomości do klientki i nie potwierdzono
+dostarczenia do jej skrzynki. Po uruchomieniu domeny należy sprawdzić aktywację
+i rzeczywiste dostarczenie z obu formularzy. Opcja kopiowania treści nadal działa.
+
+Zapytania obsługuje zewnętrzny FormSubmit; według jego dokumentacji niepotwierdzone
+zgłoszenia są przechowywane do 30 dni. Strona sama nie zapisuje zapytań.
+Dokumentacja: https://formsubmit.co/documentation oraz https://formsubmit.co/help.
+
+Search Console nie został jeszcze skonfigurowany, a sitemapę przygotowano lokalnie.
 
 Dokumentacja: [Wix — domena na zewnętrznym hostingu](https://support.wix.com/en/article/connecting-a-wix-domain-to-an-external-site),
 [Google — sitemapy](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap),

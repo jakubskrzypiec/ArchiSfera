@@ -285,7 +285,7 @@ if (document.body.dataset.page === "projekty") {
   if (requestedProject) openProject(requestedProject);
 }
 
-// Prepare the user's message in their email application, as on the existing site.
+// FormSubmit handles delivery; copying remains available as a fallback.
 const contactForm = find("#contact-form");
 if (contactForm) {
   const serviceNames = {
@@ -298,11 +298,27 @@ if (contactForm) {
     contactForm.elements.message.value = `Interesuje mnie ${serviceNames[service]}.\n\n`;
   }
   const status = find("#form-status");
-  const emailLink = document.createElement("a");
-  emailLink.className = "prepared-mail";
-  emailLink.hidden = true;
-  emailLink.textContent = "Otwórz wiadomość w poczcie ↗";
-  status.before(emailLink);
+  const submitButton = contactForm.querySelector('[type="submit"]');
+  const defaultButtonContent = submitButton.innerHTML;
+  const returnUrl = new URL(window.location.href);
+  returnUrl.search = "";
+  returnUrl.searchParams.set("wyslano", "1");
+  returnUrl.hash = contactForm.closest("section").id;
+  contactForm.elements._next.value = returnUrl.href;
+  contactForm.elements._url.value = window.location.origin + window.location.pathname;
+  if (new URLSearchParams(window.location.search).get("wyslano") === "1") {
+    status.textContent = "Dziękuję za wiadomość. Odpowiem na podany adres e-mail.";
+    contactForm.scrollIntoView({ block: "center", behavior: "instant" });
+    const cleanUrl = new URL(window.location.href);
+    cleanUrl.searchParams.delete("wyslano");
+    window.history.replaceState(null, "", cleanUrl);
+  }
+  function restoreSubmitButton() {
+    submitButton.disabled = false;
+    submitButton.innerHTML = defaultButtonContent;
+    contactForm.removeAttribute("aria-busy");
+  }
+  window.addEventListener("pageshow", restoreSubmitButton);
 
   function prepareMessage() {
     const values = Object.fromEntries(new FormData(contactForm));
@@ -313,17 +329,23 @@ if (contactForm) {
     };
   }
   contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!contactForm.reportValidity()) return;
-    const message = prepareMessage();
-    emailLink.href = `mailto:biuro@archisfera.net?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`;
-    emailLink.hidden = false;
-    status.textContent = "Wiadomość jest przygotowana. Otwórz ją w poczcie, aby wysłać, lub skopiuj treść.";
-    emailLink.focus();
+    if (!contactForm.reportValidity()) {
+      event.preventDefault();
+      return;
+    }
+    if (contactForm.elements._honey.value || contactForm.getAttribute("aria-busy") === "true") {
+      event.preventDefault();
+      return;
+    }
+    contactForm.elements._subject.value = prepareMessage().subject;
+    submitButton.disabled = true;
+    submitButton.textContent = "Wysyłanie…";
+    contactForm.setAttribute("aria-busy", "true");
+    status.textContent = "Przekierowuję do bezpiecznego wysłania formularza…";
+    // Native POST keeps FormSubmit's spam protection and works without JavaScript.
   });
   contactForm.addEventListener("input", () => {
-    emailLink.hidden = true;
-    status.textContent = "";
+    if (contactForm.getAttribute("aria-busy") !== "true") status.textContent = "";
   });
   find("#copy-message").addEventListener("click", async () => {
     if (!contactForm.reportValidity()) return;
@@ -334,7 +356,8 @@ if (contactForm) {
       status.textContent =
         "Treść została skopiowana. Wklej ją do wiadomości i wyślij na biuro@archisfera.net.";
     } catch {
-      status.textContent = "Użyj przycisku „Przygotuj wiadomość”, aby otworzyć ją w swojej poczcie.";
+      status.textContent =
+        "Nie udało się skopiować treści. Wyślij formularz lub napisz na biuro@archisfera.net.";
     }
   });
 }

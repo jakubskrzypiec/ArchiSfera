@@ -2006,3 +2006,12 @@ dialog::backdrop {
     height: 44px;
   }
 }
+
+/* Honeypot stays outside the visible form and keyboard navigation. */
+.contact-form .form-honeypot {
+  display: none;
+}
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}

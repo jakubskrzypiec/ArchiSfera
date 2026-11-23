@@ -33,8 +33,9 @@ baner. Zdjęcie architekt pochodzi z przesłanych materiałów.
 
 Białe tła, akcent koralowy #F54329 i lokalny Manrope z licencją OFL. Animacje
 uwzględniają ograniczenie ruchu w systemie. Galerie, menu i formularz obsługują
-klawiaturę. Formularz przygotowuje wiadomość w aplikacji pocztowej; nie wysyła
-jej z serwera ani nie zapisuje zapytań.
+klawiaturę. Formularz przekazuje zapytania przez FormSubmit na biuro@archisfera.net. Zachowuje
+walidację, ochronę antyspamową usługi oraz opcję kopiowania wiadomości. Przed
+odbiorem zapytań klientka musi potwierdzić aktywację w swojej skrzynce.
 
 Dane portfolio: `portfolio.js`. Metadane i adres domeny: `site.config.mjs`.
 Wspólny wygląd i interakcje: `styles.css`, `subpages.css`, `motion.css`, `app.js`,

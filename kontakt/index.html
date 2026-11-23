@@ -8,13 +8,13 @@
     <link rel="preload" href="assets/fonts/manrope-400.ttf" as="font" type="font/ttf" crossorigin="" />
     <link rel="preload" href="assets/fonts/manrope-500.ttf" as="font" type="font/ttf" crossorigin="" />
     <script src="theme.js?v=30176d4684"></script>
-    <link rel="stylesheet" href="styles.css?v=837ebeecf8" />
+    <link rel="stylesheet" href="styles.css?v=7733b3fa2e" />
     <link rel="stylesheet" href="subpages.css?v=040ddd8e54" />
     <link rel="stylesheet" href="motion.css?v=0f72c9790a" />
     <script src="portfolio.js?v=d70430035a" defer=""></script>
-    <script src="app.js?v=dd0ee8f252" defer=""></script>
+    <script src="app.js?v=3e2a72cfbb" defer=""></script>
     <script src="motion.js?v=7b2e15fe30" defer=""></script>
-  <!-- SEO:START -->
+    <!-- SEO:START -->
     <title>Kontakt z architektem — Janów, Smardzew | ArchiSfera</title>
     <meta name="description" content="Skontaktuj się z pracownią ArchiSfera Kamili Chęcielewskiej. Janów 3t, 95-002 Smardzew, gmina Zgierz. Telefon 506 088 108, e-mail biuro@archisfera.net." />
     <meta name="theme-color" content="#ffffff" />
@@ -70,7 +70,21 @@
           <p class="eyebrow">Napisz do pracowni</p>
           <h2>Opowiedz mi<br />o swojej inwestycji.</h2>
         </div>
-        <form id="contact-form" class="contact-form">
+        <form
+          id="contact-form"
+          class="contact-form"
+          action="https://formsubmit.co/biuro@archisfera.net"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="Nowe zapytanie ze strony ArchiSfera" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="https://www.archisfera.net/kontakt/?wyslano=1#formularz" />
+          <input type="hidden" name="_url" value="https://www.archisfera.net/kontakt/" />
+          <div class="form-honeypot" aria-hidden="true">
+            <label
+              >Pozostaw to pole puste<input type="text" name="_honey" tabindex="-1" autocomplete="off"
+            /></label>
+          </div>
           <div class="form-row">
             <label
               >Imię i nazwisko <span>*</span
@@ -123,12 +137,12 @@
             zapytania.</label
           >
           <div class="form-actions">
-            <button class="dark-button" type="submit">Przygotuj wiadomość <span>↗</span></button
+            <button class="dark-button" type="submit">Wyślij wiadomość <span>↗</span></button
             ><button id="copy-message" class="copy-button" type="button">Kopiuj treść</button>
           </div>
           <p class="form-note">
-            Otworzymy wiadomość w Twojej aplikacji pocztowej. Możesz też skopiować treść i wysłać ją na
-            biuro@archisfera.net.
+            Wiadomość trafi na biuro@archisfera.net. Formularz obsługuje FormSubmit. Możesz też skopiować
+            treść i wysłać ją ze swojej poczty.
           </p>
           <p id="form-status" role="status" aria-live="polite"></p>
         </form>
